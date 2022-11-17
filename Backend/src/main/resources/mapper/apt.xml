@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.apt.model.mapper.AptMapper">
+	<resultMap type="aptDto" id="apt">
+		<result column="sidoName" property="sidoName"/>
+		<result column="gugunName" property="gugunName"/>
+		<result column="roadName" property="roadName"/>
+		<result column="dealYear" property="dealYear"/>
+		<result column="dealMonth" property="dealMonth"/>
+	</resultMap>
+	
+	<select id="getList" parameterType="AptDto" resultMap="apt">
+		select * from apt
+		where sidoName=#{sidoName} 
+		and gugunName=#{gugunName} 
+		and roadName=#{roadName} 
+		and dealYear=${dealYear} 
+		and dealMonth=${dealMonth}
+	</select>
+</mapper>
