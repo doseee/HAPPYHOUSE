@@ -1,6 +1,5 @@
-package com.ssafy.happyhouse.board.model.service;
+package com.ssafy.happyhouse.notice.model.service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,35 +8,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.happyhouse.board.model.BoardDto;
-import com.ssafy.happyhouse.board.model.mapper.BoardMapper;
+import com.ssafy.happyhouse.notice.model.NoticeDto;
+import com.ssafy.happyhouse.notice.model.mapper.NoticeMapper;
 import com.ssafy.happyhouse.util.PageNavigation;
 import com.ssafy.happyhouse.util.SizeConstant;
 
 @Service
-public class BoardServiceImpl implements BoardService {
-
-	private BoardMapper boardMapper;
-
+public class NoticeServiceImpl implements NoticeService{
+	
+	private NoticeMapper noticeMapper;
+	
 	@Autowired
-	public BoardServiceImpl(BoardMapper boardMapper) {
-		this.boardMapper = boardMapper;
+	public NoticeServiceImpl(NoticeMapper noticeMapper) {
+		this.noticeMapper = noticeMapper;
 	}
 
 	@Override
 	@Transactional
-	public void writeArticle(BoardDto boardDto) throws Exception {
-		System.out.println("글입력 전 dto : " + boardDto);
-		boardMapper.writeArticle(boardDto);
-		System.out.println("글입력 후 dto : " + boardDto);
+	public void writeNotice(NoticeDto noticeDto) throws Exception {
+		System.out.println("공지사항 입력 전 dto : " + noticeDto);
+		noticeMapper.writeNotice(noticeDto);
+		System.out.println("공지사항 입력 후 dto : " + noticeDto);
 	}
 
 	@Override
-	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
+	public List<NoticeDto> listNotice(Map<String, String> map) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		String key = map.get("key");
-		if ("userid".equals(key))
-			key = "b.user_id";
 		param.put("key", key == null ? "" : key);
 		param.put("word", map.get("word") == null ? "" : map.get("word"));
 		int pgNo = Integer.parseInt(map.get("pgno") == null ? "1" : map.get("pgno"));
@@ -45,9 +42,9 @@ public class BoardServiceImpl implements BoardService {
 		param.put("start", start);
 		param.put("listsize", SizeConstant.LIST_SIZE);
 
-		return boardMapper.listArticle(param);
+		return noticeMapper.listNotice(param);
 	}
-
+	
 	@Override
 	public PageNavigation makePageNavigation(Map<String, String> map) throws Exception {
 		PageNavigation pageNavigation = new PageNavigation();
@@ -64,7 +61,7 @@ public class BoardServiceImpl implements BoardService {
 			key = "user_id";
 		param.put("key", key == null ? "" : key);
 		param.put("word", map.get("word") == null ? "" : map.get("word"));
-		int totalCount = boardMapper.getTotalArticleCount(param);
+		int totalCount = noticeMapper.getTotalNoticeCount(param);
 		pageNavigation.setTotalCount(totalCount);
 		int totalPageCount = (totalCount - 1) / sizePerPage + 1;
 		pageNavigation.setTotalPageCount(totalPageCount);
@@ -78,29 +75,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardDto getArticle(int articleNo) throws Exception {
-		return boardMapper.getArticle(articleNo);
+	public NoticeDto getNotice(int articleNo) throws Exception {
+		return noticeMapper.getNotice(articleNo);
 	}
 
 	@Override
 	public void updateHit(int articleNo) throws Exception {
-		boardMapper.updateHit(articleNo);
+		noticeMapper.updateHit(articleNo);
 	}
 
 	@Override
-	public void modifyArticle(BoardDto boardDto) throws Exception {
-		boardMapper.modifyArticle(boardDto);
+	public void modifyNotice(NoticeDto noticeDto) throws Exception {
+		noticeMapper.modifyNotice(noticeDto);
 	}
 
 	@Override
-	@Transactional
-	public void deleteArticle(int articleNo) throws Exception {
-		boardMapper.deleteArticle(articleNo);
+	public void deleteNotice(int articleNo) throws Exception {
+		noticeMapper.deleteNotice(articleNo);
 	}
-
-	@Override
-	public List<BoardDto> getListArticleByUser(String userId) throws SQLException {
-		return boardMapper.getListArticleByUser(userId);
-	}
-
 }

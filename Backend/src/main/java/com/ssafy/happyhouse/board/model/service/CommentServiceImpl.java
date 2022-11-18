@@ -1,6 +1,5 @@
 package com.ssafy.happyhouse.board.model.service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,35 +8,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.happyhouse.board.model.BoardDto;
-import com.ssafy.happyhouse.board.model.mapper.BoardMapper;
+import com.ssafy.happyhouse.board.model.mapper.CommentMapper;
 import com.ssafy.happyhouse.util.PageNavigation;
 import com.ssafy.happyhouse.util.SizeConstant;
+import com.ssafy.happyhouse.board.model.CommentDto;
 
 @Service
-public class BoardServiceImpl implements BoardService {
-
-	private BoardMapper boardMapper;
-
+public class CommentServiceImpl implements CommentService{
+	
+	private CommentMapper commentMapper;
+	
 	@Autowired
-	public BoardServiceImpl(BoardMapper boardMapper) {
-		this.boardMapper = boardMapper;
+	public CommentServiceImpl(CommentMapper commentMapper) {
+		this.commentMapper = commentMapper;
 	}
 
 	@Override
 	@Transactional
-	public void writeArticle(BoardDto boardDto) throws Exception {
-		System.out.println("글입력 전 dto : " + boardDto);
-		boardMapper.writeArticle(boardDto);
-		System.out.println("글입력 후 dto : " + boardDto);
+	public void writeComment(CommentDto commentDto) throws Exception {
+		System.out.println("댓글입력 전 dto : " + commentDto);
+		commentMapper.writeComment(commentDto);
+		System.out.println("댓글입력 후 dto : " + commentDto);
 	}
-
+	
 	@Override
-	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
+	public List<CommentDto> listComment(Map<String, String> map, int articleNo) throws Exception {
 		Map<String, Object> param = new HashMap<String, Object>();
 		String key = map.get("key");
 		if ("userid".equals(key))
-			key = "b.user_id";
+			key = "c.user_id";
 		param.put("key", key == null ? "" : key);
 		param.put("word", map.get("word") == null ? "" : map.get("word"));
 		int pgNo = Integer.parseInt(map.get("pgno") == null ? "1" : map.get("pgno"));
@@ -45,9 +44,9 @@ public class BoardServiceImpl implements BoardService {
 		param.put("start", start);
 		param.put("listsize", SizeConstant.LIST_SIZE);
 
-		return boardMapper.listArticle(param);
+		return commentMapper.listComment(param, articleNo);
 	}
-
+	
 	@Override
 	public PageNavigation makePageNavigation(Map<String, String> map) throws Exception {
 		PageNavigation pageNavigation = new PageNavigation();
@@ -64,7 +63,7 @@ public class BoardServiceImpl implements BoardService {
 			key = "user_id";
 		param.put("key", key == null ? "" : key);
 		param.put("word", map.get("word") == null ? "" : map.get("word"));
-		int totalCount = boardMapper.getTotalArticleCount(param);
+		int totalCount = commentMapper.getTotalCommentCount(param);
 		pageNavigation.setTotalCount(totalCount);
 		int totalPageCount = (totalCount - 1) / sizePerPage + 1;
 		pageNavigation.setTotalPageCount(totalPageCount);
@@ -76,31 +75,24 @@ public class BoardServiceImpl implements BoardService {
 
 		return pageNavigation;
 	}
-
+	
 	@Override
-	public BoardDto getArticle(int articleNo) throws Exception {
-		return boardMapper.getArticle(articleNo);
+	public int getTotalCommentCount(Map<String, Object> map) throws Exception {
+		return commentMapper.getTotalCommentCount(map);
+	}
+	
+	@Override
+	public void modifyComment(CommentDto commentDto) throws Exception {
+		commentMapper.modifyComment(commentDto);	
 	}
 
 	@Override
-	public void updateHit(int articleNo) throws Exception {
-		boardMapper.updateHit(articleNo);
+	public void deleteComment(int commentNo) throws Exception {
+		commentMapper.deleteComment(commentNo);
 	}
 
 	@Override
-	public void modifyArticle(BoardDto boardDto) throws Exception {
-		boardMapper.modifyArticle(boardDto);
+	public List<CommentDto> getListCommentByUser(String userId) throws Exception {
+		return commentMapper.getListCommentByUser(userId);
 	}
-
-	@Override
-	@Transactional
-	public void deleteArticle(int articleNo) throws Exception {
-		boardMapper.deleteArticle(articleNo);
-	}
-
-	@Override
-	public List<BoardDto> getListArticleByUser(String userId) throws SQLException {
-		return boardMapper.getListArticleByUser(userId);
-	}
-
 }

@@ -14,7 +14,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema happyhouse
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `happyhouse` ;
+CREATE SCHEMA IF NOT EXISTS `happyhouse` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin ;
 USE `happyhouse` ;
 
 -- -----------------------------------------------------
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`board` (
     REFERENCES `happyhouse`.`users` (`user_id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 12
+AUTO_INCREMENT = 7
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -85,6 +85,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`comment` (
   `article_no` INT NOT NULL,
   `content` VARCHAR(2000) NOT NULL,
   `register_time` VARCHAR(45) NULL DEFAULT 'CURRENT_TIMESTAMP',
+  `user_name` VARCHAR(20) NOT NULL,
   PRIMARY KEY (`comment_no`),
   INDEX `user_id_idx` (`user_id` ASC) VISIBLE,
   INDEX `article_no_idx` (`article_no` ASC) VISIBLE,
@@ -97,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`comment` (
     REFERENCES `happyhouse`.`users` (`user_id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 5
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -183,6 +185,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`notice` (
   `register_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`article_no`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 

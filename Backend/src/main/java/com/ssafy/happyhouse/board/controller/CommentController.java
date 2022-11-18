@@ -24,21 +24,22 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ssafy.happyhouse.board.model.BoardDto;
-import com.ssafy.happyhouse.board.model.service.BoardService;
+import com.ssafy.happyhouse.board.model.CommentDto;
+import com.ssafy.happyhouse.board.model.service.CommentService;
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/comment")
 @CrossOrigin("*")
-public class BoardController {
+public class CommentController {
 
-	private final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private final Logger logger = LoggerFactory.getLogger(CommentController.class);
 
-	private final BoardService boardService;
+	private final CommentService commentService;
 
 	@Autowired
-	public BoardController(BoardService boardService) {
-		logger.info("Board Controller 생성자 호출");
-		this.boardService = boardService;
+	public CommentController(CommentService commentService) {
+		logger.info("Comment Controller 생성자 호출");
+		this.commentService = commentService;
 	}
 
 	@GetMapping("/write")
@@ -51,9 +52,9 @@ public class BoardController {
 
 	//세션 추가
 	@PostMapping("/write")
-	public ResponseEntity<?> write(@RequestBody BoardDto boardDto, RedirectAttributes redirectAttributes) throws Exception {
+	public ResponseEntity<?> write(@RequestBody CommentDto commentDto, RedirectAttributes redirectAttributes) throws Exception {
 		try {
-			boardService.writeArticle(boardDto);
+			commentService.writeComment(commentDto);
 			redirectAttributes.addAttribute("pgno", "1");
 			redirectAttributes.addAttribute("key", "");
 			redirectAttributes.addAttribute("word", "");
@@ -65,31 +66,12 @@ public class BoardController {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<?> list(@RequestParam Map<String, String> map) throws Exception{
-		try {
-			List<BoardDto> list = boardService.listArticle(map);
-			if(list != null && !list.isEmpty()) {
-				return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK);
-			}else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-			}
-		} catch (SQLException e) {
-			return exceptionHandling(e);
-		}
-	}
-
-	@GetMapping("/view")
-	public ResponseEntity<?> view(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map, Model model)
+	public ResponseEntity<?> list(@RequestParam("articleNo") int articleNo, @RequestParam Map<String, String> map)
 			throws Exception {
 		try {
-			BoardDto boardDto = boardService.getArticle(articleNo);
-			boardService.updateHit(articleNo);
-			model.addAttribute("article", boardDto);
-			model.addAttribute("pgno", map.get("pgno"));
-			model.addAttribute("key", map.get("key"));
-			model.addAttribute("word", map.get("word"));
-			if( boardDto != null)
-				return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
+			List<CommentDto> list = commentService.listComment(map, articleNo);
+			if( list != null)
+				return new ResponseEntity<List<CommentDto>>(list, HttpStatus.OK);
 			else
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} catch (SQLException e) {
@@ -98,12 +80,12 @@ public class BoardController {
 	}
 	
 	//내가 쓴 글
-	@GetMapping("/myArticle")
+	@GetMapping("/myComment")
 	public ResponseEntity<?> myArticle(@RequestParam("userId") String userId) throws Exception{
 		try {;
-			List<BoardDto> list = boardService.getListArticleByUser(userId);
+			List<CommentDto> list = commentService.getListCommentByUser(userId);
 			if(list != null && !list.isEmpty()) {
-				return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK);
+				return new ResponseEntity<List<CommentDto>>(list, HttpStatus.OK);
 			}else {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 			}
@@ -112,29 +94,11 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping("/modify")
-	public ResponseEntity<?> modify(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map, Model model)
-			throws Exception {
-		try {
-			BoardDto boardDto = boardService.getArticle(articleNo);
-			model.addAttribute("article", boardDto);
-			model.addAttribute("pgno", map.get("pgno"));
-			model.addAttribute("key", map.get("key"));
-			model.addAttribute("word", map.get("word"));
-			if( boardDto != null)
-				return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
-			else
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		} catch (SQLException e) {
-			return exceptionHandling(e);
-		}
-	}
-
 	@PutMapping("/modify")
-	public ResponseEntity<?> modify(@RequestBody BoardDto boardDto, @RequestParam Map<String, String> map,
+	public ResponseEntity<?> modify(@RequestBody CommentDto commentDto, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		try {
-			boardService.modifyArticle(boardDto);
+			commentService.modifyComment(commentDto);
 			redirectAttributes.addAttribute("pgno", map.get("pgno"));
 			redirectAttributes.addAttribute("key", map.get("key"));
 			redirectAttributes.addAttribute("word", map.get("word"));
@@ -145,10 +109,10 @@ public class BoardController {
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<?> delete(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map,
+	public ResponseEntity<?> delete(@RequestParam("commentNo") int commentNo, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		try {
-			boardService.deleteArticle(articleNo);
+			commentService.deleteComment(commentNo);
 			redirectAttributes.addAttribute("pgno", map.get("pgno"));
 			redirectAttributes.addAttribute("key", map.get("key"));
 			redirectAttributes.addAttribute("word", map.get("word"));
@@ -158,7 +122,6 @@ public class BoardController {
 		}
 	}
 
-	
 	private ResponseEntity<String> exceptionHandling(SQLException e) {
 		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}

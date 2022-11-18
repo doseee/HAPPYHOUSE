@@ -10,14 +10,12 @@ import com.ssafy.happyhouse.board.model.BoardDto;
 
 @Mapper
 public interface BoardMapper {
-
 	int writeArticle(BoardDto boardDto) throws SQLException;
-	void registerFile(BoardDto boardDto) throws Exception;
 	List<BoardDto> listArticle(Map<String, Object> map) throws SQLException;
 	int getTotalArticleCount(Map<String, Object> map) throws SQLException;
 	BoardDto getArticle(int articleNo) throws SQLException;
 	void updateHit(int articleNo) throws SQLException;
 	void modifyArticle(BoardDto boardDto) throws SQLException;
-	void deleteFile(int articleNo) throws Exception;
 	void deleteArticle(int articleNo) throws SQLException;
+	List<BoardDto> getListArticleByUser(String userId) throws SQLException;
 }

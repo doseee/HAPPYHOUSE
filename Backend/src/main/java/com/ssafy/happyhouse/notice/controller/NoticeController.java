@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.board.controller;
+package com.ssafy.happyhouse.notice.controller;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -23,22 +23,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ssafy.happyhouse.board.model.BoardDto;
-import com.ssafy.happyhouse.board.model.service.BoardService;
+import com.ssafy.happyhouse.notice.model.NoticeDto;
+import com.ssafy.happyhouse.notice.model.service.NoticeService;
 
 @RestController
-@RequestMapping("/board")
+@RequestMapping("/notice")
 @CrossOrigin("*")
-public class BoardController {
+public class NoticeController {
 
-	private final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private final Logger logger = LoggerFactory.getLogger(NoticeController.class);
 
-	private final BoardService boardService;
+	private final NoticeService noticeService;
 
 	@Autowired
-	public BoardController(BoardService boardService) {
-		logger.info("Board Controller 생성자 호출");
-		this.boardService = boardService;
+	public NoticeController(NoticeService noticeService) {
+		logger.info("Notice Controller 생성자 호출");
+		this.noticeService = noticeService;
 	}
 
 	@GetMapping("/write")
@@ -51,9 +51,9 @@ public class BoardController {
 
 	//세션 추가
 	@PostMapping("/write")
-	public ResponseEntity<?> write(@RequestBody BoardDto boardDto, RedirectAttributes redirectAttributes) throws Exception {
+	public ResponseEntity<?> write(@RequestBody NoticeDto noticeDto, RedirectAttributes redirectAttributes) throws Exception {
 		try {
-			boardService.writeArticle(boardDto);
+			noticeService.writeNotice(noticeDto);
 			redirectAttributes.addAttribute("pgno", "1");
 			redirectAttributes.addAttribute("key", "");
 			redirectAttributes.addAttribute("word", "");
@@ -67,9 +67,9 @@ public class BoardController {
 	@GetMapping("/list")
 	public ResponseEntity<?> list(@RequestParam Map<String, String> map) throws Exception{
 		try {
-			List<BoardDto> list = boardService.listArticle(map);
+			List<NoticeDto> list = noticeService.listNotice(map);
 			if(list != null && !list.isEmpty()) {
-				return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK);
+				return new ResponseEntity<List<NoticeDto>>(list, HttpStatus.OK);
 			}else {
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 			}
@@ -82,31 +82,16 @@ public class BoardController {
 	public ResponseEntity<?> view(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map, Model model)
 			throws Exception {
 		try {
-			BoardDto boardDto = boardService.getArticle(articleNo);
-			boardService.updateHit(articleNo);
-			model.addAttribute("article", boardDto);
+			NoticeDto noticeDto = noticeService.getNotice(articleNo);
+			noticeService.updateHit(articleNo);
+			model.addAttribute("article", noticeDto);
 			model.addAttribute("pgno", map.get("pgno"));
 			model.addAttribute("key", map.get("key"));
 			model.addAttribute("word", map.get("word"));
-			if( boardDto != null)
-				return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
+			if( noticeDto != null)
+				return new ResponseEntity<NoticeDto>(noticeDto, HttpStatus.OK);
 			else
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		} catch (SQLException e) {
-			return exceptionHandling(e);
-		}
-	}
-	
-	//내가 쓴 글
-	@GetMapping("/myArticle")
-	public ResponseEntity<?> myArticle(@RequestParam("userId") String userId) throws Exception{
-		try {;
-			List<BoardDto> list = boardService.getListArticleByUser(userId);
-			if(list != null && !list.isEmpty()) {
-				return new ResponseEntity<List<BoardDto>>(list, HttpStatus.OK);
-			}else {
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-			}
 		} catch (SQLException e) {
 			return exceptionHandling(e);
 		}
@@ -116,13 +101,13 @@ public class BoardController {
 	public ResponseEntity<?> modify(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map, Model model)
 			throws Exception {
 		try {
-			BoardDto boardDto = boardService.getArticle(articleNo);
-			model.addAttribute("article", boardDto);
+			NoticeDto noticeDto = noticeService.getNotice(articleNo);
+			model.addAttribute("article", noticeDto);
 			model.addAttribute("pgno", map.get("pgno"));
 			model.addAttribute("key", map.get("key"));
 			model.addAttribute("word", map.get("word"));
-			if( boardDto != null)
-				return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
+			if( noticeDto != null)
+				return new ResponseEntity<NoticeDto>(noticeDto, HttpStatus.OK);
 			else
 				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		} catch (SQLException e) {
@@ -131,10 +116,10 @@ public class BoardController {
 	}
 
 	@PutMapping("/modify")
-	public ResponseEntity<?> modify(@RequestBody BoardDto boardDto, @RequestParam Map<String, String> map,
+	public ResponseEntity<?> modify(@RequestBody NoticeDto noticeDto, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		try {
-			boardService.modifyArticle(boardDto);
+			noticeService.modifyNotice(noticeDto);
 			redirectAttributes.addAttribute("pgno", map.get("pgno"));
 			redirectAttributes.addAttribute("key", map.get("key"));
 			redirectAttributes.addAttribute("word", map.get("word"));
@@ -148,7 +133,7 @@ public class BoardController {
 	public ResponseEntity<?> delete(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		try {
-			boardService.deleteArticle(articleNo);
+			noticeService.deleteNotice(articleNo);
 			redirectAttributes.addAttribute("pgno", map.get("pgno"));
 			redirectAttributes.addAttribute("key", map.get("key"));
 			redirectAttributes.addAttribute("word", map.get("word"));
@@ -158,7 +143,6 @@ public class BoardController {
 		}
 	}
 
-	
 	private ResponseEntity<String> exceptionHandling(SQLException e) {
 		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
