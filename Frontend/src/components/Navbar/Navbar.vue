@@ -8,8 +8,19 @@
           @click.native.stop="toggle"
         ></navbar-toggle-button>
       </div>
-      <div class="navbar-notice">
-        <slot name="navbar-notice"></slot>
+      <div>
+        <div
+          class="input-group-prepend"
+          style="margin-left: 20px; border: 2px solid; border-radius: 30px"
+        >
+          <p
+            class="navbar-brand input-group-text"
+            style="padding: 10px; padding-top: 12px; margin: 0px"
+          >
+            공지사항
+          </p>
+          <slot name="navbar-notice"> </slot>
+        </div>
       </div>
       <div
         class="navbar-collapse collapse"
