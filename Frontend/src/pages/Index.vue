@@ -6,10 +6,10 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6">
-              <carousel-section></carousel-section>
+              <main-qna></main-qna>
             </div>
             <div class="col-md-6">
-              <carousel-section></carousel-section>
+              <main-news></main-news>
             </div>
           </div>
         </div>
@@ -76,7 +76,8 @@ import NucleoIconsSection from "./components/NucleoIconsSection";
 import SignupForm from "./components/SignupForm";
 import ExamplesSection from "./components/ExamplesSection";
 import DownloadSection from "./components/DownloadSection";
-
+import MainQna from "./components/MainQna";
+import MainNews from "./components/MainNews";
 export default {
   name: "index",
   bodyClass: "index-page",
@@ -94,6 +95,8 @@ export default {
     SignupForm,
     ExamplesSection,
     DownloadSection,
+    MainQna,
+    MainNews,
   },
 };
 </script>
