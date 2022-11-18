@@ -1,6 +1,6 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
-import { login } from "@/api/user";
+import { login, findById, tokenRegeneration, logout } from "@/api/user";
 
 const userStore = {
   namespaced: true,

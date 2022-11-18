@@ -52,11 +52,26 @@
             <p>뉴스</p>
           </a>
         </li>
-        <li class="nav-item">
-          <drop-down tag="li" title="로그인" icon="now-ui-icons users_single-02">
-            <nav-link to="/login"> <i class="now-ui-icons users_circle-08"></i> Login </nav-link>
-            <nav-link to="/mypage"> <i class="now-ui-icons users_single-02"></i> mypage </nav-link>
+        <!--로그인 O -->
+        <li class="nav-item" v-if="userInfo">
+          <drop-down tag="li" title="내 정보" icon="now-ui-icons users_circle-08">
+            <nav-link to="/mypage">
+              <i class="now-ui-icons users_single-02"></i> 마이페이지
+            </nav-link>
+            <nav-link class="link">
+              <button @click.prevent="onClickLogout">
+                <i class="now-ui-icons media-1_button-power"></i>
+                로그아웃
+              </button>
+            </nav-link>
           </drop-down>
+        </li>
+        <!--로그인 X -->
+        <li class="nav-item" v-else>
+          <router-link class="nav-link" to="/login">
+            <i class="now-ui-icons users_single-02"></i>
+            <p>로그인</p>
+          </router-link>
         </li>
       </template>
     </template>
@@ -66,11 +81,40 @@
 <script>
 import { DropDown, Navbar, NavLink } from "@/components";
 import { Popover } from "element-ui";
+import { mapState, mapGetters, mapActions } from "vuex";
+
+const userStore = "userStore";
+
 export default {
   name: "main-navbar",
+  data() {
+    return {};
+  },
   props: {
     transparent: Boolean,
     colorOnScroll: Number,
+  },
+  computed: {
+    ...mapState(userStore, ["isLogin", "userInfo"]),
+    ...mapGetters(["checkUserInfo"]),
+  },
+  methods: {
+    ...mapActions(userStore, ["userLogout"]),
+    // ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
+    onClickLogout() {
+      // this.SET_IS_LOGIN(false);
+      // this.SET_USER_INFO(null);
+      // sessionStorage.removeItem("access-token");
+      // if (this.$route.path != "/") this.$router.push({ name: "main" });
+      console.log(this.userInfo.userid);
+      //vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
+      //+ satate에 isLogin, userInfo 정보 변경)
+      // this.$store.dispatch("userLogout", this.userInfo.userid);
+      this.userLogout(this.userInfo.userid);
+      sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
+      sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+      if (this.$route.path != "/") this.$router.push({ name: "index" });
+    },
   },
   data() {
     return {
