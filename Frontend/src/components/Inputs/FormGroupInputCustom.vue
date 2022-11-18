@@ -1,20 +1,9 @@
 <template>
   <div :class="[{ 'input-group': hasIcon }]">
-    <slot name="addonLeft">
-      <div v-if="addonLeftIcon" class="input-group-prepend">
-        <i class="input-group-text" :class="addonLeftIcon"></i>
-      </div>
-    </slot>
-    <slot>
-      <input
-        :value="value"
-        v-on="listeners"
-        v-bind="$attrs"
-        class="form-control"
-        :class="[{ valid: value && !error }, inputClasses]"
-        aria-describedby="addon-right addon-left"
-      />
-    </slot>
+    <div v-if="addonLeftIcon" class="input-group-prepend">
+      <i class="input-group-text"></i>
+    </div>
+    <input v-bind="$attrs" class="form-control" />
   </div>
 </template>
 <script>
@@ -48,27 +37,7 @@ export default {
       };
     },
     hasIcon() {
-      const { addonRight, addonLeft } = this.$slots;
-      return (
-        addonRight !== undefined ||
-        addonLeft !== undefined ||
-        this.addonRightIcon !== undefined ||
-        this.addonLeftIcon !== undefined
-      );
-    },
-  },
-  methods: {
-    updateValue(evt) {
-      let value = evt.target.value;
-      this.$emit("input", value);
-    },
-    onFocus(value) {
-      this.focused = true;
-      this.$emit("focus", value);
-    },
-    onBlur(value) {
-      this.focused = false;
-      this.$emit("blur", value);
+      return this.addonLeftIcon !== undefined;
     },
   },
 };
