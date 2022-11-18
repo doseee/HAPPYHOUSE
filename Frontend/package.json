@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.0.96",
+    "axios": "^1.1.3",
     "babel-eslint": "^10.1.0",
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.23.1",
@@ -16,13 +17,16 @@
     "element-ui": "^2.13.2",
     "eslint": "^7.3.1",
     "eslint-plugin-vue": "^6.2.2",
+    "jwt-decode": "^3.1.2",
     "nouislider": "^14.6.0",
     "vue": "^2.7.14",
     "vue-lazy-load": "^0.0.7",
     "vue-lazyload": "^1.3.3",
     "vue-router": "^3.3.4",
     "vue2-transitions": "^0.3.0",
-    "vuetify": "^2.6.12"
+    "vuetify": "^2.6.12",
+    "vuex": "^4.1.0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.4.6",

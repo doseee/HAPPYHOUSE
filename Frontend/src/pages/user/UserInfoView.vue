@@ -1,55 +1,51 @@
 <template>
-  <div>
-    <div class="content">
-      <div class="container">
-        <div class="col-md-5 ml-auto mr-auto">
-          <card type="login" plain>
-            <p>HAPPY HOUSE</p>
-            <fg-input
-              class="no-border input-lg"
-              addon-left-icon="now-ui-icons users_circle-08"
-              placeholder="아이디"
-            >
-            </fg-input>
+  <div class="container clear-filter" style="padding: 0; z-index: -1">
+    <div class="col-md-5 ml-auto mr-auto">
+      <card type="login" plain>
+        <h3 style="color: black">(홍길동)님의 회원정보 페이지</h3>
 
-            <fg-input
-              class="no-border input-lg"
-              addon-left-icon="now-ui-icons text_caps-small"
-              placeholder="비밀번호"
-            >
-            </fg-input>
+        <fg-input
+          class="no-border input-lg"
+          addon-left-icon="now-ui-icons users_circle-08"
+          placeholder="아이디: ssafy"
+          readonly
+        ></fg-input>
 
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">로그인</a>
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">카카오 로그인</a>
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-primary btn-round btn-lg btn-block">네이버 로그인</a>
-            </div>
-            <template slot="raw-content">
-              <div class="pull-left">
-                <h6>
-                  <router-link to="/regist" class="link footer-link">회원가입</router-link>
-                </h6>
-              </div>
-              <div class="pull-right">
-                <h6>
-                  <a href="#pablo" class="link footer-link">비밀번호 찾기</a>
-                </h6>
-              </div>
-            </template>
-          </card>
-        </div>
-      </div>
+        <fg-input
+          class="no-border input-lg"
+          addon-left-icon="now-ui-icons ui-1_email-85"
+          placeholder="이메일 : ssafy@ssafy.com"
+          readonly
+        >
+        </fg-input>
+
+        <fg-input
+          class="no-border input-lg"
+          addon-left-icon="now-ui-icons tech_mobile"
+          placeholder="전화번호 : 010-1234-1234"
+          readonly
+        >
+        </fg-input>
+
+        <fg-input
+          class="no-border input-lg"
+          addon-left-icon="now-ui-icons shopping_shop"
+          placeholder="주소 : 서울특별시 광진구"
+          readonly
+        >
+        </fg-input>
+      </card>
     </div>
   </div>
 </template>
 <script>
+import { FormGroupInput } from "@/components";
 export default {
   name: "UserInfoView",
   bodyClass: "user-info-view",
+  components: {
+    [FormGroupInput.name]: FormGroupInput,
+  },
 };
 </script>
 <style>

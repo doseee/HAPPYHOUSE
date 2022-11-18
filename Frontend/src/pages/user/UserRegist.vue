@@ -1,81 +1,99 @@
 <template>
   <div class="page-header clear-filter" filter-color="orange">
     <div class="page-header-image" style="background-image: url('img/login.jpg')"></div>
-    <div class="content">
-      <div class="container">
-        <div class="col-md-5 ml-auto mr-auto">
-          <card type="regist" plain>
-            <p>회원가입</p>
+    <div class="container">
+      <div class="col-md-5 ml-auto mr-auto">
+        <card type="regist" plain>
+          <p>회원가입</p>
 
-            <fg-input id="userId" class="no-border input-lg" placeholder="아이디">
-            </fg-input>
-
-            <button type="button" class="btn btn-round btn-warning">
-              <!---->중복검사<!---->
-            </button>
-
-            <fg-input
-              id="userPwd"
-              type="password"
+          <div>
+            <fg-input-custom-dupli
+              id="userId"
               class="no-border input-lg"
-              placeholder="비밀번호"
+              placeholder="아이디"
+              addon-left-icon=""
+              style="border-top-right-radius: 10px; border-bottom-right-radius: 10px"
             >
-            </fg-input>
+            </fg-input-custom-dupli>
+          </div>
 
-            <fg-input
-              id="pwck"
-              type="password"
-              class="no-border input-lg"
-              placeholder="비밀번호 확인"
-            >
-            </fg-input>
-            <fg-input id="userName" class="no-border input-lg" placeholder="이름">
-            </fg-input>
-            <fg-input id="userTel" class="no-border input-lg" placeholder="전화번호">
-            </fg-input>
-            <fg-input
-              type="email"
-              id="userEmail"
-              class="no-border input-lg"
-              placeholder="이메일"
-            >
-            </fg-input>
-            <fg-input id="userAddress" class="no-border input-lg" placeholder="주소">
-            </fg-input>
+          <fg-input-custom
+            id="userPwd"
+            type="password"
+            class="no-border input-lg"
+            placeholder="비밀번호"
+            addon-left-icon=""
+          >
+          </fg-input-custom>
 
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-warning btn-round btn-lg btn-block"
-                >회원가입</a
-              >
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-warning btn-round btn-lg btn-block"
-                >카카오로 회원가입</a
-              >
-            </div>
-            <div class="card-footer text-center">
-              <a href="#pablo" class="btn btn-warning btn-round btn-lg btn-block"
-                >네이버로 회원가입</a
-              >
-            </div>
-          </card>
-        </div>
+          <fg-input-custom
+            id="pwck"
+            type="password"
+            class="no-border input-lg"
+            placeholder="비밀번호 확인"
+            addon-left-icon=""
+          >
+          </fg-input-custom>
+          <fg-input-costom
+            id="userName"
+            class="no-border input-lg"
+            placeholder="이름"
+            addon-left-icon=""
+          >
+          </fg-input-costom>
+          <fg-input-custom
+            id="userTel"
+            class="no-border input-lg"
+            placeholder="전화번호"
+            addon-left-icon=""
+          >
+          </fg-input-custom>
+          <fg-input-custom
+            type="email"
+            id="userEmail"
+            class="no-border input-lg"
+            placeholder="이메일"
+            addon-left-icon=""
+          >
+          </fg-input-custom>
+          <fg-input-custom
+            id="userAddress"
+            class="no-border input-lg"
+            placeholder="주소"
+            addon-left-icon=""
+          >
+          </fg-input-custom>
+
+          <div class="card-footer text-center">
+            <a href="#pablo" class="btn btn-warning btn-round btn-lg btn-block">회원가입</a>
+          </div>
+          <div class="card-footer text-center">
+            <a href="#pablo" class="btn btn-warning btn-round btn-lg btn-block"
+              >카카오로 회원가입</a
+            >
+          </div>
+          <div class="card-footer text-center">
+            <a href="#pablo" class="btn btn-warning btn-round btn-lg btn-block"
+              >네이버로 회원가입</a
+            >
+          </div>
+        </card>
       </div>
     </div>
-    <main-footer></main-footer>
   </div>
 </template>
 <script>
-import { Card, Button, FormGroupInput } from "@/components";
-import MainFooter from "@/layout/MainFooter";
+import { Card, Button } from "@/components";
+import FormGroupInputCustom from "@/components/Inputs/FormGroupInputCustom";
+import FormGroupInputDupli from "@/components/Inputs/FormGroupInputDupli";
 export default {
   name: "UserRegister",
   bodyClass: "UserRegister",
   components: {
     Card,
-    MainFooter,
     [Button.name]: Button,
-    [FormGroupInput.name]: FormGroupInput,
+    [FormGroupInputCustom.name]: FormGroupInputCustom,
+    [FormGroupInputDupli.name]: FormGroupInputDupli,
   },
 };
 </script>
