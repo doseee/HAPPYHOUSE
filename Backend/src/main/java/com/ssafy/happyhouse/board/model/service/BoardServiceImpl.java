@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.board.model.service;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,8 +94,13 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	@Transactional
-	public void deleteArticle(int articleNo, String path) throws Exception {
+	public void deleteArticle(int articleNo) throws Exception {
 		boardMapper.deleteArticle(articleNo);
+	}
+
+	@Override
+	public List<BoardDto> getListArticleByUser(String userId) throws SQLException {
+		return boardMapper.getListArticleByUser(userId);
 	}
 
 }

@@ -27,12 +27,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 
 	@Autowired
 	private JwtInterceptor jwtInterceptor;
-
-	private final String uploadFilePath;
-
-	public WebMvcConfiguration(@Value("${file.path.upload-files}") String uploadFilePath) {
-		this.uploadFilePath = uploadFilePath;
-	}
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -50,13 +44,4 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
 //				.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH", "HEAD")
 				.maxAge(1800);
 	}
-
-
-
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/upload/**").addResourceLocations("file:///" + uploadFilePath + "/")
-				.setCachePeriod(3600).resourceChain(true).addResolver(new PathResourceResolver());
-	}
-
 }
