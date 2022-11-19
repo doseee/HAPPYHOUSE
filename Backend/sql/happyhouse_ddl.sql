@@ -38,18 +38,20 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `happyhouse`.`aptlike`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `happyhouse`.`aptlike` (
+  `like_no` INT NOT NULL AUTO_INCREMENT,
   `user_id` VARCHAR(16) NOT NULL,
-  `like_no` INT NOT NULL,
   `sidoName` VARCHAR(30) NOT NULL,
   `gugunName` VARCHAR(30) NOT NULL,
   `dongName` VARCHAR(30) NOT NULL,
   `dongCode` VARCHAR(30) NOT NULL,
-  PRIMARY KEY (`user_id`, `like_no`),
+  PRIMARY KEY (`like_no`),
+  INDEX `user_id` (`user_id` ASC) VISIBLE,
   CONSTRAINT `user_id`
     FOREIGN KEY (`user_id`)
     REFERENCES `happyhouse`.`users` (`user_id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -71,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`board` (
     REFERENCES `happyhouse`.`users` (`user_id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -98,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`comment` (
     REFERENCES `happyhouse`.`users` (`user_id`)
     ON DELETE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 5
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -185,7 +187,7 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`notice` (
   `register_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`article_no`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
+AUTO_INCREMENT = 0
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
