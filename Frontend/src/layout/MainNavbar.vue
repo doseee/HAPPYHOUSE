@@ -9,8 +9,14 @@
     <template>
       <router-link class="navbar-brand" to="/"> HAPPY HOUSE </router-link>
     </template>
-    <template slot="navbar-notice" class="navbar-notice">
-      <textra :data="words" :timer="1.1" />
+
+    <template slot="navbar-notice">
+      <textra
+        style="width: 530px; padding: 15px; padding-left: 50px"
+        :data="words"
+        :infinite="true"
+        :timer="1.1"
+      />
     </template>
     <template>
       <template slot="navbar-menu">
@@ -87,9 +93,6 @@ const userStore = "userStore";
 
 export default {
   name: "main-navbar",
-  data() {
-    return {};
-  },
   props: {
     transparent: Boolean,
     colorOnScroll: Number,
@@ -118,7 +121,13 @@ export default {
   },
   data() {
     return {
-      words: ["My text to show", "palnet", "fail", "sample text"],
+      words: [
+        "주기적으로 비밀번호를 변경해주세요",
+        "2022.1.1 부동산 법 개정",
+        "공지사항3",
+        "공지사항4",
+        "공지사항5",
+      ],
     };
   },
   components: {
