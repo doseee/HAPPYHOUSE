@@ -2,7 +2,11 @@
   <b-row class="mb-1">
     <b-col style="text-align: left">
       <b-form @submit="onSubmit" @reset="onReset">
-        <b-form-group id="userid-group" label="작성자:" label-for="userid" description="작성자를 입력하세요.">
+        <b-form-group
+          id="userid-group"
+          label="작성자:"
+          label-for="userid"
+          description="작성자를 입력하세요.">
           <fg-input
             class="no-border input-lg"
             id="userid"
@@ -10,18 +14,20 @@
             v-model="article.userid"
             type="text"
             required
-            placeholder="작성자 입력..."
-          ></fg-input>
+            placeholder="작성자 입력..."></fg-input>
         </b-form-group>
 
-        <b-form-group id="subject-group" label="제목:" label-for="subject" description="제목을 입력하세요.">
+        <b-form-group
+          id="subject-group"
+          label="제목:"
+          label-for="subject"
+          description="제목을 입력하세요.">
           <b-form-input
             id="subject"
             v-model="article.subject"
             type="text"
             required
-            placeholder="제목 입력..."
-          ></b-form-input>
+            placeholder="제목 입력..."></b-form-input>
         </b-form-group>
 
         <b-form-group id="content-group" label="내용:" label-for="content">
@@ -30,13 +36,19 @@
             v-model="article.content"
             placeholder="내용 입력..."
             rows="10"
-            max-rows="15"
-          ></b-form-textarea>
+            max-rows="15"></b-form-textarea>
         </b-form-group>
 
-        <button type="submit"  class="btn btn-round btn-warning" v-if="this.type === 'register'">글작성</button>
-        <button type="submit" class="btn btn-round btn-warning" v-else>글수정</button>
-        <button type="reset"  class="btn btn-round btn-warning">초기화</button>
+        <button
+          type="submit"
+          class="btn btn-round btn-warning"
+          v-if="this.type === 'register'">
+          글작성
+        </button>
+        <button type="submit" class="btn btn-round btn-warning" v-else>
+          글수정
+        </button>
+        <button type="reset" class="btn btn-round btn-warning">초기화</button>
       </b-form>
     </b-col>
   </b-row>
@@ -79,12 +91,24 @@ export default {
 
       let err = true;
       let msg = "";
-      !this.article.userid && ((msg = "작성자 입력해주세요"), (err = false), this.$refs.userid.focus());
-      err && !this.article.subject && ((msg = "제목 입력해주세요"), (err = false), this.$refs.subject.focus());
-      err && !this.article.content && ((msg = "내용 입력해주세요"), (err = false), this.$refs.content.focus());
+      !this.article.userid &&
+        ((msg = "작성자 입력해주세요"),
+        (err = false),
+        this.$refs.userid.focus());
+      err &&
+        !this.article.subject &&
+        ((msg = "제목 입력해주세요"),
+        (err = false),
+        this.$refs.subject.focus());
+      err &&
+        !this.article.content &&
+        ((msg = "내용 입력해주세요"),
+        (err = false),
+        this.$refs.content.focus());
 
       if (!err) alert(msg);
-      else this.type === "register" ? this.registArticle() : this.modifyArticle();
+      else
+        this.type === "register" ? this.registArticle() : this.modifyArticle();
     },
     onReset(event) {
       event.preventDefault();

@@ -6,8 +6,7 @@
         class="form-check-input"
         type="checkbox"
         :disabled="disabled"
-        v-model="model"
-      />
+        v-model="model" />
       <span class="form-check-sign"></span>
       <slot>
         <span v-if="inline">&nbsp;</span>
@@ -17,20 +16,20 @@
 </template>
 <script>
 export default {
-  name: 'n-checkbox',
+  name: "n-checkbox",
   model: {
-    prop: 'checked'
+    prop: "checked",
   },
   props: {
     checked: [Array, Boolean],
     disabled: Boolean,
     inline: Boolean,
-    hasError: Boolean
+    hasError: Boolean,
   },
   data() {
     return {
-      cbId: '',
-      touched: false
+      cbId: "",
+      touched: false,
     };
   },
   computed: {
@@ -42,8 +41,8 @@ export default {
         if (!this.touched) {
           this.touched = true;
         }
-        this.$emit('input', check);
-      }
+        this.$emit("input", check);
+      },
     },
     inlineClass() {
       if (this.inline) {
@@ -51,12 +50,10 @@ export default {
       }
 
       return ``;
-    }
+    },
   },
   created() {
-    this.cbId = Math.random()
-      .toString(16)
-      .slice(2);
-  }
+    this.cbId = Math.random().toString(16).slice(2);
+  },
 };
 </script>

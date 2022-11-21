@@ -4,10 +4,9 @@
     :class="[
       { 'card-plain': plain },
       { 'card-raised': raised },
-      { [`card-${type}`]: type }
+      { [`card-${type}`]: type },
     ]"
-    :data-background-color="color"
-  >
+    :data-background-color="color">
     <h6 class="card-category" v-if="$slots.category || category">
       {{ category }}
     </h6>
@@ -26,8 +25,7 @@
     <div
       class="card-header"
       :class="headerClasses"
-      v-if="$slots.header || title"
-    >
+      v-if="$slots.header || title">
       <slot name="header">
         <h1 v-if="title" class="card-title">{{ title }}</h1>
         <h3 v-if="subTitle" class="card-category">{{ subTitle }}</h3>
@@ -48,7 +46,7 @@
 </template>
 <script>
 export default {
-  name: 'card',
+  name: "card",
   props: {
     type: String,
     title: String,
@@ -60,8 +58,8 @@ export default {
     plain: Boolean,
     raised: Boolean,
     cardBodyClasses: [String, Object, Array],
-    headerClasses: [String, Object, Array]
-  }
+    headerClasses: [String, Object, Array],
+  },
 };
 </script>
 <style></style>

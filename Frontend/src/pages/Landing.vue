@@ -3,8 +3,7 @@
     <div class="page-header page-header-small">
       <parallax
         class="page-header-image"
-        style="background-image: url('img/bg6.jpg')"
-      >
+        style="background-image: url('img/bg6.jpg')">
       </parallax>
       <div class="content-center">
         <div class="container">
@@ -42,8 +41,7 @@
             <div class="col-md-6">
               <div
                 class="image-container image-left"
-                style="background-image: url('img/login.jpg')"
-              >
+                style="background-image: url('img/login.jpg')">
                 <!-- First image on the left side -->
                 <p class="blockquote blockquote-primary">
                   "Over the span of the satellite record, Arctic sea ice has
@@ -57,15 +55,13 @@
               <!-- Second image on the left side of the article -->
               <div
                 class="image-container"
-                style="background-image: url('img/bg3.jpg')"
-              ></div>
+                style="background-image: url('img/bg3.jpg')"></div>
             </div>
             <div class="col-md-5">
               <!-- First image on the right side, above the article -->
               <div
                 class="image-container image-right"
-                style="background-image: url('img/bg1.jpg')"
-              ></div>
+                style="background-image: url('img/bg1.jpg')"></div>
               <h3>
                 So what does the new record for the lowest level of winter ice
                 actually mean
@@ -111,8 +107,7 @@
                 <img
                   src="img/avatar.jpg"
                   alt="Thumbnail Image"
-                  class="rounded-circle img-fluid img-raised"
-                />
+                  class="rounded-circle img-fluid img-raised" />
                 <h4 class="title">Romina Hadid</h4>
                 <p class="category text-primary">Model</p>
                 <p class="description">
@@ -137,8 +132,7 @@
                 <img
                   src="img/ryan.jpg"
                   alt="Thumbnail Image"
-                  class="rounded-circle img-fluid img-raised"
-                />
+                  class="rounded-circle img-fluid img-raised" />
                 <h4 class="title">Ryan Tompson</h4>
                 <p class="category text-primary">Designer</p>
                 <p class="description">
@@ -160,8 +154,7 @@
                 <img
                   src="img/eva.jpg"
                   alt="Thumbnail Image"
-                  class="rounded-circle img-fluid img-raised"
-                />
+                  class="rounded-circle img-fluid img-raised" />
                 <h4 class="title">Eva Jenner</h4>
                 <p class="category text-primary">Fashion</p>
                 <p class="description">
@@ -195,15 +188,13 @@
               class="input-lg"
               placeholder="First Name..."
               v-model="form.firstName"
-              addon-left-icon="now-ui-icons users_circle-08"
-            >
+              addon-left-icon="now-ui-icons users_circle-08">
             </fg-input>
             <fg-input
               class="input-lg"
               placeholder="Email Here..."
               v-model="form.email"
-              addon-left-icon="now-ui-icons ui-1_email-85"
-            >
+              addon-left-icon="now-ui-icons ui-1_email-85">
             </fg-input>
             <div class="textarea-container">
               <textarea
@@ -212,8 +203,7 @@
                 rows="4"
                 cols="80"
                 v-model="form.message"
-                placeholder="Type a message..."
-              ></textarea>
+                placeholder="Type a message..."></textarea>
             </div>
             <div class="send-button">
               <n-button type="primary" round block size="lg"
@@ -227,23 +217,23 @@
   </div>
 </template>
 <script>
-import { Button, FormGroupInput } from '@/components';
+import { Button, FormGroupInput } from "@/components";
 export default {
-  name: 'landing',
-  bodyClass: 'landing-page',
+  name: "landing",
+  bodyClass: "landing-page",
   components: {
     [Button.name]: Button,
-    [FormGroupInput.name]: FormGroupInput
+    [FormGroupInput.name]: FormGroupInput,
   },
   data() {
     return {
       form: {
-        firstName: '',
-        email: '',
-        message: ''
-      }
+        firstName: "",
+        email: "",
+        message: "",
+      },
     };
-  }
+  },
 };
 </script>
 <style></style>

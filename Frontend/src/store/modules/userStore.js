@@ -1,6 +1,14 @@
 import jwtDecode from "jwt-decode";
 import router from "@/router";
-import { login, findById, tokenRegeneration, logout } from "@/api/user";
+import {
+  login,
+  findById,
+  tokenRegeneration,
+  logout,
+  update,
+  remove,
+  join,
+} from "@/api/user";
 
 const userStore = {
   namespaced: true,
@@ -55,14 +63,14 @@ const userStore = {
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
     },
     async getUserInfo({ commit, dispatch }, token) {
       let decodeToken = jwtDecode(token);
-      // console.log("2. getUserInfo() decodeToken :: ", decodeToken);
+      console.log("2. getUserInfo() decodeToken :: ", decodeToken);
       await findById(
-        decodeToken.userid,
+        decodeToken.userId,
         ({ data }) => {
           if (data.message === "success") {
             commit("SET_USER_INFO", data.userInfo);
@@ -74,15 +82,18 @@ const userStore = {
         async (error) => {
           console.log(
             "getUserInfo() error code [토큰 만료되어 사용 불가능.] ::: ",
-            error.response.status
+            error.response.status,
           );
           commit("SET_IS_VALID_TOKEN", false);
           await dispatch("tokenRegeneration");
-        }
+        },
       );
     },
     async tokenRegeneration({ commit, state }) {
-      console.log("토큰 재발급 >> 기존 토큰 정보 : {}", sessionStorage.getItem("access-token"));
+      console.log(
+        "토큰 재발급 >> 기존 토큰 정보 : {}",
+        sessionStorage.getItem("access-token"),
+      );
       await tokenRegeneration(
         JSON.stringify(state.userInfo),
         ({ data }) => {
@@ -116,15 +127,50 @@ const userStore = {
                 console.log(error);
                 commit("SET_IS_LOGIN", false);
                 commit("SET_USER_INFO", null);
-              }
+              },
             );
           }
-        }
+        },
       );
     },
-    async userLogout({ commit }, userid) {
+    async userJoin({ commit }, user) {
+      console.log(user);
+      console.log(user.userAddress);
+      await join(
+        user,
+        ({ data }) => {},
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+    async userUpdate({ commit }, user) {
+      await update(
+        user,
+        ({ data }) => {},
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+
+    async userRemove({ commit }, userId) {
+      await remove(
+        userId,
+        ({ data }) => {
+          commit("SET_IS_LOGIN", false);
+          commit("SET_USER_INFO", null);
+          commit("SET_IS_VALID_TOKEN", false);
+        },
+        (error) => {
+          console.log(error);
+        },
+      );
+    },
+
+    async userLogout({ commit }, userId) {
       await logout(
-        userid,
+        userId,
         ({ data }) => {
           if (data.message === "success") {
             commit("SET_IS_LOGIN", false);
@@ -136,7 +182,7 @@ const userStore = {
         },
         (error) => {
           console.log(error);
-        }
+        },
       );
     },
   },

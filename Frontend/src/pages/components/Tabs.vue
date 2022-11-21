@@ -11,8 +11,7 @@
           <card>
             <tabs
               slot="raw-content"
-              tab-content-classes="tab-content-padding text-center"
-            >
+              tab-content-classes="tab-content-padding text-center">
               <tab-pane>
                 <template slot="label">
                   <i class="now-ui-icons objects_umbrella-13"></i> Home
@@ -79,8 +78,7 @@
               type="neutral"
               tab-nav-wrapper-classes="card-header"
               tab-content-classes="card-body text-center"
-              data-background-color="orange"
-            >
+              data-background-color="orange">
               <tab-pane>
                 <template slot="label">
                   <i class="now-ui-icons objects_umbrella-13"></i> Home
@@ -144,14 +142,14 @@
   </div>
 </template>
 <script>
-import { Card, Tabs, TabPane } from '@/components';
+import { Card, Tabs, TabPane } from "@/components";
 
 export default {
   components: {
     Card,
     Tabs,
-    TabPane
-  }
+    TabPane,
+  },
 };
 </script>
 <style>

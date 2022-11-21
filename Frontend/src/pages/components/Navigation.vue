@@ -13,8 +13,7 @@
               data-target="#example-navbar"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-bar bar1"></span>
               <span class="navbar-toggler-bar bar2"></span>
               <span class="navbar-toggler-bar bar3"></span>
@@ -50,8 +49,7 @@
               data-target="#example-navbar-icons"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-bar bar1"></span>
               <span class="navbar-toggler-bar bar2"></span>
               <span class="navbar-toggler-bar bar3"></span>
@@ -66,14 +64,12 @@
                 <a class="nav-link" href="#pablo"
                   ><i
                     class="now-ui-icons users_single-02"
-                    aria-hidden="true"
-                  ></i
+                    aria-hidden="true"></i
                 ></a>
               </li>
               <drop-down
                 class="nav-item dropdown"
-                icon="now-ui-icons ui-1_settings-gear-63"
-              >
+                icon="now-ui-icons ui-1_settings-gear-63">
                 <a class="dropdown-header">Dropdown header</a>
                 <a class="dropdown-item" href="#">Action</a>
                 <a class="dropdown-item" href="#">Another action</a>
@@ -92,8 +88,7 @@
     <div id="navbar">
       <div
         class="navigation-example"
-        style="background-image:url('img/bg7.jpg')"
-      >
+        style="background-image: url('img/bg7.jpg')">
         <!-- Navbar Primary  -->
         <navbar type="primary" menu-classes="ml-auto">
           <div class="navbar-translate">
@@ -105,8 +100,7 @@
               data-target="#example-navbar-primary"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-bar bar1"></span>
               <span class="navbar-toggler-bar bar2"></span>
               <span class="navbar-toggler-bar bar3"></span>
@@ -146,8 +140,7 @@
               data-target="#example-navbar-info"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-bar bar1"></span>
               <span class="navbar-toggler-bar bar2"></span>
               <span class="navbar-toggler-bar bar3"></span>
@@ -183,8 +176,7 @@
               data-target="#example-navbar-success"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-bar bar1"></span>
               <span class="navbar-toggler-bar bar2"></span>
               <span class="navbar-toggler-bar bar3"></span>
@@ -220,8 +212,7 @@
               data-target="#example-navbar-success"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-bar bar1"></span>
               <span class="navbar-toggler-bar bar2"></span>
               <span class="navbar-toggler-bar bar3"></span>
@@ -262,8 +253,7 @@
               data-target="#example-navbar-danger"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-bar bar1"></span>
               <span class="navbar-toggler-bar bar2"></span>
               <span class="navbar-toggler-bar bar3"></span>
@@ -302,8 +292,7 @@
               data-target="#example-navbar-transparent"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+              aria-label="Toggle navigation">
               <span class="navbar-toggler-bar bar1"></span>
               <span class="navbar-toggler-bar bar2"></span>
               <span class="navbar-toggler-bar bar3"></span>
@@ -336,13 +325,13 @@
   </div>
 </template>
 <script>
-import { Navbar, DropDown } from '@/components';
+import { Navbar, DropDown } from "@/components";
 
 export default {
   components: {
     Navbar,
-    DropDown
-  }
+    DropDown,
+  },
 };
 </script>
 <style></style>

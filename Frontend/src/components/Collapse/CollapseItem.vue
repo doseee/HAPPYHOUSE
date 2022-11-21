@@ -7,8 +7,7 @@
         :href="`#${itemId}`"
         @click.prevent="activate"
         :aria-expanded="active"
-        :aria-controls="`content-${itemId}`"
-      >
+        :aria-controls="`content-${itemId}`">
         <slot name="title">
           {{ title }}
         </slot>
@@ -23,8 +22,7 @@
         :id="`content-${itemId}`"
         role="tabpanel"
         :aria-labelledby="title"
-        class="collapsed"
-      >
+        class="collapsed">
         <div class="card-body">
           <slot></slot>
         </div>
@@ -33,46 +31,46 @@
   </div>
 </template>
 <script>
-import { CollapseTransition } from 'vue2-transitions';
+import { CollapseTransition } from "vue2-transitions";
 
 export default {
-  name: 'collapse-item',
+  name: "collapse-item",
   components: {
-    CollapseTransition
+    CollapseTransition,
   },
   props: {
     title: {
       type: String,
-      default: ''
+      default: "",
     },
     id: String,
-    noIcon: Boolean
+    noIcon: Boolean,
   },
   inject: {
     animationDuration: {
-      default: 250
+      default: 250,
     },
     multipleActive: {
-      default: false
+      default: false,
     },
     addItem: {
-      default: () => {}
+      default: () => {},
     },
     removeItem: {
-      default: () => {}
+      default: () => {},
     },
     deactivateAll: {
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   computed: {
     itemId() {
       return this.id || this.title;
-    }
+    },
   },
   data() {
     return {
-      active: false
+      active: false,
     };
   },
   methods: {
@@ -81,7 +79,7 @@ export default {
         this.deactivateAll();
       }
       this.active = !this.active;
-    }
+    },
   },
   mounted() {
     this.addItem(this);
@@ -91,7 +89,7 @@ export default {
       this.$el.parentNode.removeChild(this.$el);
     }
     this.removeItem(this);
-  }
+  },
 };
 </script>
 <style></style>

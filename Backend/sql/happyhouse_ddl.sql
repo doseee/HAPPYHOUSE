@@ -245,20 +245,6 @@ CREATE TABLE IF NOT EXISTS `happyhouse`.`apt` (`dongCode` INT, `sidoName` INT, `
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `happyhouse`.`apt_info_deal` (`aptCode` INT, `dongCode` INT, `apartmentName` INT, `sidoName` INT, `gugunName` INT, `roadName` INT, `dong` INT, `lng` INT, `lat` INT);
 
--- -----------------------------------------------------
--- View `happyhouse`.`apt`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `happyhouse`.`apt`;
-USE `happyhouse`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`ssafy`@`%` SQL SECURITY DEFINER VIEW `happyhouse`.`apt` AS select `happyhouse`.`a`.`dongCode` AS `dongCode`,`happyhouse`.`a`.`sidoName` AS `sidoName`,`happyhouse`.`a`.`gugunName` AS `gugunName`,`happyhouse`.`a`.`roadName` AS `roadName`,`d`.`dealYear` AS `dealYear`,`d`.`dealMonth` AS `dealMonth`,`happyhouse`.`a`.`apartmentName` AS `apartmentName`,`d`.`floor` AS `floor`,`d`.`area` AS `area`,`happyhouse`.`a`.`dong` AS `dong`,`d`.`dealAmount` AS `dealAmount`,`happyhouse`.`a`.`lng` AS `lng`,`happyhouse`.`a`.`lat` AS `lat` from (`happyhouse`.`apt_info_deal` `a` join `happyhouse`.`housedeal` `d`) where (`happyhouse`.`a`.`aptCode` = `d`.`aptCode`);
-
--- -----------------------------------------------------
--- View `happyhouse`.`apt_info_deal`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `happyhouse`.`apt_info_deal`;
-USE `happyhouse`;
-CREATE  OR REPLACE ALGORITHM=UNDEFINED DEFINER=`ssafy`@`%` SQL SECURITY DEFINER VIEW `happyhouse`.`apt_info_deal` AS select `i`.`aptCode` AS `aptCode`,`i`.`dongCode` AS `dongCode`,`i`.`apartmentName` AS `apartmentName`,`d`.`sidoName` AS `sidoName`,`d`.`gugunName` AS `gugunName`,`i`.`roadName` AS `roadName`,`d`.`dongName` AS `dong`,`i`.`lng` AS `lng`,`i`.`lat` AS `lat` from (`happyhouse`.`dongcode` `d` join `happyhouse`.`houseinfo` `i`) where (`d`.`dongCode` = `i`.`dongCode`);
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -5,18 +5,20 @@
         <slot v-bind="slotData"></slot>
         <navbar-toggle-button
           :toggled="showMenu"
-          @click.native.stop="toggle"
-        ></navbar-toggle-button>
+          @click.native.stop="toggle"></navbar-toggle-button>
       </div>
       <div>
         <div
           class="input-group-prepend"
-          style="margin-left: 20px; border: 2px solid; border-radius: 30px"
-        >
+          style="
+            border: 2px solid;
+            border-radius: 30px;
+            height: 30px;
+            padding: 1px;
+          ">
           <p
             class="navbar-brand input-group-text"
-            style="padding: 10px; padding-top: 12px; margin: 0px"
-          >
+            style="padding: 0px; width: 80px">
             공지사항
           </p>
           <slot name="navbar-notice"> </slot>
@@ -26,11 +28,14 @@
         class="navbar-collapse collapse"
         v-click-outside="close"
         :style="menuImage ? `background: url(${menuImage}) 0% 0% / cover;` : ''"
-        :class="[{ show: showMenu }, { 'has-image': menuImage }, navMenuClasses]"
+        :class="[
+          { show: showMenu },
+          { 'has-image': menuImage },
+          navMenuClasses,
+        ]"
         v-if="$slots['navbar-menu'] || $scopedSlots['navbar-menu']"
         data-color="orange"
-        id="navigation"
-      >
+        id="navigation">
         <slot name="before-menu"></slot>
         <ul class="navbar-nav" :class="menuClasses">
           <slot name="navbar-menu" v-bind="slotData"></slot>
@@ -77,9 +82,15 @@ export default {
       type: String,
       default: "white",
       validator(value) {
-        return ["white", "default", "primary", "danger", "success", "warning", "info"].includes(
-          value
-        );
+        return [
+          "white",
+          "default",
+          "primary",
+          "danger",
+          "success",
+          "warning",
+          "info",
+        ].includes(value);
       },
     },
     navMenuClasses: {
@@ -162,7 +173,8 @@ export default {
       }
     },
     handleScroll() {
-      let scrollValue = document.body.scrollTop || document.documentElement.scrollTop;
+      let scrollValue =
+        document.body.scrollTop || document.documentElement.scrollTop;
       this.currentScrollValue = scrollValue;
       if (this.colorOnScroll > 0 && scrollValue > this.colorOnScroll) {
         this.extraNavClasses = `bg-${this.type}`;
