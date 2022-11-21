@@ -9,5 +9,4 @@ public class CommentDto {
 	private int articleNo;
 	private String content;
 	private String registerTime;
-	private String userName;
 }
