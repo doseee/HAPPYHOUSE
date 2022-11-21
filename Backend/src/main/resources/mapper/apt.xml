@@ -2,20 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.happyhouse.apt.model.mapper.AptMapper">
-	<resultMap type="aptDto" id="apt">
-		<result column="sidoName" property="sidoName"/>
-		<result column="gugunName" property="gugunName"/>
-		<result column="roadName" property="roadName"/>
-		<result column="dealYear" property="dealYear"/>
-		<result column="dealMonth" property="dealMonth"/>
-	</resultMap>
+	<select id="getSido" resultType="sidoGugunCodeDto">
+		select left(sidoCode,2) sidoCode, sidoName
+		from sidocode
+		order by sidoCode
+	</select>
 	
-	<select id="getList" parameterType="AptDto" resultMap="apt">
-		select * from apt
-		where sidoName=#{sidoName} 
-		and gugunName=#{gugunName} 
-		and roadName=#{roadName} 
-		and dealYear=${dealYear} 
-		and dealMonth=${dealMonth}
+	<select id="getGugunInSido" parameterType="string" resultType="sidoGugunCodeDto">
+		select left(gugunCode,5) gugunCode, gugunName
+		from guguncode
+		where left(gugunCode,2) = #{sido}
+		order by gugunCode
+	</select>
+	
+	<select id="getAddressName" parameterType="string" resultType="SidoGugunCodeDto">
+		select sidoName, gugunName, dongName
+		from dongcode
+		where dongcode = #{dongcode}
+	</select>
+	
+	<select id="getDongInGugun" parameterType="string" resultType="sidoGugunCodeDto">
+		select distinct dongName, dongCode
+		from dongcode
+		where left(dongCode, 5) = #{gugun}
+		order by dongName
+	</select>
+	
+	<select id="getAptInDong" parameterType="string" resultType="houseInfoDto">
+		select h.aptCode, h.roadName, h.roadNameBonbun, h.roadNameBubun, h.roadNameSeq, h.roadNameCode, h.bonbun, h.apartmentName, h.buildYear, h.dongCode, h.dong, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
+		(select round(avg(cast(replace(dealAmount, ',' ,'')as unsigned))) from housedeal hd where hd.aptCode=h.aptCode) avgPrice,
+		  (select count(r.rate) from aptreview r where r.aptCode = h.aptCode) cnt,        
+        (select round(avg(r.rate) ,2) from aptreview r where r.aptCode = h.aptCode) avgrate
+		from houseinfo h
+		left join sidocode si
+		on left(h.dongcode,2) = left(si.sidocode,2)
+		left join guguncode gu
+		on left(h.dongcode,5) = left(gu.guguncode,5)
+		where dongCode = #{dong} 
+		order by h.apartmentName;		
+</select>
+	
+	<select id="getAptName" parameterType="string" resultType="houseInfoDto">
+		select h.aptCode, h.roadName, h.roadNameBonbun, h.roadNameBubun, h.roadNameSeq, h.roadNameCode, h.bonbun, h.apartmentName, h.buildYear, h.dongCode, h.dong, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
+		(select round(avg(cast(replace(dealAmount, ',' ,'')as unsigned))) from housedeal hd where hd.aptCode=h.aptCode) avgPrice,
+		  (select count(r.rate) from aptreview r where r.aptCode = h.aptCode) cnt,        
+        (select round(avg(r.rate) ,2) from aptreview r where r.aptCode = h.aptCode) avgrate
+		from houseinfo h
+		left join sidocode si
+		on left(h.dongcode,2) = left(si.sidocode,2)
+		left join guguncode gu
+		on left(h.dongcode,5) = left(gu.guguncode,5)
+		where h.apartmentName like concat('%', #{aptName},'%')
+		order by h.apartmentName;	
+	</select>
+	
+	<select id="getDealsByCode" parameterType="string" resultType="HouseDealDto">
+	select aptcode, replace(dealAmount, ',' ,'') dealAmount, dealYear, dealMonth, dealDay, area, floor
+	from housedeal
+	where aptCode = #{aptCode}
+	order by dealYear desc, dealMonth desc, dealDay desc;
+	</select>
+
+	<select id="selectHouse" parameterType="String" resultType="houseInfoDto">
+	select h.aptCode, h.roadName, h.roadNameBonbun, h.roadNameBubun, h.roadNameSeq, h.roadNameCode, h.bonbun, h.apartmentName, h.buildYear, h.dongCode, h.dong, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
+		(select round(avg(cast(replace(dealAmount, ',' ,'')as unsigned))) from housedeal hd where hd.aptCode=h.aptCode) avgPrice,
+		  (select count(r.rate) from aptreview r where r.aptCode = h.aptCode) cnt,        
+        (select round(avg(r.rate) ,2) from aptreview r where r.aptCode = h.aptCode) avgrate
+		from houseinfo h
+		left join sidocode si
+		on left(h.dongcode,2) = left(si.sidocode,2)
+		left join guguncode gu
+		on left(h.dongcode,5) = left(gu.guguncode,5)
+		where h.aptCode = #{aptCode}
+		order by h.apartmentName;	
 	</select>
 </mapper>
