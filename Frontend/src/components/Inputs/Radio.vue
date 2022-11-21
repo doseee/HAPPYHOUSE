@@ -1,8 +1,7 @@
 <template>
   <div
     class="form-check form-check-radio"
-    :class="[inlineClass, { disabled: disabled }]"
-  >
+    :class="[inlineClass, { disabled: disabled }]">
     <label :for="cbId" class="form-check-label">
       <input
         :id="cbId"
@@ -10,8 +9,7 @@
         type="radio"
         :disabled="disabled"
         :value="label"
-        v-model="model"
-      />
+        v-model="model" />
       <span class="form-check-sign"> </span>
       <slot></slot>
     </label>
@@ -19,16 +17,16 @@
 </template>
 <script>
 export default {
-  name: 'n-radio',
+  name: "n-radio",
   props: {
     label: [String, Number],
     disabled: Boolean,
     value: [String, Boolean],
-    inline: Boolean
+    inline: Boolean,
   },
   data() {
     return {
-      cbId: ''
+      cbId: "",
     };
   },
   computed: {
@@ -37,20 +35,18 @@ export default {
         return this.value;
       },
       set(value) {
-        this.$emit('input', value);
-      }
+        this.$emit("input", value);
+      },
     },
     inlineClass() {
       if (this.inline) {
         return `form-check-inline`;
       }
-      return '';
-    }
+      return "";
+    },
   },
   created() {
-    this.cbId = Math.random()
-      .toString(16)
-      .slice(2);
-  }
+    this.cbId = Math.random().toString(16).slice(2);
+  },
 };
 </script>

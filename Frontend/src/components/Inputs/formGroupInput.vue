@@ -5,9 +5,8 @@
       { 'input-group': hasIcon },
       { 'has-danger': error },
       { 'input-group-focus': focused },
-      { 'has-label': label || $slots.label }
-    ]"
-  >
+      { 'has-label': label || $slots.label },
+    ]">
     <slot name="label">
       <label v-if="label" class="control-label" :class="labelClasses">
         {{ label }}
@@ -28,14 +27,12 @@
           v-bind="$attrs"
           class="form-control"
           :class="[{ valid: value && !error }, inputClasses]"
-          aria-describedby="addon-right addon-left"
-        />
+          aria-describedby="addon-right addon-left" />
       </slot>
       <slot name="addonRight">
         <span
           v-if="addonRightIcon"
-          class="input-group-addon input-group-append"
-        >
+          class="input-group-addon input-group-append">
           <i class="input-group-text" :class="addonRightIcon"></i>
         </span>
       </slot>
@@ -44,10 +41,9 @@
       <slot name="helpBlock">
         <div
           class="text-danger invalid-feedback"
-          style="display: block;"
+          style="display: block"
           :class="{ 'mt-2': hasIcon }"
-          v-if="error"
-        >
+          v-if="error">
           {{ error }}
         </div>
       </slot>
@@ -57,7 +53,7 @@
 <script>
 export default {
   inheritAttrs: false,
-  name: 'fg-input',
+  name: "fg-input",
   props: {
     required: Boolean,
     label: String,
@@ -66,14 +62,14 @@ export default {
     inputClasses: String,
     value: {
       type: [String, Number],
-      default: ''
+      default: "",
     },
     addonRightIcon: String,
-    addonLeftIcon: String
+    addonLeftIcon: String,
   },
   data() {
     return {
-      focused: false
+      focused: false,
     };
   },
   computed: {
@@ -82,7 +78,7 @@ export default {
         ...this.$listeners,
         input: this.updateValue,
         focus: this.onFocus,
-        blur: this.onBlur
+        blur: this.onBlur,
       };
     },
     hasIcon() {
@@ -93,22 +89,22 @@ export default {
         this.addonRightIcon !== undefined ||
         this.addonLeftIcon !== undefined
       );
-    }
+    },
   },
   methods: {
     updateValue(evt) {
       let value = evt.target.value;
-      this.$emit('input', value);
+      this.$emit("input", value);
     },
     onFocus(value) {
       this.focused = true;
-      this.$emit('focus', value);
+      this.$emit("focus", value);
     },
     onBlur(value) {
       this.focused = false;
-      this.$emit('blur', value);
-    }
-  }
+      this.$emit("blur", value);
+    },
+  },
 };
 </script>
 <style></style>

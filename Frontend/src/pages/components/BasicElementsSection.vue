@@ -66,31 +66,27 @@
           <div class="col-sm-6 col-lg-3">
             <fg-input
               addon-left-icon="now-ui-icons users_single-02"
-              placeholder="Left Nucleo Icon"
-            >
+              placeholder="Left Nucleo Icon">
             </fg-input>
           </div>
           <div class="col-sm-6 col-lg-3">
             <fg-input
               addon-right-icon="now-ui-icons users_single-02"
-              placeholder="Right Nucleo Icon"
-            >
+              placeholder="Right Nucleo Icon">
             </fg-input>
           </div>
           <div class="col-sm-6 col-lg-3">
             <fg-input
               addon-left-icon="now-ui-icons users_single-02"
               class="no-border"
-              placeholder="No border left icon"
-            >
+              placeholder="No border left icon">
             </fg-input>
           </div>
           <div class="col-sm-6 col-lg-3">
             <fg-input
               addon-right-icon="now-ui-icons users_single-02"
               class="no-border"
-              placeholder="No border right icon"
-            >
+              placeholder="No border right icon">
             </fg-input>
           </div>
         </div>
@@ -127,8 +123,7 @@
           <n-switch
             v-model="switches.defaultOff"
             on-text="ON"
-            off-text="OFF"
-          ></n-switch>
+            off-text="OFF"></n-switch>
         </div>
         <div class="col-sm-6 col-lg-3">
           <p class="category">Sliders</p>
@@ -148,8 +143,8 @@ import {
   Radio,
   FormGroupInput,
   Slider,
-  Switch
-} from '@/components';
+  Switch,
+} from "@/components";
 
 export default {
   components: {
@@ -159,30 +154,30 @@ export default {
     [FormGroupInput.name]: FormGroupInput,
     [Switch.name]: Switch,
     [Option.name]: Option,
-    Slider
+    Slider,
   },
   data() {
     return {
       radios: {
-        radioOn: '2',
-        radioOff: '2'
+        radioOn: "2",
+        radioOff: "2",
       },
       checkboxes: {
         unchecked: false,
         checked: true,
         disabledUnchecked: false,
-        disabledChecked: true
+        disabledChecked: true,
       },
       switches: {
         defaultOn: true,
-        defaultOff: false
+        defaultOff: false,
       },
       sliders: {
         simple: 30,
-        rangeSlider: [20, 60]
-      }
+        rangeSlider: [20, 60],
+      },
     };
-  }
+  },
 };
 </script>
 <style></style>

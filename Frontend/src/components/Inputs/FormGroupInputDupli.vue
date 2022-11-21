@@ -13,8 +13,7 @@
         class="form-control"
         :class="[{ valid: value && !error }, inputClasses]"
         aria-describedby="addon-right addon-left"
-        style="border-radius: 30px"
-      />
+        style="border-radius: 30px" />
     </slot>
     <button class="btn-round btn-warning">중복검사</button>
   </div>

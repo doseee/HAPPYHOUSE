@@ -3,12 +3,13 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 // module import
 import userStore from "@/store/modules/userStore";
-
+import aptStore from "@/store/modules/aptStore";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     userStore,
+    aptStore,
   },
   plugins: [
     createPersistedState({

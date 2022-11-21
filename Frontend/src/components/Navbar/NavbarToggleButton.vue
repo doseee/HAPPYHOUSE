@@ -7,8 +7,7 @@
     data-target="#navbar"
     aria-controls="navbarSupportedContent"
     aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
+    aria-label="Toggle navigation">
     <span class="navbar-toggler-bar top-bar"></span>
     <span class="navbar-toggler-bar middle-bar"></span>
     <span class="navbar-toggler-bar bottom-bar"></span>
@@ -16,10 +15,10 @@
 </template>
 <script>
 export default {
-  name: 'navbar-toggle-button',
+  name: "navbar-toggle-button",
   props: {
-    toggled: Boolean
-  }
+    toggled: Boolean,
+  },
 };
 </script>
 <style></style>

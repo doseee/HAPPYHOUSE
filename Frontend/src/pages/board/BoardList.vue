@@ -16,8 +16,7 @@
                   <button
                     type="button"
                     class="btn btn-round btn-warning float-right"
-                    @click="moveWrite()"
-                  >
+                    @click="moveWrite()">
                     <!---->글쓰기<!---->
                   </button>
                 </b-col>
@@ -30,8 +29,7 @@
                     hover
                     :items="articles"
                     :fields="fields"
-                    @row-clicked="viewArticle"
-                  >
+                    @row-clicked="viewArticle">
                   </b-table>
                 </b-col>
               </b-row>

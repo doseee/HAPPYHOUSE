@@ -4,9 +4,8 @@
       :class="[
         { 'col-md-4': vertical && !tabNavWrapperClasses },
         { 'col-12': centered && !tabNavWrapperClasses },
-        tabNavWrapperClasses
-      ]"
-    >
+        tabNavWrapperClasses,
+      ]">
       <ul
         class="nav"
         role="tablist"
@@ -18,17 +17,15 @@
           { 'nav-tabs': !pills },
           { 'flex-column': vertical },
           { 'justify-content-center': centered },
-          tabNavClasses
-        ]"
-      >
+          tabNavClasses,
+        ]">
         <li
           v-for="tab in tabs"
           class="nav-item active"
           data-toggle="tab"
           role="tablist"
           aria-expanded="true"
-          :key="tab.id"
-        >
+          :key="tab.id">
           <a
             data-toggle="tab"
             role="tablist"
@@ -36,8 +33,7 @@
             @click.prevent="activateTab(tab)"
             :aria-expanded="tab.active"
             class="nav-link"
-            :class="{ active: tab.active, disabled: tab.disabled }"
-          >
+            :class="{ active: tab.active, disabled: tab.disabled }">
             <tab-item-content :tab="tab"> </tab-item-content>
           </a>
         </li>
@@ -49,9 +45,8 @@
         { 'tab-space': !vertical && !noContentSpace },
         'text-left',
         { 'col-md-8': vertical && !tabContentClasses },
-        tabContentClasses
-      ]"
-    >
+        tabContentClasses,
+      ]">
       <slot></slot>
     </div>
   </div>
@@ -59,79 +54,79 @@
 
 <script>
 export default {
-  name: 'tabs',
+  name: "tabs",
   inheritAttrs: false,
   components: {
     TabItemContent: {
-      props: ['tab'],
+      props: ["tab"],
       render(h) {
-        return h('div', [this.tab.$slots.label || this.tab.label]);
-      }
-    }
+        return h("div", [this.tab.$slots.label || this.tab.label]);
+      },
+    },
   },
   provide() {
     return {
       addTab: this.addTab,
-      removeTab: this.removeTab
+      removeTab: this.removeTab,
     };
   },
   props: {
     type: {
       type: String,
-      default: 'default',
-      validator: value => {
+      default: "default",
+      validator: (value) => {
         let acceptedValues = [
-          'primary',
-          'info',
-          'success',
-          'warning',
-          'danger',
-          'default',
-          'neutral'
+          "primary",
+          "info",
+          "success",
+          "warning",
+          "danger",
+          "default",
+          "neutral",
         ];
         return acceptedValues.indexOf(value) !== -1;
-      }
+      },
     },
     activeTab: {
       type: String,
-      default: ''
+      default: "",
     },
     tabNavWrapperClasses: {
       type: [String, Object],
-      default: ''
+      default: "",
     },
     tabNavClasses: {
       type: [String, Object],
-      default: ''
+      default: "",
     },
     tabContentClasses: {
       type: [String, Object],
-      default: ''
+      default: "",
     },
     vertical: Boolean,
     noContentSpace: Boolean,
     icons: Boolean,
     centered: Boolean,
     value: String,
-    pills: Boolean
+    pills: Boolean,
   },
   data() {
     return {
-      tabs: []
+      tabs: [],
     };
   },
   computed: {
     tabTypeClass() {
-      let baseClass = this.pills ? 'pills' : 'tabs';
+      let baseClass = this.pills ? "pills" : "tabs";
       if (this.type) {
         return `nav-${baseClass}-${this.type}`;
       }
-      return '';
-    }
+      return "";
+    },
   },
   methods: {
     findAndActivateTab(label) {
-      let tabToActivate = this.tabs.find(t => t.label === label);
+      let tabToActivate = this.tabs.find((t) => t.label === label);
       if (tabToActivate) {
         this.activateTab(tabToActivate);
       }
@@ -145,10 +140,10 @@ export default {
       }
       this.deactivateTabs();
       tab.active = true;
-      this.$emit('input', tab.label || tab.id);
+      this.$emit("input", tab.label || tab.id);
     },
     deactivateTabs() {
-      this.tabs.forEach(tab => {
+      this.tabs.forEach((tab) => {
         tab.active = false;
       });
     },
@@ -168,7 +163,7 @@ export default {
       if (index > -1) {
         tabs.splice(index, 1);
       }
-    }
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -180,7 +175,7 @@ export default {
   watch: {
     value(newVal) {
       this.findAndActivateTab(newVal);
-    }
-  }
+    },
+  },
 };
 </script>

@@ -13,8 +13,7 @@
         :aria-valuenow="value"
         aria-valuemin="0"
         aria-valuemax="100"
-        :style="`width: ${value}%;`"
-      >
+        :style="`width: ${value}%;`">
         <slot>
           <span class="progress-value" v-if="showValue"> {{ value }}% </span>
         </slot>
@@ -24,7 +23,7 @@
 </template>
 <script>
 export default {
-  name: 'n-progress',
+  name: "n-progress",
   props: {
     striped: Boolean,
     showValue: Boolean,
@@ -32,28 +31,28 @@ export default {
     label: String,
     height: {
       type: Number,
-      default: 1
+      default: 1,
     },
     type: {
       type: String,
-      default: 'default'
+      default: "default",
     },
     value: {
       type: Number,
       default: 0,
-      validator: value => {
+      validator: (value) => {
         return value >= 0 && value <= 100;
-      }
-    }
+      },
+    },
   },
   computed: {
     computedClasses() {
       return [
-        { 'progress-bar-striped': this.striped },
-        { 'progress-bar-animated': this.animated }
+        { "progress-bar-striped": this.striped },
+        { "progress-bar-animated": this.animated },
       ];
-    }
-  }
+    },
+  },
 };
 </script>
 <style></style>
