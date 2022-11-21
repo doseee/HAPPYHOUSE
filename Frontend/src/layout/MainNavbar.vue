@@ -4,19 +4,18 @@
     type="white"
     :transparent="transparent"
     :color-on-scroll="colorOnScroll"
-    menu-classes="ml-auto"
-  >
+    menu-classes="ml-auto">
     <template>
       <router-link class="navbar-brand" to="/"> HAPPY HOUSE </router-link>
     </template>
 
     <template slot="navbar-notice">
       <textra
-        style="width: 530px; padding: 15px; padding-left: 50px"
+        style="width: 530px; padding-top: 3px; padding-left: 25px"
         :data="words"
         :infinite="true"
-        :timer="1.1"
-      />
+        :timer="2"
+        filter="bottom-top" />
     </template>
     <template>
       <template slot="navbar-menu">
@@ -24,8 +23,7 @@
           <a
             class="nav-link"
             href="https://www.creative-tim.com/product/vue-now-ui-kit"
-            target="_blank"
-          >
+            target="_blank">
             <i class="now-ui-icons ui-1_calendar-60"></i>
             <p>공지사항</p>
           </a>
@@ -39,28 +37,26 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="https://www.creative-tim.com/product/vue-now-ui-kit"
-            target="_blank"
-          >
+          <router-link class="nav-link" to="/apt">
             <i class="now-ui-icons travel_istanbul"></i>
             <p>거래조회</p>
-          </a>
+          </router-link>
         </li>
         <li class="nav-item">
           <a
             class="nav-link"
             href="https://www.creative-tim.com/product/vue-now-ui-kit"
-            target="_blank"
-          >
+            target="_blank">
             <i class="now-ui-icons files_paper"></i>
             <p>뉴스</p>
           </a>
         </li>
         <!--로그인 O -->
         <li class="nav-item" v-if="userInfo">
-          <drop-down tag="li" title="내 정보" icon="now-ui-icons users_circle-08">
+          <drop-down
+            tag="li"
+            title="내 정보"
+            icon="now-ui-icons users_circle-08">
             <nav-link to="/mypage">
               <i class="now-ui-icons users_single-02"></i> 마이페이지
             </nav-link>
