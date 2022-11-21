@@ -223,6 +223,15 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
+CREATE TABLE `likedong` (
+  `userId` varchar(45) NOT NULL,
+  `dongcode` varchar(10) NOT NULL,
+  PRIMARY KEY (`userId`,`dongcode`),
+  KEY `fk_likedong_dongcode1_idx` (`dongcode`),
+  CONSTRAINT `fk_likedong_dongcode1` FOREIGN KEY (`dongcode`) REFERENCES `dongcode` (`dongCode`),
+  CONSTRAINT `fk_likedong_user1` FOREIGN KEY (`userId`) REFERENCES `users` (`user_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 --
 -- Dumping data for table `sidocode`
 --

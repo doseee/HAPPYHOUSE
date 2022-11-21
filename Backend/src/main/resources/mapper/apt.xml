@@ -30,16 +30,14 @@
 	
 	<select id="getAptInDong" parameterType="string" resultType="houseInfoDto">
 		select h.aptCode, h.roadName, h.roadNameBonbun, h.roadNameBubun, h.roadNameSeq, h.roadNameCode, h.bonbun, h.apartmentName, h.buildYear, h.dongCode, h.dong, h.jibun, h.lat, h.lng, si.sidoname, gu.gugunname,
-		(select round(avg(cast(replace(dealAmount, ',' ,'')as unsigned))) from housedeal hd where hd.aptCode=h.aptCode) avgPrice,
-		  (select count(r.rate) from aptreview r where r.aptCode = h.aptCode) cnt,        
-        (select round(avg(r.rate) ,2) from aptreview r where r.aptCode = h.aptCode) avgrate
+		(select round(avg(cast(replace(dealAmount, ',' ,'')as unsigned))) from housedeal hd where hd.aptCode=h.aptCode) avgPrice
 		from houseinfo h
 		left join sidocode si
 		on left(h.dongcode,2) = left(si.sidocode,2)
 		left join guguncode gu
 		on left(h.dongcode,5) = left(gu.guguncode,5)
 		where dongCode = #{dong} 
-		order by h.apartmentName;		
+		order by h.apartmentName;
 </select>
 	
 	<select id="getAptName" parameterType="string" resultType="houseInfoDto">
