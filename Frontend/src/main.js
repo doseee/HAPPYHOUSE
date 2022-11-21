@@ -28,12 +28,12 @@ import "vuetify/dist/vuetify.min.css";
 import "@mdi/font/css/materialdesignicons.css";
 import BootstrapVue from "bootstrap-vue";
 
-Vue.config.productionTip = false;
-
 Vue.use(NowUiKit);
 Vue.use(Textra);
 Vue.use(Vuetify);
 Vue.use(BootstrapVue);
+
+Vue.config.productionTip = false;
 
 new Vue({
   router,
