@@ -8,22 +8,21 @@
         <b-form-select
           v-model="selectSido"
           :options="sidos"
-          @change="getSidoList"></b-form-select>
+          @change="getGugunList"></b-form-select>
       </div>
       <div class="form-group col-md-2">
         <b-form-select
           v-model="selectGugun"
           :options="guguns"
-          @change="getGugunList"></b-form-select>
-      </div>
-      <div class="form-group col-md-2">
-        <b-form-select
-          v-model="selectDong"
-          :options="dongs"
           @change="getDongList"></b-form-select>
       </div>
+      <div class="form-group col-md-2">
+        <b-form-select v-model="selectDong" :options="dongs"></b-form-select>
+      </div>
       <div style="margin-right: 10px">
-        <b-button variant="outline-primary">검색</b-button>
+        <b-button variant="outline-primary" @click="getHouseList"
+          >검색</b-button
+        >
       </div>
       <div>
         <b-button variant="outline-primary">관심지역추가</b-button>
@@ -32,10 +31,10 @@
   </div>
 </template>
 <script>
-import { sidoList, gugunList, dongList } from "@/api/apt.js";
+import { sidoList, gugunList, dongList, houseListByDong } from "@/api/apt.js";
 import { mapActions, mapState } from "vuex";
 
-const houseStore = "houseStore";
+const aptStore = "aptStore";
 export default {
   name: "AptSearchForm",
   data() {
@@ -49,7 +48,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(houseStore, ["sidoCode", "gugunCode", "dongCode"]),
+    ...mapState(aptStore, ["sidoCode", "gugunCode", "dongCode"]),
   },
   created() {
     this.selectSido = this.sidoCode;
@@ -58,18 +57,18 @@ export default {
     this.getSidoList();
     let params = this.$route.params;
     if (params.sidoCodeParam) {
-      this.currentSido = params.sidoCodeParam.substr(0, 2); //시도 설정
+      this.selectSido = params.sidoCodeParam.substr(0, 2); //시도 설정
       //구군 불러오기
       this.getGugunList();
-      this.currentGugun = params.gugunCodeParam.substr(0, 5); //구군 설정
+      this.selectGugun = params.gugunCodeParam.substr(0, 5); //구군 설정
       //동 불러오기
       this.getDongList();
-      this.currentDong = params.dongCodeParam; //동 설정
+      this.selectDong = params.dongCodeParam; //동 설정
       this.getHouseList();
     }
   },
   methods: {
-    ...mapActions(houseStore, [
+    ...mapActions(aptStore, [
       "setHouses",
       "setHousesFilter",
       "setSidoCode",
@@ -87,9 +86,9 @@ export default {
       });
     },
     getGugunList() {
-      this.setSidoCode(this.currentSido);
-      this.guguns = [{ value: null, text: "선택" }];
-      gugunList({ sidoCode: this.currentSido }, (res) => {
+      this.setSidoCode(this.selectSido);
+      this.guguns = [{ value: null, text: "구/군 선택" }];
+      gugunList({ sidoCode: this.selectSido }, (res) => {
         res.data.forEach((gugun) => {
           if (gugun.gugunName != null) {
             if (!gugun.gugunCode) gugun.gugunCode = null;
@@ -99,9 +98,9 @@ export default {
       });
     },
     getDongList() {
-      this.setGugunCode(this.currentGugun);
-      this.dongs = [{ value: null, text: "선택" }];
-      dongList({ sidoCode: this.currentGugun }, (res) => {
+      this.setGugunCode(this.selectGugun);
+      this.dongs = [{ value: null, text: "동 선택" }];
+      dongList({ sidoCode: this.selectGugun }, (res) => {
         res.data.forEach((dong) => {
           if (dong.dongName != null) {
             if (!dong.dongCode) dong.dongCode = null;
@@ -111,11 +110,11 @@ export default {
       });
     },
     getHouseList() {
-      this.setDongCode(this.currentDong);
+      this.setDongCode(this.selectDong);
       this.isLikeDong();
       houseListByDong(
         {
-          dongCode: this.currentDong,
+          dongCode: this.selectDong,
         },
         (res) => {
           this.setHouses(res.data);
@@ -123,6 +122,14 @@ export default {
           // eslint-disable-next-line prettier/prettier
         }
       );
+    },
+    isLikeDong() {
+      this.isLike = false;
+      // this.likeList.map((dong) => {
+      //   if (dong.dongCode == this.dongCode) {
+      //     this.isLike = true;
+      //   }
+      // });
     },
   },
   destroyed() {

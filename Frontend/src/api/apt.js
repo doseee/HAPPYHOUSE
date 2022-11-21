@@ -4,7 +4,7 @@ const api = apiInstance();
 
 function sidoList(success) {
   api
-    .get(`/map/sido`)
+    .get(`/apt/sido`)
     .then(success)
     .catch((error) => {
       alert("문제가 발생했습니다.");
@@ -14,7 +14,7 @@ function sidoList(success) {
 
 function gugunList(params, success) {
   api
-    .get(`/map/gugun?sido=${params.sidoCode}`)
+    .get(`/apt/gugun?sido=${params.sidoCode}`)
     .then(success)
     .catch((error) => {
       alert("문제가 발생했습니다.");
@@ -23,7 +23,7 @@ function gugunList(params, success) {
 }
 function dongList(params, success) {
   api
-    .get(`/map/dong?gugun=${params.sidoCode}`)
+    .get(`/apt/dong?gugun=${params.sidoCode}`)
     .then(success)
     .catch((error) => {
       alert("문제가 발생했습니다.");
@@ -31,4 +31,14 @@ function dongList(params, success) {
     });
 }
 
-export { sidoList, gugunList, dongList };
+function houseListByDong(params, success) {
+  api
+    .get(`/apt/apt?dong=${params.dongCode}`)
+    .then(success)
+    .catch((error) => {
+      alert("문제가 발생했습니다.");
+      console.log(error);
+    });
+}
+
+export { sidoList, gugunList, dongList, houseListByDong };

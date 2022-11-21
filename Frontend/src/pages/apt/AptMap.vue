@@ -37,6 +37,8 @@
   </div>
 </template>
 <script>
+import { mapActions, mapState } from "vuex";
+const aptStore = "aptStore";
 export default {
   name: "AptMap",
   data() {
@@ -62,6 +64,19 @@ export default {
       codes: ["BK9", "CS2", "HP8", "SW8"],
     };
   },
+  computed: {
+    ...mapState(aptStore, [
+      "houses",
+      "house",
+      "housesfilter",
+      "sidoCode",
+      "gugunCode",
+      "dongCode",
+    ]),
+    // listUpdate: function () {
+    //   return displayMarkers(this.housesfilter);
+    // },
+  },
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
@@ -73,6 +88,25 @@ export default {
         "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=137733fdbf835c5c41c957dd14e3d699&libraries=services";
       document.head.appendChild(script);
     }
+  },
+  watch: {
+    housesfilter: function () {
+      if (this.housesfilter.length != 0 && this.housesfilter) {
+        this.displayMarkers();
+      }
+    },
+    house: function () {
+      this.setMapCenter();
+    },
+    houses: function () {
+      this.bankSelected = false;
+      this.martSelected = false;
+      this.hpSelected = false;
+      this.subwaySelected = false;
+      for (let i = 0; i < 4; i++) {
+        this.removeMarkerSide(i);
+      }
+    },
   },
   methods: {
     initMap() {
@@ -94,9 +128,8 @@ export default {
       this.markers = [];
     },
     addMarker(position) {
-      let imageSrc =
-          "https://images.vexels.com/media/users/3/142675/isolated/lists/84e468a8fff79b66406ef13d3b8653e2-house-location-marker-icon.png", // 마커 이미지 url, 스프라이트 이미지를 씁니다
-        imageSize = new kakao.maps.Size(50, 50), // 마커 이미지의 크기
+      let imageSrc = "img/apt.png", // 마커 이미지 url, 스프라이트 이미지를 씁니다
+        imageSize = new kakao.maps.Size(30, 30), // 마커 이미지의 크기
         imgOptions = {
           // offset: new kakao.maps.Point(13, 37), // 마커 좌표에 일치시킬 이미지 내에서의 좌표
         },
@@ -177,6 +210,45 @@ export default {
         { useMapBounds: true }
       );
     },
+    displayMarkers() {
+      let map = this.map;
+      let bounds = new kakao.maps.LatLngBounds();
+      this.removeMarker();
+      this.housesfilter.map((house) => {
+        let placePosition = new kakao.maps.LatLng(
+          house.lat,
+          // eslint-disable-next-line prettier/prettier
+          house.lng
+        );
+        let mk = this.addMarker(placePosition);
+        //지도 범위를 재설정하기 위해 LatLngBounds에 좌표를 추가
+        bounds.extend(placePosition);
+        //마커와 검색 결과 항목에 mouseover 했을때 해당 장소에 인포윈도우에 장소명 표시
+        let content = `<div class="infowindow">
+                          <span class="title">
+                            ${house.apartmentName}
+                            </span>
+                      </div>`;
+        let overlay = new kakao.maps.CustomOverlay({
+          content: content,
+          map: map,
+          position: mk.getPosition(),
+        });
+        overlay.setMap(null);
+        //마커 클릭시 vuex에 해당 아파트 정보 저장하고, 모달창 띄우기
+        kakao.maps.event.addListener(mk, "click", () => {
+          this.setDetail(house);
+        });
+        kakao.maps.event.addListener(mk, "mouseover", function () {
+          overlay.setMap(map);
+        });
+        kakao.maps.event.addListener(mk, "mouseout", function () {
+          overlay.setMap(null);
+        });
+      });
+      //검색된 장소 위치를 기준으로 지도 범위 재설정
+      this.map.setBounds(bounds);
+    },
     //편의시설 관련 마커 추가
     displayMarkerSide(idx, data) {
       this.removeMarkerSide(idx);
@@ -189,7 +261,7 @@ export default {
       )
         return;
       let imgSrc = this.imgSrcs[idx],
-        imgSize = new kakao.maps.Size(40, 40),
+        imgSize = new kakao.maps.Size(30, 30),
         markerImage = new kakao.maps.MarkerImage(imgSrc, imgSize);
       data.map((item) => {
         let itemPositon = new kakao.maps.LatLng(item.y, item.x);
