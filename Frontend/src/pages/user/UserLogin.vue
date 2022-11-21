@@ -1,6 +1,8 @@
 <template>
   <div class="page-header clear-filter" filter-color="orange">
-    <div class="page-header-image" style="background-image: url('img/login.jpg')"></div>
+    <div
+      class="page-header-image"
+      style="background-image: url('img/login.jpg')"></div>
     <div class="container">
       <div class="col-md-5 ml-auto mr-auto">
         <card type="login" plain>
@@ -12,11 +14,10 @@
             </div>
             <input
               id="userid"
-              v-model="user.userid"
+              v-model="user.userId"
               class="form-control"
               placeholder="아이디"
-              @keyup.enter="confirm"
-            />
+              @keyup.enter="confirm" />
           </div>
           <div class="input-group no-border input-lg">
             <div class="input-group-prepend">
@@ -24,29 +25,36 @@
             </div>
             <input
               id="userpwd"
-              v-model="user.userpwd"
+              v-model="user.userPwd"
               class="form-control"
               placeholder="비밀번호"
-              @keyup.enter="confirm"
-            />
+              @keyup.enter="confirm" />
           </div>
 
           <label v-if="isLoginError">아이디 또는 비밀번호를 확인하세요.</label>
           <div class="card-footer text-center">
-            <button class="btn btn-primary btn-round btn-lg btn-block" @click="confirm">
+            <button
+              class="btn btn-primary btn-round btn-lg btn-block"
+              @click="confirm">
               로그인
             </button>
           </div>
           <div class="card-footer text-center">
-            <button class="btn btn-primary btn-round btn-lg btn-block">카카오 로그인</button>
+            <button class="btn btn-primary btn-round btn-lg btn-block">
+              카카오 로그인
+            </button>
           </div>
           <div class="card-footer text-center">
-            <button class="btn btn-primary btn-round btn-lg btn-block">네이버 로그인</button>
+            <button class="btn btn-primary btn-round btn-lg btn-block">
+              네이버 로그인
+            </button>
           </div>
           <template slot="raw-content">
             <div class="pull-left">
               <h6>
-                <router-link to="/regist" class="link footer-link">회원가입</router-link>
+                <router-link to="/regist" class="link footer-link"
+                  >회원가입</router-link
+                >
               </h6>
             </div>
             <div class="pull-right">
@@ -72,8 +80,8 @@ export default {
   data() {
     return {
       user: {
-        userid: null,
-        userpwd: null,
+        userId: null,
+        userPwd: null,
       },
     };
   },
@@ -91,9 +99,6 @@ export default {
         //console.log("4. confirm() userInfo :: ", this.userInfo);
         this.$router.push({ name: "index" });
       }
-    },
-    movePage() {
-      this.$router.push({ name: "join" });
     },
   },
 
