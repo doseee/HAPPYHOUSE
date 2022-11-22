@@ -53,7 +53,7 @@ async function deleteLikeDong(params, success) {
   await api
     .delete(
       // eslint-disable-next-line prettier/prettier
-      `/userapi/delete-like?dongCode=${params.dongCode}&userid=${params.userid}`
+      `/user/delete-like?dongCode=${params.dongCode}&userId=${params.userId}`
     )
     .then(success)
     .catch((err) => {
@@ -67,7 +67,7 @@ async function selectLikeDong(params, success) {
   await api
     .get(
       // eslint-disable-next-line prettier/prettier
-      `/userapi/mylike?userid=${params.userid}`
+      `/user/mylike?userId=${params.userId}`
     )
     .then(success)
     .catch((err) => {
