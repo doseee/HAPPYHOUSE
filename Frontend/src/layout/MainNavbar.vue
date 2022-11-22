@@ -20,16 +20,13 @@
     <template>
       <template slot="navbar-menu">
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="https://www.creative-tim.com/product/vue-now-ui-kit"
-            target="_blank">
+          <router-link class="nav-link" to="/notice/list">
             <i class="now-ui-icons ui-1_calendar-60"></i>
             <p>공지사항</p>
-          </a>
+          </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/list">
+          <router-link class="nav-link" to="/board/list">
             <!--i class="now-ui-icons files_paper"></-i-->
             <!--img class="now-ui-icons" src="img/qna.png" width="16px" /-->
             <i class="now-ui-icons ui-2_chat-round"></i>

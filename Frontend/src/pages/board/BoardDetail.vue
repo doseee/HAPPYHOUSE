@@ -71,7 +71,6 @@
 <script>
 import {
   getArticle,
-  hitAdd,
   writeComment,
   listComment,
   deleteArticle,
