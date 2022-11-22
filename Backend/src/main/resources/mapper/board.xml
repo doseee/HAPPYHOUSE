@@ -33,13 +33,10 @@
 		</if>
 	</sql>
 
-	<select id="listArticle" parameterType="map" resultMap="article">
+	<select id="listArticle" resultMap="article">
 		select b.article_no, b.user_id, b.subject, b.content, b.hit, b.register_time, m.user_name
 		from board b, users m 
 		where b.user_id = m.user_id
-		<include refid="search"></include>
-		order by b.article_no desc
-		limit #{start}, #{listsize}
 	</select>
 	
 	<select id="getListArticleByUser" parameterType="string" resultMap="article">
@@ -79,5 +76,11 @@
 		delete from board
 		where article_no = #{articleNo}
 	</delete>
+
+	<select id="searchByTitle" parameterType="string" resultMap="article">
+		select *
+		from board
+		where subject like concat('%', #{subject}, '%')
+	</select>
 
 </mapper>
