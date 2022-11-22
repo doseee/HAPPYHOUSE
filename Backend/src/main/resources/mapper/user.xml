@@ -87,4 +87,29 @@
 		where user_id = #{userId}
 	</update>
 	
+	<!-- 관심지역 등록하기 -->
+	<insert id="addLikeDong" parameterType="map">
+		insert into likedong(userId, dongCode)
+		values(#{userId},#{dongCode})	
+	</insert>
+	
+	<!-- 관심지역 해제하기 -->
+	<delete id="deleteLikeDong" parameterType="map">
+		delete 
+		from likedong 
+		where userId=#{userId} and dongcode=#{dongCode}
+	</delete>
+	
+	<!-- 유저이름으로 관심지역 조회 -->
+	<select id="listLikeDong" parameterType="map" resultType="SidoGugunCodeDto">
+	select  s.sidocode, s.sidoName,  g.guguncode, g.gugunName,d.dongcode, d.dongname
+	from likedong l
+	left join dongcode d
+	on l.dongcode=d.dongcode
+	left join guguncode g
+	on left(d.dongCode,5) = left(g.gugunCode,5)
+    left join sidocode s
+	on left(d.dongCode,2) = left(s.sidoCode,2)
+	where userId=#{userId}
+	</select>
 </mapper>
