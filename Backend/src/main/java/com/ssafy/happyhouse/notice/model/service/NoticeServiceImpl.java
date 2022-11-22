@@ -51,4 +51,9 @@ public class NoticeServiceImpl implements NoticeService{
 	public void deleteNotice(int articleNo) throws Exception {
 		noticeMapper.deleteNotice(articleNo);
 	}
+
+	@Override
+	public List<NoticeDto> searchByTitle(String subject) throws Exception {
+		return noticeMapper.searchByTitle(subject);
+	}
 }

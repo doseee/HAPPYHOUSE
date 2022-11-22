@@ -23,7 +23,7 @@
 	<select id="listNotice" resultMap="notice">
 		select article_no, subject, content, hit, register_time
 		from notice
-		order by article_no
+		order by article_no desc
 	</select>
 
 	<select id="getNotice" parameterType="int" resultMap="notice">
@@ -48,5 +48,10 @@
 		delete from notice
 		where article_no = #{articleNo}
 	</delete>
-
+	
+	<select id="searchByTitle" parameterType="string" resultMap="notice">
+		select *
+		from notice
+		where subject like concat('%', #{subject}, '%')
+	</select>
 </mapper>
