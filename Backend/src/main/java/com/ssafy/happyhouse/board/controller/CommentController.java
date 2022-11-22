@@ -5,14 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ssafy.happyhouse.board.model.BoardDto;
 import com.ssafy.happyhouse.board.model.CommentDto;
 import com.ssafy.happyhouse.board.model.service.CommentService;
 
@@ -43,16 +38,12 @@ public class CommentController {
 		this.commentService = commentService;
 	}
 	
-	//세션 추가
 	@PostMapping("/write")
-	public ResponseEntity<?> write(@RequestBody CommentDto commentDto, RedirectAttributes redirectAttributes) throws Exception {
+	public ResponseEntity<?> write(@RequestBody CommentDto commentDto) throws Exception {
 		try {
 			commentService.writeComment(commentDto);
 			Map<String, Object> resultMap = new HashMap<>();
 			resultMap.put("data", "success");
-			redirectAttributes.addAttribute("pgno", "1");
-			redirectAttributes.addAttribute("key", "");
-			redirectAttributes.addAttribute("word", "");
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		catch (SQLException e) {
@@ -61,10 +52,10 @@ public class CommentController {
 	}
 
 	@GetMapping("/list")
-	public ResponseEntity<?> list(@RequestParam("articleNo") int articleNo, @RequestParam Map<String, String> map)
+	public ResponseEntity<?> list(@RequestParam("articleNo") int articleNo)
 			throws Exception {
 		try {
-			List<CommentDto> list = commentService.listComment(map, articleNo);
+			List<CommentDto> list = commentService.listComment(articleNo);
 			if( list != null)
 				return new ResponseEntity<List<CommentDto>>(list, HttpStatus.OK);
 			else
@@ -90,13 +81,9 @@ public class CommentController {
 	}
 
 	@PutMapping("/modify")
-	public ResponseEntity<?> modify(@RequestBody CommentDto commentDto, @RequestParam Map<String, String> map,
-			RedirectAttributes redirectAttributes) throws Exception {
+	public ResponseEntity<?> modify(@RequestBody CommentDto commentDto, @RequestParam Map<String, String> map) throws Exception {
 		try {
 			commentService.modifyComment(commentDto);
-			redirectAttributes.addAttribute("pgno", map.get("pgno"));
-			redirectAttributes.addAttribute("key", map.get("key"));
-			redirectAttributes.addAttribute("word", map.get("word"));
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch (SQLException e) {
 			return exceptionHandling(e);
@@ -104,15 +91,11 @@ public class CommentController {
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<?> delete(@RequestParam("commentNo") int commentNo, @RequestParam Map<String, String> map,
-			RedirectAttributes redirectAttributes) throws Exception {
+	public ResponseEntity<?> delete(@RequestParam("commentNo") int commentNo, @RequestParam Map<String, String> map) throws Exception {
 		try {
 			commentService.deleteComment(commentNo);
 			Map<String, Object> resultMap = new HashMap<>();
 			resultMap.put("data", "success");
-			redirectAttributes.addAttribute("pgno", map.get("pgno"));
-			redirectAttributes.addAttribute("key", map.get("key"));
-			redirectAttributes.addAttribute("word", map.get("word"));
 			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		} catch (SQLException e) {
 			return exceptionHandling(e);
@@ -122,5 +105,4 @@ public class CommentController {
 	private ResponseEntity<String> exceptionHandling(SQLException e) {
 		return new ResponseEntity<String>("Error : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
 }
