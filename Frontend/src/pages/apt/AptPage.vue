@@ -2,13 +2,17 @@
   <div class="page-header clear-filter" filter-color="orange">
     <b-container class="bv-example-row md-3">
       <div class="content">
-        <div class="row col-md-12 justify-content-center mb-4">
-          <div class="col-md-10 ml-auto mr-auto">
+        <div
+          class="row col-md-12 justify-content-center mb-4"
+          style="padding-bottom: 0px">
+          <div class="col-md-2"></div>
+          <div class="col-md-8">
             <apt-search-form></apt-search-form>
           </div>
+        </div>
+        <div class="row">
           <b-row class="mb-5">
-            <b-col cols="1" class="p-0"> </b-col>
-            <b-col cols="3" class="p-0">
+            <b-col cols="4" class="p-0" style="margin-top: 20px">
               <apt-list> </apt-list>
             </b-col>
             <b-col class="p-0">

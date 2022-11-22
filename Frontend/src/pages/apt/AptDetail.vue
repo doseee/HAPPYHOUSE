@@ -32,10 +32,7 @@
       </b-list-group-item>
     </b-list-group>
     <h4 class="my-3">거래 목록</h4>
-    <b-table-simple
-      sticky-header
-      class="deal-list center"
-      style="overflow: auto">
+    <b-table-simple sticky-header class="deal-list">
       <b-thead head-variant="dark">
         <b-tr>
           <b-th v-for="(field, i) in fields" :key="i" sortable>

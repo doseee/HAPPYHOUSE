@@ -1,7 +1,10 @@
 <template>
-  <b-container class="row align-items-end" style="margin-left: 10px">
+  <b-container
+    class="row align-items-end"
+    style="padding-top: 20px; padding-bottom: 0px; margin-left: 10px">
     <div v-if="houses && houses.length != 0" class="bv-example-row wd">
-      <b-list-group class="con wt-30" style="max-height: 400px">
+      <b-row></b-row>
+      <b-list-group class="con con1" style="padding-top: 10px">
         <apt-list-item
           v-for="(house, index) in housesfilter"
           :key="index"
@@ -88,10 +91,10 @@ export default {
 </script>
 
 <style>
-.con {
+.con1 {
   position: relative;
   overflow-y: auto;
-  height: 600px;
+  max-height: 380px;
 }
 .con::-webkit-scrollbar {
   width: 10px;
@@ -103,12 +106,7 @@ export default {
 .con::-webkit-scrollbar-track {
   border-radius: 10px;
 }
-.center {
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
+
 .filtertitle {
   display: flex;
   flex-direction: row-reverse;

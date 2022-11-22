@@ -1,5 +1,5 @@
 <template>
-  <div class="my-4 wc d-flex align-items-center" style="margin-left: 80px">
+  <div class="my-4 wc d-flex align-items-center" style="margin-left: 30px">
     <div class="sm-3" style="margin-right: 5px">
       <b-form-select
         v-model="selectSido"

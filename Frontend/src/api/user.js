@@ -6,6 +6,15 @@ async function login(user, success, fail) {
   await api.post(`/user/login`, JSON.stringify(user)).then(success).catch(fail);
 }
 
+async function idCheck(userId, success) {
+  api
+    .post(`user/checkid/${userId}`)
+    .then(success)
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
 async function findById(userId, success, fail) {
   api.defaults.headers["access-token"] = sessionStorage.getItem("access-token");
   await api.get(`/user/info/${userId}`).then(success).catch(fail);
@@ -87,4 +96,5 @@ export {
   registLikeDong,
   deleteLikeDong,
   selectLikeDong,
+  idCheck,
 };
