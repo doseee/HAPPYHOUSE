@@ -30,14 +30,74 @@
             @click="selectSubway">
             지하철
           </b-list-group-item>
+          <b-button
+            id="popover-button-event"
+            ref="button"
+            variant="warning"
+            style="margin-left: 400px">
+            <b-icon icon="sliders" v-b-tooltip.hover.topright="'필터'"></b-icon>
+          </b-button>
         </b-list-group>
+        <b-popover
+          ref="popover"
+          target="popover-button-event"
+          title="필터링"
+          triggers="focus"
+          :show.sync="popoverShow"
+          placement="top"
+          class="popstyle">
+          <template #title>
+            <div class="filtertitle">
+              <b-button
+                @click="onClose"
+                class="close m-0"
+                aria-label="Close"
+                style="background-color: gray">
+                <span class="d-inline-block" aria-hidden="true">&times;</span>
+              </b-button>
+              <h6>아파트 목록 필터링</h6>
+            </div>
+          </template>
+
+          <b-container class="flex-direction-col mx-2">
+            <div class="my-4">
+              평균 가격 범위 (단위 : 만원)
+              <vue-slider
+                v-model="pricevalue"
+                :data="pricedata"
+                :tooltip="'always'"
+                :tooltip-placement="['bottom', 'bottom']"
+                :tooltip-formatter="format1"
+                @dragging="onSubmit"></vue-slider>
+            </div>
+            <div class="my-4">
+              건설연도 범위 (단위 : 년)
+              <vue-slider
+                v-model="buildrange"
+                :tooltip="'always'"
+                :tooltip-placement="['bottom', 'bottom']"
+                :tooltip-formatter="format2"
+                :min="1961"
+                :max="2022"
+                @dragging="onSubmit"></vue-slider>
+            </div>
+            <b-row class="mt-4 d-flex justify-content-end">
+              <b-button @click="onReset" size="sm" variant="outline-danger"
+                >초기화</b-button
+              >
+            </b-row>
+          </b-container>
+        </b-popover>
       </b-col>
     </b-row>
+
     <div id="map" style="width: 750px; height: 400px"></div>
   </div>
 </template>
 <script>
 import { mapActions, mapState } from "vuex";
+import VueSlider from "vue-slider-component";
+import "vue-slider-component/theme/default.css";
 const aptStore = "aptStore";
 export default {
   name: "AptMap",
@@ -62,6 +122,12 @@ export default {
         "img/subway.png",
       ],
       codes: ["BK9", "CS2", "HP8", "SW8"],
+      popoverShow: false,
+      pricevalue: "1200",
+      pricedata: ["1", "5", "10", "20", "50", "100", "500", "1000", "1200"],
+      buildrange: [1961, 2022],
+      format1: (v) => `${v / 10.0}억`,
+      format2: `{value}년`,
     };
   },
   computed: {
@@ -99,6 +165,8 @@ export default {
       this.setMapCenter();
     },
     houses: function () {
+      this.pricevalue = "1200";
+      this.buildrange = [1961, 2022];
       this.bankSelected = false;
       this.martSelected = false;
       this.hpSelected = false;
@@ -109,6 +177,44 @@ export default {
     },
   },
   methods: {
+    ...mapActions(aptStore, [
+      "clearHouses",
+      "clearHousesFilter",
+      "setHousesFilter",
+      "detailHouse",
+    ]),
+    setMapCenter() {
+      let moveLatLon = new kakao.maps.LatLng(this.house.lat, this.house.lng);
+      this.map.setCenter(moveLatLon);
+      this.map.setLevel(2);
+    },
+    onClose() {
+      this.popoverShow = false;
+    },
+    onSubmit() {
+      this.clearHousesFilter();
+      //필터 적용하기
+      let hlist = this.houses;
+      let filterHouse = hlist.filter((h) => {
+        return (
+          parseInt(h.avgPrice) <= this.pricevalue * 1000 &&
+          h.buildYear >= this.buildrange[0] &&
+          h.buildYear <= this.buildrange[1]
+        );
+      });
+      this.setHousesFilter(filterHouse);
+    },
+    setDetail(house) {
+      this.detailHouse(house);
+      this.$emit("show-modal");
+    },
+    onReset() {
+      //필터 해제
+      let origin = this.houses;
+      this.setHousesFilter(origin);
+      this.pricevalue = "1200";
+      this.buildrange = [1961, 2022];
+    },
     initMap() {
       const container = document.getElementById("map"); // 지도를 표시할 div let
       let Options = {
@@ -224,7 +330,7 @@ export default {
         //지도 범위를 재설정하기 위해 LatLngBounds에 좌표를 추가
         bounds.extend(placePosition);
         //마커와 검색 결과 항목에 mouseover 했을때 해당 장소에 인포윈도우에 장소명 표시
-        let content = `<div class="infowindow">
+        let content = `<div class="infowindow" style="color: black">
                           <span class="title">
                             ${house.apartmentName}
                             </span>
@@ -280,6 +386,9 @@ export default {
       this.sideMarkers[idx] = [];
     },
   },
+  components: {
+    VueSlider,
+  },
 };
 </script>
 <style>
@@ -302,5 +411,42 @@ export default {
 .selected {
   background-color: gray !important;
   color: whitesmoke;
+}
+.filtertitle {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: baseline;
+}
+.popover.b-popover {
+  border: none;
+}
+.con {
+  position: relative;
+  overflow-y: auto;
+  height: 600px;
+}
+.con::-webkit-scrollbar {
+  width: 10px;
+}
+.con::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 10px;
+}
+.con::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+.center {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.right {
+  display: flex;
+  align-items: flex-end;
+}
+.wd {
+  width: 100%;
 }
 </style>

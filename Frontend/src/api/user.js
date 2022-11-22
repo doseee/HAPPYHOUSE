@@ -33,4 +33,58 @@ async function join(user, success, fail) {
   await api.post(`/user/user`, JSON.stringify(user)).then(success).catch(fail);
 }
 
-export { login, findById, tokenRegeneration, logout, update, remove, join };
+/////////////////관심지역 등록 //////////////////////
+
+//관심지역 등록
+async function registLikeDong(params, success) {
+  await api
+    .post(
+      // eslint-disable-next-line prettier/prettier
+      `/user/add-like?dongCode=${params.dongCode}&userId=${params.userId}`
+    )
+    .then(success)
+    .catch((err) => {
+      alert("문제가 발생했습니다.");
+      console.log(err);
+    });
+}
+//관심지역 제거
+async function deleteLikeDong(params, success) {
+  await api
+    .delete(
+      // eslint-disable-next-line prettier/prettier
+      `/userapi/delete-like?dongCode=${params.dongCode}&userid=${params.userid}`
+    )
+    .then(success)
+    .catch((err) => {
+      alert("문제가 발생했습니다.");
+      console.log(err);
+    });
+}
+
+//관심지역 리스트 조회
+async function selectLikeDong(params, success) {
+  await api
+    .get(
+      // eslint-disable-next-line prettier/prettier
+      `/userapi/mylike?userid=${params.userid}`
+    )
+    .then(success)
+    .catch((err) => {
+      alert("문제가 발생했습니다.");
+      console.log(err);
+    });
+}
+
+export {
+  login,
+  findById,
+  tokenRegeneration,
+  logout,
+  update,
+  remove,
+  join,
+  registLikeDong,
+  deleteLikeDong,
+  selectLikeDong,
+};
