@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.board.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +48,12 @@ public class CommentController {
 	public ResponseEntity<?> write(@RequestBody CommentDto commentDto, RedirectAttributes redirectAttributes) throws Exception {
 		try {
 			commentService.writeComment(commentDto);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("data", "success");
 			redirectAttributes.addAttribute("pgno", "1");
 			redirectAttributes.addAttribute("key", "");
 			redirectAttributes.addAttribute("word", "");
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		catch (SQLException e) {
 			return exceptionHandling(e);
@@ -105,10 +108,12 @@ public class CommentController {
 			RedirectAttributes redirectAttributes) throws Exception {
 		try {
 			commentService.deleteComment(commentNo);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("data", "success");
 			redirectAttributes.addAttribute("pgno", map.get("pgno"));
 			redirectAttributes.addAttribute("key", map.get("key"));
 			redirectAttributes.addAttribute("word", map.get("word"));
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		} catch (SQLException e) {
 			return exceptionHandling(e);
 		}

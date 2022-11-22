@@ -115,47 +115,33 @@ public class BoardController {
 		}
 	}
 
-	@GetMapping("/modify")
-	public ResponseEntity<?> modify(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map, Model model)
-			throws Exception {
-		try {
-			BoardDto boardDto = boardService.getArticle(articleNo);
-			model.addAttribute("article", boardDto);
-			model.addAttribute("pgno", map.get("pgno"));
-			model.addAttribute("key", map.get("key"));
-			model.addAttribute("word", map.get("word"));
-			if( boardDto != null)
-				return new ResponseEntity<BoardDto>(boardDto, HttpStatus.OK);
-			else
-				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		} catch (SQLException e) {
-			return exceptionHandling(e);
-		}
-	}
-
 	@PutMapping("/modify")
 	public ResponseEntity<?> modify(@RequestBody BoardDto boardDto, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		try {
 			boardService.modifyArticle(boardDto);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("data", "success");
 			redirectAttributes.addAttribute("pgno", map.get("pgno"));
 			redirectAttributes.addAttribute("key", map.get("key"));
 			redirectAttributes.addAttribute("word", map.get("word"));
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		} catch (SQLException e) {
 			return exceptionHandling(e);
 		}
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<?> delete(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map,
+	public ResponseEntity<?> delete(@RequestParam("articleNo") int articleNo, @RequestParam Map<String, String> map,
 			RedirectAttributes redirectAttributes) throws Exception {
 		try {
 			boardService.deleteArticle(articleNo);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("data", "success");
 			redirectAttributes.addAttribute("pgno", map.get("pgno"));
 			redirectAttributes.addAttribute("key", map.get("key"));
 			redirectAttributes.addAttribute("word", map.get("word"));
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		} catch (SQLException e) {
 			return exceptionHandling(e);
 		}
