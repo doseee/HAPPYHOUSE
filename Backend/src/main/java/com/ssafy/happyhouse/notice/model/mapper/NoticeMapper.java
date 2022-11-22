@@ -11,7 +11,7 @@ import com.ssafy.happyhouse.notice.model.NoticeDto;
 @Mapper
 public interface NoticeMapper {
 	int writeNotice(NoticeDto noticeDto) throws SQLException;
-	List<NoticeDto> listNotice(Map<String, Object> map) throws SQLException;
+	List<NoticeDto> listNotice() throws SQLException;
 	int getTotalNoticeCount(Map<String, Object> map) throws SQLException;
 	NoticeDto getNotice(int articleNo) throws SQLException;
 	void updateHit(int articleNo) throws SQLException;

@@ -1,11 +1,6 @@
 <template>
   <div class="page-header clear-filter" filter-color="orange">
-    <b-container class="bv-example-row mt-3">
-      <b-row>
-        <b-col>
-          <h3>글보기</h3>
-        </b-col>
-      </b-row>
+    <b-container class="bv-example-row md-3">
       <b-row class="mb-1">
         <b-col class="text-left">
           <button class="btn btn-round btn-warning" @click="listArticle">
@@ -51,13 +46,13 @@
           max-rows="6"></b-form-textarea>
         <b-row class="mb-5">
           <b-col class="text-right">
-            <b-button
-              variant="dark"
+            <button
               type="button"
-              class="m-1"
-              @click="commentCheck"
-              >댓글 작성</b-button
-            >
+              class="btn btn-round btn-warning float-right"
+              variant="success"
+              @click="commentCheck">
+              댓글 작성
+            </button>
           </b-col>
         </b-row>
       </div>
@@ -115,7 +110,7 @@ export default {
   },
   methods: {
     reListComment() {
-      listComment(this.article.articleno, (res) => {
+      listComment(this.article.articleNo, (res) => {
         this.comments = res.data;
       });
     },
@@ -135,7 +130,7 @@ export default {
       };
       writeComment(comment, (res) => {
         let msg = "답변 등록시 문제가 발생했습니다.";
-        if (res.data === "success") {
+        if (res.data.data === "success") {
           msg = "답변 등록이 완료되었습니다.";
         }
         alert(msg);
@@ -146,33 +141,31 @@ export default {
       this.$router.push({ name: "boardList" });
     },
     moveModifyArticle() {
-      if (this.userInfo?.userid === undefined || this.userInfo.userid == null) {
+      if (this.userInfo?.userId === undefined || this.userInfo.userId == null) {
         alert("로그인이 필요한 서비스입니다.");
         this.$router.push({ name: "login" });
       } else {
-        if (this.userInfo?.userid != this.article.userid) {
+        if (this.userInfo?.userId != this.article.userId) {
           alert("다른 사용자의 글은 수정 할 수 없습니다.");
         } else {
           this.$router.replace({
             name: "boardModify",
             params: {
-              articleno: this.article.articleno,
+              articleno: this.article.articleNo,
             },
           });
         }
       }
-
-      //   this.$router.push({ path: `/board/modify/${this.article.articleno}` });
     },
     deleteArticleCheck() {
-      if (this.userInfo?.userid === undefined || this.userInfo.userid == null) {
+      if (this.userInfo?.userId === undefined || this.userInfo.userId == null) {
         alert("로그인이 필요한 서비스입니다.");
         this.$router.push({ name: "login" });
       } else {
         if (confirm("삭제하시겠습니까?")) {
-          deleteArticle(this.$route.params.articleno, (res) => {
+          deleteArticle(this.$route.params.articleNo, (res) => {
             let msg = "문제가 발생했습니다.";
-            if (res.data == "success") {
+            if (res.data.data == "success") {
               msg = "글이 삭제되었습니다.";
             }
             alert(msg);

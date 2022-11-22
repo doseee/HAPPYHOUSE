@@ -8,7 +8,7 @@
             <b-container>
               <b-row>
                 <b-col>
-                  <h3>글목록</h3>
+                  <h3>List</h3>
                 </b-col>
               </b-row>
               <b-row class="mb-1">
@@ -139,11 +139,11 @@ export default {
   },
   methods: {
     moveWrite() {
-      if (!this.userInfo?.userid) {
+      if (!this.userInfo?.userId) {
         alert("로그인이 필요한 서비스입니다.");
         this.$router.push({ name: "login" });
       } else {
-        this.$router.push({ name: "boardRegister" });
+        this.$router.push({ name: "boardWrite" });
       }
     },
     searchBoard(event) {

@@ -39,10 +39,10 @@
           type="submit"
           class="btn btn-round btn-warning"
           v-if="this.type === 'register'">
-          글작성
+          등록
         </button>
         <button type="submit" class="btn btn-round btn-warning" v-else>
-          글수정
+          수정
         </button>
         <button type="reset" class="btn btn-round btn-warning">초기화</button>
       </b-form>
@@ -132,14 +132,14 @@ export default {
     },
     modifyArticleM() {
       let article = {
-        articleno: this.article.articleno,
+        articleNo: this.article.articleNo,
         userId: this.userInfo.userId,
         subject: this.article.subject,
         content: this.article.content,
       };
       modifyArticle(article, (res) => {
         let msg = "수정 처리시 문제가 발생했습니다.";
-        if (res.data === "success") {
+        if (res.data.data === "success") {
           msg = "수정이 완료되었습니다.";
         }
         alert(msg);

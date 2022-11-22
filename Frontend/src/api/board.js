@@ -13,7 +13,7 @@ function listArticle(success) {
 }
 function listComment(articleNo, success) {
   api
-    .get(`/comment?articleNo=${articleNo}`)
+    .get(`/comment/list?articleNo=${articleNo}`)
     .then(success)
     .catch((err) => {
       console.log(err);
@@ -50,7 +50,7 @@ function getArticle(articleNo, success) {
 
 function modifyArticle(article, success) {
   api
-    .put(`/board/${article.articleno}`, JSON.stringify(article))
+    .put(`/board/modify`, JSON.stringify(article))
     .then(success)
     .catch((err) => {
       alert("문제가 발생했습니다.");
@@ -58,26 +58,26 @@ function modifyArticle(article, success) {
     });
 }
 
-function deleteArticle(articleno, success) {
+function deleteArticle(articleNo, success) {
   api
-    .delete(`/board/${articleno}`)
+    .delete(`/board/delete?articleNo=${articleNo}`)
     .then(success)
     .catch((err) => {
       alert("문제가 발생했습니다.");
       console.log(err);
     });
 }
-function deleteComment(commentno, success) {
+function deleteComment(commentNo, success) {
   api
-    .delete(`/comment/${commentno}`)
+    .delete(`/comment/delete?commentNo=${commentNo}`)
     .then(success)
     .catch((err) => {
       console.log(err);
     });
 }
-function getArticleById(userid, success) {
+function getArticleById(userId, success) {
   api
-    .get(`/board/searchid/${userid}`)
+    .get(`/board/searchId?userId=${userId}`)
     .then(success)
     .catch((err) => {
       alert("문제가 발생했습니다.");
@@ -87,7 +87,7 @@ function getArticleById(userid, success) {
 
 function getArticleBySubject(subject, success) {
   api
-    .get(`/board/searchtitle/${subject}`)
+    .get(`/board/searchTitle?subject=${subject}`)
     .then(success)
     .catch((err) => {
       alert("문제가 발생했습니다.");
