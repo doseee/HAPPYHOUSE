@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.user.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.happyhouse.apt.model.SidoGugunCodeDto;
 import com.ssafy.happyhouse.user.model.UserDto;
 import com.ssafy.happyhouse.user.model.service.JwtServiceImpl;
 import com.ssafy.happyhouse.user.model.service.UserService;
@@ -221,4 +224,53 @@ public class UserController {
 		}
 		return new ResponseEntity<Map<String, Object>>(resultMap, status);
 	}
+	
+	//아이디 중복 체크
+		@ApiOperation(value = "아이디를 받아 아이디를 중복체크한다. ")
+		@PostMapping("/checkid/{userid}")
+		public ResponseEntity<?> checkId(@PathVariable String userid) throws Exception{
+			if(userService.idCheck(userid) == 1) {
+				return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+			}
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+		
+		//관심지역 추가
+		@ApiOperation(value = "관심지역을 추가한다.")
+		@PostMapping("/add-like")
+		public ResponseEntity<String> addLikedong(@RequestParam String userId, @RequestParam String dongCode) throws Exception{
+			Map<String, String >map = new HashMap<String, String>();
+			map.put("userId",userId);
+			map.put("dongCode",dongCode);
+			logger.debug("map : {}",map);
+			try {
+				userService.addLikeDong(map);
+				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK); 
+			}catch(Exception e) {
+				return new ResponseEntity<String>(FAIL, HttpStatus.OK); 
+			}
+		}
+
+		//관심지역 제거
+		@ApiOperation(value = "관심지역을 제거한다.")
+		@DeleteMapping("/delete-like")
+		public ResponseEntity<String> deleteLikedong(@RequestParam String userId, @RequestParam String dongCode) throws Exception{
+			Map<String, String >map = new HashMap<String, String>();
+			map.put("userId",userId);
+			map.put("dongCode",dongCode);
+			logger.debug("map : {}",map);
+			if(userService.deleteLikeDong(map)) {
+				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK); 
+			}
+			return new ResponseEntity<String>(FAIL, HttpStatus.OK); 
+		}
+		
+		
+		//내 관심지역 조회
+		@ApiOperation(value = "회원의 아이디를 받아서 관심지역 리스트를 반환한다.")
+		@GetMapping(value = "/mylike")
+		public ResponseEntity<List<SidoGugunCodeDto>> mylike(@RequestParam String userId) throws Exception{
+			logger.debug("userId : {}", userId);
+			return new ResponseEntity<List<SidoGugunCodeDto>>(userService.listLikeDong(userId), HttpStatus.OK); 
+		}
 }

@@ -41,4 +41,13 @@ function houseListByDong(params, success) {
     });
 }
 
-export { sidoList, gugunList, dongList, houseListByDong };
+function dealsByCode(params, success) {
+  api
+    .get(`/apt/apt-deals?aptCode=${params.aptCode}`)
+    .then(success)
+    .catch((error) => {
+      alert("문제가 발생했습니다.");
+      console.log(error);
+    });
+}
+export { sidoList, gugunList, dongList, houseListByDong, dealsByCode };

@@ -1,40 +1,36 @@
 <template>
-  <div class="container" style="padding-left: 24px">
-    <div style="height: 70px"></div>
-    <div
-      class="row col-md-12 justify-content-center"
-      style="paddding-top: 40px; padding-bottom: 0px margin-bottom: 0px">
-      <div class="form-group col-md-2">
-        <b-form-select
-          v-model="selectSido"
-          :options="sidos"
-          @change="getGugunList"></b-form-select>
-      </div>
-      <div class="form-group col-md-2">
-        <b-form-select
-          v-model="selectGugun"
-          :options="guguns"
-          @change="getDongList"></b-form-select>
-      </div>
-      <div class="form-group col-md-2">
-        <b-form-select v-model="selectDong" :options="dongs"></b-form-select>
-      </div>
-      <div style="margin-right: 10px">
-        <b-button variant="outline-primary" @click="getHouseList"
-          >검색</b-button
-        >
-      </div>
-      <div>
-        <b-button variant="outline-primary">관심지역추가</b-button>
-      </div>
+  <div class="my-4 wc d-flex align-items-center" style="margin-left: 80px">
+    <div class="sm-3" style="margin-right: 5px">
+      <b-form-select
+        v-model="selectSido"
+        :options="sidos"
+        @change="getGugunList"></b-form-select>
+    </div>
+    <div class="sm-3" style="margin-right: 5px">
+      <b-form-select
+        v-model="selectGugun"
+        :options="guguns"
+        @change="getDongList"></b-form-select>
+    </div>
+    <div class="sm-3" style="margin-right: 5px">
+      <b-form-select v-model="selectDong" :options="dongs"></b-form-select>
+    </div>
+    <div style="margin-right: 5px">
+      <b-button variant="outline-primary" @click="getHouseList">검색</b-button>
+    </div>
+    <div>
+      <b-button variant="outline-primary" @click="addLikeDong"
+        >관심지역추가</b-button
+      >
     </div>
   </div>
 </template>
 <script>
 import { sidoList, gugunList, dongList, houseListByDong } from "@/api/apt.js";
 import { mapActions, mapState } from "vuex";
-
+import { registLikeDong, deleteLikeDong } from "@/api/user.js";
 const aptStore = "aptStore";
+const userStore = "userStore";
 export default {
   name: "AptSearchForm",
   data() {
@@ -48,6 +44,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(userStore, ["userInfo", "likeList"]),
     ...mapState(aptStore, ["sidoCode", "gugunCode", "dongCode"]),
   },
   created() {
@@ -78,6 +75,7 @@ export default {
       "clearGugunCode",
       "clearDongCode",
     ]),
+    ...mapActions(userStore, ["setLikeList"]),
     getSidoList() {
       sidoList((res) => {
         res.data.forEach((sido) => {
@@ -122,6 +120,56 @@ export default {
           // eslint-disable-next-line prettier/prettier
         }
       );
+    },
+    async addLikeDong() {
+      //로그인 확인
+      if (!this.userInfo) {
+        alert("로그인 후 가능한 서비스입니다.");
+        this.$router.push({ name: "login" });
+        return;
+      }
+      //관심지역으로 등록하기
+      if (!this.dongCode) {
+        alert("지역을 선택해주세요");
+      } else {
+        if (this.isLike) {
+          //관심지역 해제
+          await deleteLikeDong(
+            {
+              dongCode: this.dongCode,
+              userId: this.userInfo.userId,
+            },
+            ({ data }) => {
+              if (data == "success") {
+                this.isLike = false;
+                //vuex 리스트 다시 조회
+                this.setLikeList(this.userInfo.userId);
+              } else {
+                alert("관심지역 해제에 실패하였습니다.");
+              }
+              // eslint-disable-next-line prettier/prettier
+            }
+          );
+        } else {
+          //관심지역 등록
+          registLikeDong(
+            {
+              dongCode: this.dongCode,
+              userId: this.userInfo.userId,
+            },
+            ({ data }) => {
+              if (data === "success") {
+                this.isLike = true;
+                //vuex 리스트 다시 조회
+                this.setLikeList(this.userInfo.userid);
+              } else {
+                alert("관심지역 등록에 실패하였습니다.");
+              }
+              // eslint-disable-next-line prettier/prettier
+            }
+          );
+        }
+      }
     },
     isLikeDong() {
       this.isLike = false;

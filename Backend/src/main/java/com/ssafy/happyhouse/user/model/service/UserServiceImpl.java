@@ -1,12 +1,13 @@
 package com.ssafy.happyhouse.user.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssafy.happyhouse.apt.model.SidoGugunCodeDto;
 import com.ssafy.happyhouse.user.model.UserDto;
 import com.ssafy.happyhouse.user.model.mapper.UserMapper;
 
@@ -81,4 +82,24 @@ public class UserServiceImpl implements UserService {
 		map.put("token", null);
 		userMapper.deleteRefreshToken(map);
 	}
+	
+	//관심지역 추가
+	@Override
+	public void addLikeDong(Map<String, String> map) throws Exception {
+		userMapper.addLikeDong(map);
+	}
+	
+	@Override
+	public boolean deleteLikeDong(Map<String, String> map) throws Exception {
+		int n= userMapper.deleteLikeDong(map);
+		System.out.println(n);
+		return n==1;
+	}
+
+	//관심지역 조회
+	@Override
+	public List<SidoGugunCodeDto> listLikeDong(String userid) throws Exception {
+		return userMapper.listLikeDong(userid);
+
+	}				
 }
