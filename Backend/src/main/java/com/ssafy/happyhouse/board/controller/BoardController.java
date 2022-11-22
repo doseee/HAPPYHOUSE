@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.board.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,11 +54,13 @@ public class BoardController {
 	@PostMapping("/write")
 	public ResponseEntity<?> write(@RequestBody BoardDto boardDto, RedirectAttributes redirectAttributes) throws Exception {
 		try {
+			Map<String, Object> resultMap = new HashMap<>();
 			boardService.writeArticle(boardDto);
+			resultMap.put("data", "success");
 			redirectAttributes.addAttribute("pgno", "1");
 			redirectAttributes.addAttribute("key", "");
 			redirectAttributes.addAttribute("word", "");
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		catch (SQLException e) {
 			return exceptionHandling(e);
@@ -79,7 +82,7 @@ public class BoardController {
 	}
 
 	@GetMapping("/view")
-	public ResponseEntity<?> view(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map, Model model)
+	public ResponseEntity<?> view(@RequestParam("articleNo") int articleNo, @RequestParam Map<String, String> map, Model model)
 			throws Exception {
 		try {
 			BoardDto boardDto = boardService.getArticle(articleNo);

@@ -23,7 +23,7 @@ import com.ssafy.happyhouse.interceptor.JwtInterceptor;
 @MapperScan(basePackages = { "com.ssafy.**.mapper" })
 public class WebMvcConfiguration implements WebMvcConfigurer {
 
-	private final List<String> patterns = Arrays.asList("/board/*", "/admin", "/user/list");
+	private final List<String> patterns = Arrays.asList( "/admin", "/user/list");
 
 	@Autowired
 	private JwtInterceptor jwtInterceptor;

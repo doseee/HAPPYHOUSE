@@ -41,15 +41,7 @@ public class CommentController {
 		logger.info("Comment Controller 생성자 호출");
 		this.commentService = commentService;
 	}
-
-	@GetMapping("/write")
-	public ResponseEntity<?> write(@RequestParam Map<String, String> map, Model model) {
-		model.addAttribute("pgno", map.get("pgno"));
-		model.addAttribute("key", map.get("key"));
-		model.addAttribute("word", map.get("word"));
-		return new ResponseEntity<Void>(HttpStatus.OK);
-	}
-
+	
 	//세션 추가
 	@PostMapping("/write")
 	public ResponseEntity<?> write(@RequestBody CommentDto commentDto, RedirectAttributes redirectAttributes) throws Exception {

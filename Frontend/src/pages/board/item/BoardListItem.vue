@@ -1,15 +1,15 @@
 <template>
   <b-tr>
-    <b-td>{{ articleno }}</b-td>
+    <b-td>{{ articleNo }}</b-td>
     <b-th class="text-left">
       <router-link
-        :to="{ name: 'boardview', params: { articleno: articleno } }"
+        :to="{ name: 'boardview', params: { articleNo: articleNo } }"
         >{{ subject }}</router-link
       >
     </b-th>
     <b-td>{{ hit }}</b-td>
-    <b-td>{{ userid }}</b-td>
-    <b-td>{{ regtime | dateFormat }}</b-td>
+    <b-td>{{ userId }}</b-td>
+    <b-td>{{ registerTime | dateFormat }}</b-td>
   </b-tr>
 </template>
 
@@ -19,15 +19,15 @@ import moment from "moment";
 export default {
   name: "BoardListItem",
   props: {
-    articleno: Number,
-    userid: String,
+    articleNo: Number,
+    userId: String,
     subject: String,
     hit: Number,
-    regtime: String,
+    registerTime: String,
   },
   filters: {
-    dateFormat(regtime) {
-      return moment(new Date(regtime)).format("YY.MM.DD");
+    dateFormat(registerTime) {
+      return moment(new Date(registerTime)).format("YY.MM.DD");
     },
   },
 };

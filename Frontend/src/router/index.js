@@ -6,13 +6,14 @@ import Login from "@/pages/user/UserLogin";
 import UserModify from "@/pages/user/UserModify";
 import Profile from "@/pages/Profile";
 import AppUser from "@/views/AppUser";
+import AppBoard from "@/views/AppBoard";
 import AptPage from "@/pages/apt/AptPage";
 import MainNavbar from "@/layout/MainNavbar";
 import MainFooter from "@/layout/MainFooter";
 import UserPage from "@/pages/user/UserPage";
 import UserRegist from "@/pages/user/UserRegist";
 import BoardList from "@/pages/board/BoardList";
-import BoardView from "@/pages/board/BoardView";
+import BoardDetail from "@/pages/board/BoardDetail";
 import BoardWrite from "@/pages/board/BoardWrite";
 import BoardModify from "@/pages/board/BoardModify";
 import BoardDelete from "@/pages/board/BoardDelete";
@@ -87,10 +88,10 @@ export default new Router({
       path: "/board",
       name: "board",
       components: {
-        default: AppUser,
+        default: AppBoard,
         header: MainNavbar,
         boardlist: BoardList,
-        boardView: BoardView,
+        BoardDetail: BoardDetail,
         boardwrite: BoardWrite,
         boardmodify: BoardModify,
         boarddelete: BoardDelete,
@@ -99,13 +100,13 @@ export default new Router({
       children: [
         {
           path: "/list",
-          name: "boardlist",
+          name: "boardList",
           components: { default: BoardList },
         },
         {
-          path: "view/:articleno",
-          name: "boardview",
-          components: { default: BoardView },
+          path: "view",
+          name: "boardDetail",
+          components: { default: BoardDetail },
         },
         {
           path: "write",
