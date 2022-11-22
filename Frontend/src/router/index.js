@@ -9,6 +9,7 @@ import Profile from "@/pages/Profile";
 import AppUser from "@/views/AppUser";
 import AppBoard from "@/views/AppBoard";
 import AptPage from "@/pages/apt/AptPage";
+import AppNotice from "@/views/AppNotice";
 import MainNavbar from "@/layout/MainNavbar";
 import MainFooter from "@/layout/MainFooter";
 import UserPage from "@/pages/user/UserPage";
@@ -17,6 +18,11 @@ import BoardList from "@/pages/board/BoardList";
 import BoardDetail from "@/pages/board/BoardDetail";
 import BoardWrite from "@/pages/board/BoardWrite";
 import BoardModify from "@/pages/board/BoardModify";
+import NoticeList from "@/pages/notice/NoticeList";
+import NoticeDetail from "@/pages/notice/NoticeDetail";
+import NoticeWrite from "@/pages/notice/NoticeWrite";
+import NoticeModify from "@/pages/notice/NoticeModify";
+
 Vue.use(Router);
 
 export default new Router({
@@ -103,7 +109,7 @@ export default new Router({
       redirect: "/board/list",
       children: [
         {
-          path: "/list",
+          path: "/board/list",
           name: "boardList",
           components: { default: BoardList },
         },
@@ -121,6 +127,41 @@ export default new Router({
           path: "modify",
           name: "boardModify",
           components: { default: BoardModify },
+        },
+      ],
+    },
+    {
+      path: "/notice",
+      name: "notice",
+      components: {
+        default: AppNotice,
+        header: MainNavbar,
+        noticeList: NoticeList,
+        noticeDetail: NoticeDetail,
+        noticeWrite: NoticeWrite,
+        noticeModify: NoticeModify,
+      },
+      redirect: "/notice/list",
+      children: [
+        {
+          path: "/notice/list",
+          name: "noticeList",
+          components: { default: NoticeList },
+        },
+        {
+          path: "view",
+          name: "noticeDetail",
+          components: { default: NoticeDetail },
+        },
+        {
+          path: "write",
+          name: "noticeWrite",
+          components: { default: NoticeWrite },
+        },
+        {
+          path: "modify",
+          name: "noticeModify",
+          components: { default: NoticeModify },
         },
       ],
     },

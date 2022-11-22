@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.notice.controller;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafy.happyhouse.board.model.BoardDto;
 import com.ssafy.happyhouse.notice.model.NoticeDto;
 import com.ssafy.happyhouse.notice.model.service.NoticeService;
 
@@ -41,7 +43,9 @@ public class NoticeController {
 	public ResponseEntity<?> write(@RequestBody NoticeDto noticeDto) throws Exception {
 		try {
 			noticeService.writeNotice(noticeDto);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("data", "success");
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		}
 		catch (SQLException e) {
 			return exceptionHandling(e);
@@ -63,7 +67,7 @@ public class NoticeController {
 	}
 
 	@GetMapping("/view")
-	public ResponseEntity<?> view(@RequestParam("articleno") int articleNo)
+	public ResponseEntity<?> view(@RequestParam("articleNo") int articleNo)
 			throws Exception {
 		try {
 			NoticeDto noticeDto = noticeService.getNotice(articleNo);
@@ -81,17 +85,33 @@ public class NoticeController {
 	public ResponseEntity<?> modify(@RequestBody NoticeDto noticeDto, @RequestParam Map<String, String> map) throws Exception {
 		try {
 			noticeService.modifyNotice(noticeDto);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("data", "success");
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
 		} catch (SQLException e) {
 			return exceptionHandling(e);
 		}
 	}
 
 	@DeleteMapping("/delete")
-	public ResponseEntity<?> delete(@RequestParam("articleno") int articleNo, @RequestParam Map<String, String> map) throws Exception {
+	public ResponseEntity<?> delete(@RequestParam("articleNo") int articleNo, @RequestParam Map<String, String> map) throws Exception {
 		try {
 			noticeService.deleteNotice(articleNo);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("data", "success");
+			return new ResponseEntity<Map<String, Object>>(resultMap, HttpStatus.OK);
+		} catch (SQLException e) {
+			return exceptionHandling(e);
+		}
+	}
+	
+	@GetMapping("/searchTitle")
+	public  ResponseEntity<?> searchByTitle(@RequestParam("subject") String subject, @RequestParam Map<String, String> map) throws Exception{
+	    try {
+	    	noticeService.searchByTitle(subject);
+	    	Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("data", "success");
+			return new ResponseEntity<List<NoticeDto>>(noticeService.searchByTitle(subject), HttpStatus.OK);
 		} catch (SQLException e) {
 			return exceptionHandling(e);
 		}

@@ -11,4 +11,5 @@ public interface NoticeService {
 	void updateHit(int articleNo) throws Exception;
 	void modifyNotice(NoticeDto noticeDto) throws Exception;
 	void deleteNotice(int articleNo) throws Exception;
+	List<NoticeDto> searchByTitle(String subject) throws Exception;
 }

@@ -17,4 +17,5 @@ public interface NoticeMapper {
 	void updateHit(int articleNo) throws SQLException;
 	void modifyNotice(NoticeDto noticeDto) throws SQLException;
 	void deleteNotice(int articleNo) throws SQLException;
+	List<NoticeDto> searchByTitle(String searchTitle) throws SQLException;
 }
