@@ -22,21 +22,11 @@
 		</selectKey>
 	</insert>
 
-	<sql id="search">
-		<if test="word != null and word != ''">
-			<if test="key == 'subject'">
-				and subject like concat('%', #{word}, '%')
-			</if>
-			<if test="key != 'subject'">
-				and ${key} = #{word}
-			</if>
-		</if>
-	</sql>
-
 	<select id="listArticle" resultMap="article">
 		select b.article_no, b.user_id, b.subject, b.content, b.hit, b.register_time, m.user_name
 		from board b, users m 
 		where b.user_id = m.user_id
+		order by b.article_no desc
 	</select>
 	
 	<select id="getListArticleByUser" parameterType="string" resultMap="article">
@@ -44,15 +34,7 @@
 		from board
 		where user_id = #{userId}
 	</select>
-	
-	<select id="getTotalArticleCount" parameterType="map" resultType="int">
-		select count(article_no)
-		from board
-		<where>
-			<include refid="search"></include>
-		</where>
-	</select>
-	
+
 	<select id="getArticle" parameterType="int" resultMap="article">
 		select b.article_no, b.user_id, b.subject, b.content, b.hit, b.register_time, m.user_name 
 		from board b, users m

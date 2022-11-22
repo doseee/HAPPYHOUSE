@@ -75,9 +75,9 @@ function deleteComment(commentNo, success) {
       console.log(err);
     });
 }
-function getArticleById(userid, success) {
+function getArticleById(userId, success) {
   api
-    .get(`/board/searchid/${userid}`)
+    .get(`/board/searchId?userId=${userId}`)
     .then(success)
     .catch((err) => {
       alert("문제가 발생했습니다.");
@@ -87,7 +87,7 @@ function getArticleById(userid, success) {
 
 function getArticleBySubject(subject, success) {
   api
-    .get(`/board/searchtitle/${subject}`)
+    .get(`/board/searchTitle?subject=${subject}`)
     .then(success)
     .catch((err) => {
       alert("문제가 발생했습니다.");
