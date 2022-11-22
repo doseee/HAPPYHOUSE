@@ -16,7 +16,6 @@ import BoardList from "@/pages/board/BoardList";
 import BoardDetail from "@/pages/board/BoardDetail";
 import BoardWrite from "@/pages/board/BoardWrite";
 import BoardModify from "@/pages/board/BoardModify";
-import BoardDelete from "@/pages/board/BoardDelete";
 Vue.use(Router);
 
 export default new Router({
@@ -92,9 +91,8 @@ export default new Router({
         header: MainNavbar,
         boardlist: BoardList,
         BoardDetail: BoardDetail,
-        boardwrite: BoardWrite,
-        boardmodify: BoardModify,
-        boarddelete: BoardDelete,
+        boardWrite: BoardWrite,
+        boardModify: BoardModify,
       },
       redirect: "/board/list",
       children: [
@@ -110,18 +108,13 @@ export default new Router({
         },
         {
           path: "write",
-          name: "boardwrite",
+          name: "boardWrite",
           components: { default: BoardWrite },
         },
         {
           path: "modify",
-          name: "boardmodify",
+          name: "boardModify",
           components: { default: BoardModify },
-        },
-        {
-          path: "delete/:articleno",
-          name: "boarddelete",
-          ccomponents: { default: BoardDelete },
         },
       ],
     },
