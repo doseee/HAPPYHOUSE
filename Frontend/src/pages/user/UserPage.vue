@@ -1,108 +1,28 @@
 <template>
   <div class="page-header clear-filter" filter-color="orange">
     <div class="content">
-      <v-list id="sidebar" class="clear-filter nav-link">
-        <v-list-group :value="true" no-action sub-group>
-          <template v-slot:activator>
-            <v-list-item-title style="color: white">
-              회원관리
-              <i class="now-ui-icons arrows-1_minimal-down"></i>
-            </v-list-item-title>
-          </template>
-
-          <v-list-item style="color: white">
-            <v-list-item-title class="mypage-aside">
-              <button
-                class="nav-link"
-                style="border: none; margin-left: 140px; color: white"
-                @click="infoView">
-                회원정보 보기
-              </button>
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item style="color: white">
-            <v-list-item-title class="mypage-aside">
-              <button
-                class="nav-link"
-                style="border: none; margin-left: 140px; color: white"
-                @click="modify">
-                회원정보 수정
-              </button>
-            </v-list-item-title>
-          </v-list-item>
-          <v-list-item style="margin-left: 150px; color: white">
-            <v-list-item-title
-              @click="modals.mini = true"
-              v-text="`회원탈퇴`"
-              class="mypage-aside nav-link"
-              style="font-style: italic; text-decoration: underline">
-            </v-list-item-title>
-          </v-list-item>
-        </v-list-group>
-        <v-list-group :value="true" no-action sub-group>
-          <template v-slot:activator>
-            <v-list-item-title style="color: white">
-              글 댓글
-              <i class="now-ui-icons arrows-1_minimal-down"></i>
-            </v-list-item-title>
-          </template>
-
-          <v-list-item style="margin-left: 140px; color: white">
-            <v-list-item-title
-              v-text="`내가 쓴 글`"
-              class="mypage-aside"></v-list-item-title>
-          </v-list-item>
-          <v-list-item style="margin-left: 120px; color: white">
-            <v-list-item-title
-              v-text="`내가 쓴 댓글`"
-              class="mypage-aside"></v-list-item-title>
-          </v-list-item>
-        </v-list-group>
-        <v-list-group :value="true" no-action sub-group>
-          <template v-slot:activator>
-            <v-list-item-title style="color: white">
-              나의 관심 지역
-            </v-list-item-title>
-          </template>
-        </v-list-group>
-      </v-list>
-      <template>
-        <user-info-view v-if="routeData == 'mypage'"> </user-info-view>
-        <user-modify v-if="routeData == 'modify'" :propsData="userInfo">
-        </user-modify>
-      </template>
-      <modal
-        :show.sync="modals.mini"
-        class=""
-        :show-close="false"
-        headerClasses="justify-content-center"
-        type="mini">
-        <div slot="header">
-          <img src="img/userdelete.jpg" style="width: 100px" />
+      <div class="row">
+        <div class="col-md-3">
+          <user-func-list v-on:func-select="changeView"></user-func-list>
         </div>
-        <h3 style="text-align: center; color: black">
-          회원탈퇴를 <br />하시겠습니까?
-        </h3>
-
-        <h5 style="text-align: center; color: black">
-          더이상 해당 계정으로 활동을 하실 수 없습니다.
-        </h5>
-        <template slot="footer">
-          <n-button type="defalut" link @click.native="modals.mini = false"
-            >아니오</n-button
-          >
-          <n-button type="danger" link @click="remove"
-            >예, 탈퇴하겠습니다</n-button
-          >
-        </template>
-      </modal>
+        <div class="col-lg-6">
+          <user-info-view v-if="routeData == 'mypage'"> </user-info-view>
+          <user-modify v-if="routeData == 'modify'" :propsData="userInfo">
+          </user-modify>
+          <user-like-apt
+            v-if="routeData == 'likeapt'"
+            :propsData="userInfo"></user-like-apt>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 <script>
-import { Modal, Button } from "@/components";
+import { Button } from "@/components";
 import UserInfoView from "@/pages/user/UserInfoView";
 import UserModify from "@/pages/user/UserModify";
+import UserLikeApt from "@/pages/user/UserLikeApt";
+import UserFuncList from "@/pages/user/UserFuncList";
 import { mapState, mapActions } from "vuex";
 
 const userStore = "userStore";
@@ -117,24 +37,16 @@ export default {
     };
   },
   components: {
-    Modal,
     [Button.name]: Button,
     UserInfoView,
     UserModify,
+    UserLikeApt,
+    UserFuncList,
   },
   methods: {
     ...mapActions(userStore, ["userRemove"]),
-    infoView() {
-      this.routeData = "mypage";
-    },
-    modify() {
-      this.routeData = "modify";
-    },
-    async remove() {
-      await this.userRemove(this.userInfo.userId);
-      sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
-      sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
-      this.$router.push({ name: "index" });
+    changeView(data) {
+      this.routeData = data;
     },
   },
   computed: {

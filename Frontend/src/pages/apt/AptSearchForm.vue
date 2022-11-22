@@ -19,7 +19,10 @@
       <b-button variant="outline-primary" @click="getHouseList">검색</b-button>
     </div>
     <div>
-      <b-button variant="outline-primary" @click="addLikeDong"
+      <b-button v-if="isLike" variant="outline-primary" @click="deleteLikeDong"
+        >관심지역해제</b-button
+      >
+      <b-button v-else variant="outline-primary" @click="addLikeDong"
         >관심지역추가</b-button
       >
     </div>
@@ -41,6 +44,7 @@ export default {
       sidos: [{ value: null, text: "시/도 선택" }],
       guguns: [{ value: null, text: "구/군 선택" }],
       dongs: [{ value: null, text: "동 선택" }],
+      isLike: false,
     };
   },
   computed: {
@@ -117,8 +121,7 @@ export default {
         (res) => {
           this.setHouses(res.data);
           this.setHousesFilter(res.data);
-          // eslint-disable-next-line prettier/prettier
-        }
+        },
       );
     },
     async addLikeDong() {
@@ -132,52 +135,59 @@ export default {
       if (!this.dongCode) {
         alert("지역을 선택해주세요");
       } else {
-        if (this.isLike) {
-          //관심지역 해제
-          await deleteLikeDong(
-            {
-              dongCode: this.dongCode,
-              userId: this.userInfo.userId,
-            },
-            ({ data }) => {
-              if (data == "success") {
-                this.isLike = false;
-                //vuex 리스트 다시 조회
-                this.setLikeList(this.userInfo.userId);
-              } else {
-                alert("관심지역 해제에 실패하였습니다.");
-              }
-              // eslint-disable-next-line prettier/prettier
+        //관심지역 등록
+        registLikeDong(
+          {
+            dongCode: this.dongCode,
+            userId: this.userInfo.userId,
+          },
+          ({ data }) => {
+            if (data === "success") {
+              this.isLike = true;
+              //vuex 리스트 다시 조회
+              this.setLikeList(this.userInfo.userId);
+            } else {
+              alert("관심지역 등록에 실패하였습니다.");
             }
-          );
-        } else {
-          //관심지역 등록
-          registLikeDong(
-            {
-              dongCode: this.dongCode,
-              userId: this.userInfo.userId,
-            },
-            ({ data }) => {
-              if (data === "success") {
-                this.isLike = true;
-                //vuex 리스트 다시 조회
-                this.setLikeList(this.userInfo.userid);
-              } else {
-                alert("관심지역 등록에 실패하였습니다.");
-              }
-              // eslint-disable-next-line prettier/prettier
+          },
+        );
+      }
+    },
+    async deleteLikeDong() {
+      //로그인 확인
+      if (!this.userInfo) {
+        alert("로그인 후 가능한 서비스입니다.");
+        this.$router.push({ name: "login" });
+        return;
+      }
+      //관심지역으로 등록하기
+      if (!this.dongCode) {
+        alert("지역을 선택해주세요");
+      } else {
+        await deleteLikeDong(
+          {
+            dongCode: this.dongCode,
+            userId: this.userInfo.userId,
+          },
+          ({ data }) => {
+            if (data == "success") {
+              this.isLike = false;
+              //vuex 리스트 다시 조회
+              this.setLikeList(this.userInfo.userId);
+            } else {
+              alert("관심지역 해제에 실패하였습니다.");
             }
-          );
-        }
+          },
+        );
       }
     },
     isLikeDong() {
       this.isLike = false;
-      // this.likeList.map((dong) => {
-      //   if (dong.dongCode == this.dongCode) {
-      //     this.isLike = true;
-      //   }
-      // });
+      this.likeList.map((dong) => {
+        if (dong.dongCode == this.dongCode) {
+          this.isLike = true;
+        }
+      });
     },
   },
   destroyed() {

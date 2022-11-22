@@ -8,6 +8,7 @@ import {
   update,
   remove,
   join,
+  selectLikeDong,
 } from "@/api/user";
 
 const userStore = {
@@ -17,6 +18,7 @@ const userStore = {
     isLoginError: false,
     userInfo: null,
     isValidToken: false,
+    likeList: [],
   },
   getters: {
     checkUserInfo: function (state) {
@@ -39,6 +41,9 @@ const userStore = {
     SET_USER_INFO: (state, userInfo) => {
       state.isLogin = true;
       state.userInfo = userInfo;
+    },
+    SET_LIKE_LIST: (state, likeList) => {
+      state.likeList = likeList;
     },
   },
   actions: {
@@ -167,7 +172,16 @@ const userStore = {
         },
       );
     },
-
+    setLikeList: ({ commit }, userId) => {
+      selectLikeDong(
+        {
+          userId: userId,
+        },
+        ({ data }) => {
+          commit("SET_LIKE_LIST", data);
+        },
+      );
+    },
     async userLogout({ commit }, userId) {
       await logout(
         userId,

@@ -4,6 +4,7 @@ import Index from "@/pages/Index";
 import Landing from "@/pages/Landing";
 import Login from "@/pages/user/UserLogin";
 import UserModify from "@/pages/user/UserModify";
+import UserLikeApt from "@/pages/user/UserLikeApt";
 import Profile from "@/pages/Profile";
 import AppUser from "@/views/AppUser";
 import AppBoard from "@/views/AppBoard";
@@ -73,6 +74,11 @@ export default new Router({
           path: "/modify",
           name: "modify",
           components: { default: UserModify, header: MainNavbar },
+        },
+        {
+          path: "/likeapt",
+          name: "likeapt",
+          components: { default: UserLikeApt, header: MainNavbar },
         },
         {
           path: "/regist",
