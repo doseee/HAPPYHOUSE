@@ -101,5 +101,23 @@ public class UserServiceImpl implements UserService {
 	public List<SidoGugunCodeDto> listLikeDong(String userid) throws Exception {
 		return userMapper.listLikeDong(userid);
 
+	}
+
+	@Override
+	public int pwdCheck(Map<String, String> map) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.pwdCheck(map);
+	}
+	
+	@Override
+	public int nameCheck(Map<String, String> map) throws Exception {
+		// TODO Auto-generated method stub
+		return userMapper.nameCheck(map);
+	}
+
+	@Override
+	public void modifyPwd(Map<String, String>map) throws Exception {
+		// TODO Auto-generated method stub
+		userMapper.modifyPwd(map);
 	}				
 }

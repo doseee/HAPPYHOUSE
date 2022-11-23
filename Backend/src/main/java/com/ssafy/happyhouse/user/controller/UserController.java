@@ -137,13 +137,16 @@ public class UserController {
 		return new ResponseEntity<Void>(status);
 	}
 	
-	@ApiOperation(value = "비밀번호 찾기")
-	@GetMapping("/user/findPwd/{userId}")
-	public ResponseEntity<?> findPwd(@PathVariable("userId") String userId) {
-		HttpStatus status = HttpStatus.ACCEPTED;
-		try {
-			String result = userService.findPwd(userId);
-			if(result != null) {
+	//비밀번호 변경
+	@PutMapping("/user/find-pwd")
+	public ResponseEntity<?> findPwd(@RequestBody Map<String,String> data) throws Exception{
+		Map<String, String> resultMap = new HashMap<>();
+		Map<String, String > map = new HashMap<String, String>();
+		map.put("userId", data.get("userId"));
+		map.put("userName",data.get("userName"));
+		
+		if(userService.idCheck(map.get("userId")) == 1) {
+			if(userService.nameCheck(map) == 1) {
 				int leftLimit = 97; // letter 'a'
 			    int rightLimit = 122; // letter 'z'
 			    int targetStringLength = 10;
@@ -152,22 +155,16 @@ public class UserController {
 			                                   .limit(targetStringLength)
 			                                   .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
 			                                   .toString();
-			    Map<String, String> map = new HashMap<>();
-			    map.put("userId", userId);
-			    map.put("newPass", generatedString);
-			    userService.makePwd(map);
-			    return new ResponseEntity<String>(result, status);
+				resultMap.put("result", SUCCESS);
+				map.put("newPwd", generatedString);
+				userService.modifyPwd(map);
+				resultMap.put("tmpPwd", generatedString);
+				return new ResponseEntity<Map<String, String>>(resultMap, HttpStatus.OK);
 			}
-			else {
-				status = HttpStatus.NO_CONTENT;
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
 		}
-		return new ResponseEntity<Void>(status);
-	}
+		resultMap.put("result", FAIL);
+		return new ResponseEntity<Map<String, String>>(resultMap, HttpStatus.NO_CONTENT);
+	}		
 	
 	@ApiOperation(value = "회원 삭제")
 	@DeleteMapping("/user/{userId}")
@@ -227,12 +224,28 @@ public class UserController {
 	
 	//아이디 중복 체크
 		@ApiOperation(value = "아이디를 받아 아이디를 중복체크한다. ")
-		@PostMapping("/checkid/{userid}")
-		public ResponseEntity<?> checkId(@PathVariable String userid) throws Exception{
-			if(userService.idCheck(userid) == 1) {
+		@PostMapping("/check-id/{userId}")
+		public ResponseEntity<?> checkId(@PathVariable String userId) throws Exception{
+			if(userService.idCheck(userId) == 1) {
 				return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
 			}
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+		
+		//비밀번호 변경
+		@PutMapping("/user/modify-pwd")
+		public ResponseEntity<?> modifyPwd(@RequestBody Map<String,String> data) throws Exception{
+			System.out.println(data);
+			Map<String, String > map = new HashMap<String, String>();
+			map.put("userId", data.get("userId"));
+			map.put("userPwd",data.get("userPwd"));
+			if(userService.pwdCheck(map) == 1) {
+				map.put("newPwd", data.get("newPwd"));
+				userService.modifyPwd(map);
+				return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+			}
+			return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+			
 		}
 		
 		//관심지역 추가

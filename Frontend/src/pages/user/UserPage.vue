@@ -12,6 +12,10 @@
           <user-like-apt
             v-if="routeData == 'likeapt'"
             :propsData="userInfo"></user-like-apt>
+          <user-pwd-change
+            v-if="routeData == 'pwdchange'"
+            :propsData="userInfo"
+            v-on:gotomypage="changeView"></user-pwd-change>
         </div>
       </div>
     </div>
@@ -24,6 +28,7 @@ import UserModify from "@/pages/user/UserModify";
 import UserLikeApt from "@/pages/user/UserLikeApt";
 import UserFuncList from "@/pages/user/UserFuncList";
 import { mapState, mapActions } from "vuex";
+import UserPwdChange from "@/pages/user/UserPwdChange";
 
 const userStore = "userStore";
 export default {
@@ -36,21 +41,25 @@ export default {
       routeData: "mypage",
     };
   },
+  computed: {
+    ...mapState(userStore, ["userInfo"]),
+  },
   components: {
     [Button.name]: Button,
     UserInfoView,
     UserModify,
     UserLikeApt,
     UserFuncList,
+    UserPwdChange,
   },
   methods: {
-    ...mapActions(userStore, ["userRemove"]),
+    ...mapActions(userStore, ["userRemove", "setLikeList"]),
     changeView(data) {
       this.routeData = data;
+      if (this.routeData === "likeapt") {
+        this.setLikeList(this.userInfo.userId);
+      }
     },
-  },
-  computed: {
-    ...mapState(userStore, ["userInfo"]),
   },
 };
 </script>

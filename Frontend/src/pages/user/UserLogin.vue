@@ -59,7 +59,9 @@
             </div>
             <div class="pull-right">
               <h6>
-                <a href="#pablo" class="link footer-link">비밀번호 찾기</a>
+                <router-link to="/findpwd" class="link footer-link"
+                  >비밀번호 찾기</router-link
+                >
               </h6>
             </div>
           </template>

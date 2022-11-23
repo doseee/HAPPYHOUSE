@@ -8,7 +8,7 @@ async function login(user, success, fail) {
 
 async function idCheck(userId, success) {
   api
-    .post(`user/checkid/${userId}`)
+    .post(`user/check-id/${userId}`)
     .then(success)
     .catch((err) => {
       console.log(err);
@@ -36,6 +36,20 @@ async function update(user, success, fail) {
 
 async function remove(userId, success, fail) {
   await api.delete(`/user/user/${userId}`).then(success).catch(fail);
+}
+
+async function pwdCheckModify(user, success, fail) {
+  await api
+    .put(`/user/user/modify-pwd`, JSON.stringify(user))
+    .then(success)
+    .catch(fail);
+}
+
+async function userFindPwd(user, success, fail) {
+  await api
+    .put(`/user/user/find-pwd`, JSON.stringify(user))
+    .then(success)
+    .catch(fail);
 }
 
 async function join(user, success, fail) {
@@ -97,4 +111,6 @@ export {
   deleteLikeDong,
   selectLikeDong,
   idCheck,
+  pwdCheckModify,
+  userFindPwd,
 };

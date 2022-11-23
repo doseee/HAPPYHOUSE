@@ -9,6 +9,8 @@ import com.ssafy.happyhouse.user.model.UserDto;
 public interface UserService {
 	
 	int idCheck(String userId) throws Exception;
+	int pwdCheck(Map<String, String> map) throws Exception;
+	int nameCheck(Map<String, String> map) throws Exception;
 	void joinUser(UserDto userDto) throws Exception;
 	UserDto loginUser(UserDto userDto) throws Exception;
 	
@@ -18,6 +20,8 @@ public interface UserService {
 	
 	void deleteUser(String userId) throws Exception;
 	void updateUser(UserDto userDto) throws Exception;
+	void modifyPwd(Map<String, String>map) throws Exception;
+	
 	
 	UserDto getUser(String userId) throws Exception;
 	String findPwd(String userId) throws Exception;
