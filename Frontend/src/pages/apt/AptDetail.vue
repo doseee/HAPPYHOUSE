@@ -104,8 +104,7 @@ export default {
     linkMap() {
       window.open(
         `https://map.kakao.com/link/map/${this.house.apartmentName},${this.house.lat},${this.house.lng}`,
-        // eslint-disable-next-line prettier/prettier
-        "_blank"
+        "_blank",
       );
     },
   },
