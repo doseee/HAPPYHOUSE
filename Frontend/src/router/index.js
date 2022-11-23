@@ -11,6 +11,7 @@ import AppUser from "@/views/AppUser";
 import AppBoard from "@/views/AppBoard";
 import AptPage from "@/pages/apt/AptPage";
 import AppNotice from "@/views/AppNotice";
+import AppNews from "@/views/AppNews";
 import MainNavbar from "@/layout/MainNavbar";
 import MainFooter from "@/layout/MainFooter";
 import UserPage from "@/pages/user/UserPage";
@@ -23,6 +24,7 @@ import NoticeList from "@/pages/notice/NoticeList";
 import NoticeDetail from "@/pages/notice/NoticeDetail";
 import NoticeWrite from "@/pages/notice/NoticeWrite";
 import NoticeModify from "@/pages/notice/NoticeModify";
+import NewsList from "@/pages/news/NewsList";
 
 Vue.use(Router);
 
@@ -168,6 +170,28 @@ export default new Router({
           path: "modify",
           name: "noticeModify",
           components: { default: NoticeModify },
+        },
+      ],
+    },
+    {
+      path: "/news",
+      name: "news",
+      components: {
+        default: AppNews,
+        newsList: NewsList,
+        header: MainNavbar,
+        footer: MainFooter,
+      },
+      props: {
+        header: { colorOnScroll: 100 },
+        footer: { backgroundColor: "black" },
+      },
+      redirect: "/news/list",
+      children: [
+        {
+          path: "/news/list",
+          name: "newsList",
+          components: { default: NewsList },
         },
       ],
     },
