@@ -5,6 +5,7 @@ import Landing from "@/pages/Landing";
 import Login from "@/pages/user/UserLogin";
 import UserModify from "@/pages/user/UserModify";
 import UserLikeApt from "@/pages/user/UserLikeApt";
+import UserFindPwd from "@/pages/user/UserFindPwd";
 import Profile from "@/pages/Profile";
 import AppUser from "@/views/AppUser";
 import AppBoard from "@/views/AppBoard";
@@ -89,6 +90,11 @@ export default new Router({
           path: "/regist",
           name: "regist",
           components: { default: UserRegist },
+        },
+        {
+          path: "/findpwd",
+          name: "findpwd",
+          components: { default: UserFindPwd },
         },
       ],
       props: {
