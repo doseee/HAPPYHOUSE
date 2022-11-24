@@ -1,19 +1,16 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Index from "@/pages/Index";
-import Landing from "@/pages/Landing";
 import Login from "@/pages/user/UserLogin";
 import UserModify from "@/pages/user/UserModify";
 import UserLikeApt from "@/pages/user/UserLikeApt";
 import UserFindPwd from "@/pages/user/UserFindPwd";
-import Profile from "@/pages/Profile";
 import AppUser from "@/views/AppUser";
 import AppBoard from "@/views/AppBoard";
 import AptPage from "@/pages/apt/AptPage";
 import AppNotice from "@/views/AppNotice";
 import AppNews from "@/views/AppNews";
 import MainNavbar from "@/layout/MainNavbar";
-import MainFooter from "@/layout/MainFooter";
 import UserPage from "@/pages/user/UserPage";
 import UserRegist from "@/pages/user/UserRegist";
 import BoardList from "@/pages/board/BoardList";
@@ -36,16 +33,7 @@ export default new Router({
     {
       path: "/",
       name: "index",
-      components: { default: Index, header: MainNavbar, footer: MainFooter },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" },
-      },
-    },
-    {
-      path: "/landing",
-      name: "landing",
-      components: { default: Landing, header: MainNavbar, footer: MainFooter },
+      components: { default: Index, header: MainNavbar },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" },
@@ -180,7 +168,6 @@ export default new Router({
         default: AppNews,
         newsList: NewsList,
         header: MainNavbar,
-        footer: MainFooter,
       },
       props: {
         header: { colorOnScroll: 100 },
@@ -194,15 +181,6 @@ export default new Router({
           components: { default: NewsList },
         },
       ],
-    },
-    {
-      path: "/profile",
-      name: "profile",
-      components: { default: Profile, header: MainNavbar, footer: MainFooter },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" },
-      },
     },
   ],
   scrollBehavior: (to) => {
