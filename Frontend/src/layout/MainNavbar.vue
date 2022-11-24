@@ -40,13 +40,10 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            href="https://www.creative-tim.com/product/vue-now-ui-kit"
-            target="_blank">
+          <router-link class="nav-link" to="/news/list">
             <i class="now-ui-icons files_paper"></i>
             <p>뉴스</p>
-          </a>
+          </router-link>
         </li>
         <!--로그인 O -->
         <li class="nav-item" v-if="userInfo">
