@@ -36,7 +36,7 @@
             <div>
               <div class="input-group no-border input-lg">
                 <input
-                  type="text"
+                  type="password"
                   id="userpwd"
                   required="required"
                   class="form-control"

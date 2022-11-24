@@ -2,10 +2,10 @@
   <div class="page-header clear-filter" filter-color="orange">
     <div class="content">
       <div class="row">
-        <div class="col-3">
+        <div class="col-3" style="margin-top: 50px">
           <user-func-list v-on:func-select="changeView"></user-func-list>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" style="margin-top: 70px">
           <user-info-view v-if="routeData == 'mypage'"> </user-info-view>
           <user-modify v-if="routeData == 'modify'" :propsData="userInfo">
           </user-modify>
