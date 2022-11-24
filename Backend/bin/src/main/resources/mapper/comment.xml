@@ -10,25 +10,26 @@
 		<result column="article_no" property="articleNo"/>
 		<result column="content" property="content"/>
 		<result column="register_time" property="registerTime"/>
+		<result column="user_name" property="userName"/>
 	</resultMap>
 	
 	<insert id="writeComment" parameterType="commentDto">
-		insert into comment (user_id, article_no, content, register_time)
-		values (#{userId}, #{articleNo}, #{content}, now())
+		insert into comment (user_id, article_no, content, register_time, user_name)
+		values (#{userId}, #{articleNo}, #{content}, now(), #{userName})
 		<selectKey resultType="int" keyProperty="commentNo" order="AFTER">
 			select last_insert_id()
 		</selectKey>
 	</insert>
 	
 	<select id="listComment" parameterType="map" resultMap="comment">
-		select c.comment_no, c.user_id, c.article_no, c.content, c.register_time
+		select c.comment_no, c.user_id, c.article_no, c.content, c.register_time, m.user_name
 		from comment c, users m 
 		where c.user_id = m.user_id
 		and c.article_no = #{articleNo}
 		order by c.comment_no desc
 	</select>
 	
-	<select id="getMyComment" parameterType="string" resultMap="comment">
+	<select id="getListCommentByUser" parameterType="string" resultMap="comment">
 		select *
 		from comment
 		where user_id = #{userId}
