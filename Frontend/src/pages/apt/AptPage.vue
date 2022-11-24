@@ -25,7 +25,6 @@
         id="modal-lg"
         size="lg"
         v-model="modalShow"
-        title="아파트 상세 조회"
         ok-variant="default"
         ok-title="닫기"
         ok-only>

@@ -35,9 +35,10 @@
         </b-row>
       </b-list-group-item>
     </b-list-group>
-    <h4 class="my-3">거래 목록</h4>
+    &nbsp;
+    <h4 class="my-3">모든 거래 정보</h4>
     <b-table-simple sticky-header class="deallist" style="max-height: 300px">
-      <b-thead head-variant="dark">
+      <b-thead head-variant="light">
         <b-tr>
           <b-th v-for="(field, i) in fields" :key="i" sortable>
             {{ field }}
