@@ -55,16 +55,25 @@
             <i class="now-ui-icons arrows-1_minimal-down"></i>
           </v-list-item-title>
         </template>
-
-        <v-list-item style="margin-left: 140px; color: white">
-          <v-list-item-title
-            v-text="`내가 쓴 글`"
-            class="mypage-aside"></v-list-item-title>
+        <v-list-item style="color: white">
+          <v-list-item-title class="mypage-aside">
+            <button
+              @click="myBoard"
+              class="nav-link"
+              style="border: none; margin-left: 168px; color: white">
+              내가 쓴 글
+            </button>
+          </v-list-item-title>
         </v-list-item>
-        <v-list-item style="margin-left: 120px; color: white">
-          <v-list-item-title
-            v-text="`내가 쓴 댓글`"
-            class="mypage-aside"></v-list-item-title>
+        <v-list-item style="color: white">
+          <v-list-item-title class="mypage-aside">
+            <button
+              @click="myComment"
+              class="nav-link"
+              style="border: none; margin-left: 150px; color: white">
+              내가 쓴 댓글
+            </button>
+          </v-list-item-title>
         </v-list-item>
       </v-list-group>
       <v-list-group :value="true" no-action sub-group>
@@ -136,6 +145,12 @@ export default {
     },
     likeapt() {
       this.$emit("func-select", "likeapt");
+    },
+    myBoard() {
+      this.$emit("func-select", "myboard");
+    },
+    myComment() {
+      this.$emit("func-select", "mycomment");
     },
     async remove() {
       await this.userRemove(this.userInfo.userId);

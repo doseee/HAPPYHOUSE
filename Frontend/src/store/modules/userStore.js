@@ -9,6 +9,8 @@ import {
   remove,
   join,
   selectLikeDong,
+  selectComment,
+  selectBoard,
 } from "@/api/user";
 
 const userStore = {
@@ -19,6 +21,8 @@ const userStore = {
     userInfo: null,
     isValidToken: false,
     likeList: [],
+    commentList: [],
+    boardList: [],
   },
   getters: {
     checkUserInfo: function (state) {
@@ -44,6 +48,12 @@ const userStore = {
     },
     SET_LIKE_LIST: (state, likeList) => {
       state.likeList = likeList;
+    },
+    SET_COMMENT_LIST: (state, commentList) => {
+      state.commentList = commentList;
+    },
+    SET_BOARD_LIST: (state, boardList) => {
+      state.boardList = boardList;
     },
   },
   actions: {
@@ -179,6 +189,27 @@ const userStore = {
         },
         ({ data }) => {
           commit("SET_LIKE_LIST", data);
+        },
+      );
+    },
+    setCommentList: ({ commit }, userId) => {
+      selectComment(
+        {
+          userId: userId,
+        },
+        ({ data }) => {
+          commit("SET_COMMENT_LIST", data);
+        },
+      );
+    },
+    setBoardList: ({ commit }, userId) => {
+      selectBoard(
+        {
+          userId: userId,
+        },
+        ({ data }) => {
+          console.log(data);
+          commit("SET_BOARD_LIST", data);
         },
       );
     },

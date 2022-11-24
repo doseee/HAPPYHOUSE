@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.ssafy.happyhouse.apt.model.SidoGugunCodeDto;
+import com.ssafy.happyhouse.board.model.BoardDto;
+import com.ssafy.happyhouse.board.model.CommentDto;
 import com.ssafy.happyhouse.user.model.UserDto;
 
 public interface UserService {
@@ -33,5 +35,8 @@ public interface UserService {
 	// 관심지역 조회
 	List<SidoGugunCodeDto> listLikeDong(String userid) throws Exception;
 	boolean deleteLikeDong(Map<String, String> map) throws Exception;
+	
+	List<BoardDto> getMyArticle(String userId) throws Exception;
+	List<CommentDto> getMyComment(String userId) throws Exception;
 
 }

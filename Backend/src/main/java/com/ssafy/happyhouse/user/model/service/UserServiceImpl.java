@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.apt.model.SidoGugunCodeDto;
+import com.ssafy.happyhouse.board.model.BoardDto;
+import com.ssafy.happyhouse.board.model.CommentDto;
+import com.ssafy.happyhouse.board.model.mapper.BoardMapper;
+import com.ssafy.happyhouse.board.model.mapper.CommentMapper;
 import com.ssafy.happyhouse.user.model.UserDto;
 import com.ssafy.happyhouse.user.model.mapper.UserMapper;
 
@@ -16,6 +20,12 @@ import com.ssafy.happyhouse.user.model.mapper.UserMapper;
 public class UserServiceImpl implements UserService {
 	
 	private UserMapper userMapper;
+	
+	@Autowired
+	private BoardMapper boardMapper;
+	
+	@Autowired
+	private CommentMapper commentMapper;
 	
 	@Autowired
 	public UserServiceImpl(UserMapper userMapper) {
@@ -119,5 +129,17 @@ public class UserServiceImpl implements UserService {
 	public void modifyPwd(Map<String, String>map) throws Exception {
 		// TODO Auto-generated method stub
 		userMapper.modifyPwd(map);
+	}
+
+	@Override
+	public List<BoardDto> getMyArticle(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return boardMapper.getMyArticle(userId);
+	}
+
+	@Override
+	public List<CommentDto> getMyComment(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return commentMapper.getMyComment(userId);
 	}				
 }

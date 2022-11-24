@@ -2,7 +2,7 @@
   <div class="page-header clear-filter" filter-color="orange">
     <div class="content">
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-3">
           <user-func-list v-on:func-select="changeView"></user-func-list>
         </div>
         <div class="col-lg-6">
@@ -16,6 +16,12 @@
             v-if="routeData == 'pwdchange'"
             :propsData="userInfo"
             v-on:gotomypage="changeView"></user-pwd-change>
+          <user-board
+            v-if="routeData == 'myboard'"
+            :propsData="userInfo"></user-board>
+          <user-comment
+            v-if="routeData == 'mycomment'"
+            :propsData="userInfo"></user-comment>
         </div>
       </div>
     </div>
@@ -29,7 +35,8 @@ import UserLikeApt from "@/pages/user/UserLikeApt";
 import UserFuncList from "@/pages/user/UserFuncList";
 import { mapState, mapActions } from "vuex";
 import UserPwdChange from "@/pages/user/UserPwdChange";
-
+import UserComment from "@/pages/user/UserComment";
+import UserBoard from "@/pages/user/UserBoard";
 const userStore = "userStore";
 export default {
   name: "UserPage",
@@ -51,13 +58,24 @@ export default {
     UserLikeApt,
     UserFuncList,
     UserPwdChange,
+    UserBoard,
+    UserComment,
   },
   methods: {
-    ...mapActions(userStore, ["userRemove", "setLikeList"]),
+    ...mapActions(userStore, [
+      "userRemove",
+      "setLikeList",
+      "setBoardList",
+      "setCommentList",
+    ]),
     changeView(data) {
       this.routeData = data;
       if (this.routeData === "likeapt") {
         this.setLikeList(this.userInfo.userId);
+      } else if (this.routeData === "myboard") {
+        this.setBoardList(this.userInfo.userId);
+      } else if (this.routeData === "mycomment") {
+        this.setCommentList(this.userInfo.userId);
       }
     },
   },

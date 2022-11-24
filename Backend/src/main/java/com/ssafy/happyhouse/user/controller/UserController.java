@@ -24,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.apt.model.SidoGugunCodeDto;
+import com.ssafy.happyhouse.board.model.BoardDto;
+import com.ssafy.happyhouse.board.model.CommentDto;
+import com.ssafy.happyhouse.notice.model.NoticeDto;
 import com.ssafy.happyhouse.user.model.UserDto;
 import com.ssafy.happyhouse.user.model.service.JwtServiceImpl;
 import com.ssafy.happyhouse.user.model.service.UserService;
@@ -285,5 +288,38 @@ public class UserController {
 		public ResponseEntity<List<SidoGugunCodeDto>> mylike(@RequestParam String userId) throws Exception{
 			logger.debug("userId : {}", userId);
 			return new ResponseEntity<List<SidoGugunCodeDto>>(userService.listLikeDong(userId), HttpStatus.OK); 
+		}
+		
+		@GetMapping("/user-board")
+		public ResponseEntity<?> getMyNotice(@RequestParam("userId") String userId) {
+			Map<String, Object> resultMap = new HashMap<>();
+			HttpStatus status = HttpStatus.ACCEPTED;
+			try {
+//				로그인 사용자 정보.
+				return new ResponseEntity<List<BoardDto>>(userService.getMyArticle(userId), HttpStatus.OK); 
+			} catch (Exception e) {
+				logger.error("내 글 가져오기 실패 : {}", e);
+				resultMap.put("message", e.getMessage());
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+			
+			return new ResponseEntity<Map<String, Object>>(resultMap, status);
+		}
+		
+		@GetMapping("/user-comment")
+		public ResponseEntity<?> getMyComment(@RequestParam("userId") String userId) {
+			Map<String, Object> resultMap = new HashMap<>();
+			HttpStatus status = HttpStatus.ACCEPTED;
+			
+			try {
+//				로그인 사용자 정보.
+				return new ResponseEntity<List<CommentDto>>(userService.getMyComment(userId), HttpStatus.OK); 
+			} catch (Exception e) {
+				logger.error("내 댓글 가져오기 실패 : {}", e);
+				resultMap.put("message", e.getMessage());
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+			
+			return new ResponseEntity<Map<String, Object>>(resultMap, status);
 		}
 }

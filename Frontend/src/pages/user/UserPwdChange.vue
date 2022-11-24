@@ -1,7 +1,7 @@
 <template>
   <div class="container clear-filter">
     <div class="row">
-      <div class="col-1"></div>
+      <div class="col-2"></div>
       <div class="col-8">
         <card type="login" plain>
           <h3 style="color: black">비밀번호 수정</h3>
