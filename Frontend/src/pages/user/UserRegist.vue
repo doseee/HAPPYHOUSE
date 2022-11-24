@@ -2,14 +2,15 @@
   <div class="page-header clear-filter" filter-color="orange">
     <div
       class="page-header-image"
-      style="background-image: url('img/login.jpg')"></div>
+      style="background-image: url('img/city.jpg')"></div>
     <div class="container">
+      <div class="col-md-5" style="height: 60px"></div>
       <div class="col-md-5 ml-auto mr-auto">
-        <card type="regist" plain>
+        <card type="login" plain>
           <p>회원가입</p>
 
           <form v-on:submit.prevent>
-            <div>
+            <div class="input-group-prepend">
               <div class="input-group no-border input-lg">
                 <input
                   type="text"
@@ -24,7 +25,7 @@
                   placeholder="아이디"
                   v-model="user.userId" />
                 <button
-                  class="btn-round btn-warning"
+                  class="btn-round btn-primary"
                   type="button"
                   @click="idValidCheck()">
                   중복검사
@@ -107,21 +108,11 @@
               </div>
             </div>
             <button
-              class="btn btn-warning btn-round btn-lg btn-block"
+              class="btn btn-primary btn-round btn-lg btn-block"
               @click="register">
               회원가입
             </button>
           </form>
-          <div class="card-footer text-center">
-            <a href="#pablo" class="btn btn-warning btn-round btn-lg btn-block"
-              >카카오로 회원가입</a
-            >
-          </div>
-          <div class="card-footer text-center">
-            <a href="#pablo" class="btn btn-warning btn-round btn-lg btn-block"
-              >네이버로 회원가입</a
-            >
-          </div>
         </card>
       </div>
     </div>
@@ -150,7 +141,7 @@ const userStore = "userStore";
 
 export default {
   name: "UserRegister",
-  bodyClass: "UserRegister",
+  bodyClass: "login-page",
   data() {
     return {
       user: {

@@ -2,8 +2,9 @@
   <div class="page-header clear-filter" filter-color="orange">
     <div
       class="page-header-image"
-      style="background-image: url('img/login.jpg')"></div>
+      style="background-image: url('img/city.jpg')"></div>
     <div class="container">
+      <div class="col-md-5" style="height: 100px"></div>
       <div class="col-md-5 ml-auto mr-auto">
         <card type="login" plain>
           <p style="margin-bottom: 30px">HAPPY HOUSE</p>
@@ -38,16 +39,6 @@
               class="btn btn-primary btn-round btn-lg btn-block"
               @click="confirm">
               로그인
-            </button>
-          </div>
-          <div class="card-footer text-center">
-            <button class="btn btn-primary btn-round btn-lg btn-block">
-              카카오 로그인
-            </button>
-          </div>
-          <div class="card-footer text-center">
-            <button class="btn btn-primary btn-round btn-lg btn-block">
-              네이버 로그인
             </button>
           </div>
           <template slot="raw-content">

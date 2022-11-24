@@ -2,8 +2,9 @@
   <div class="page-header clear-filter" filter-color="orange">
     <div
       class="page-header-image"
-      style="background-image: url('img/login.jpg')"></div>
+      style="background-image: url('img/city.jpg')"></div>
     <div class="container">
+      <div class="col-md-5" style="height: 100px"></div>
       <div class="col-md-5 ml-auto mr-auto">
         <card type="login" plain>
           <p style="margin-bottom: 30px">비밀번호 찾기</p>
