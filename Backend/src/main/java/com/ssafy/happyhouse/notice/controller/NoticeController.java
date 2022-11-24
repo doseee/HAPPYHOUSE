@@ -66,6 +66,23 @@ public class NoticeController {
 		}
 	}
 
+	@GetMapping("/nav-notice")
+	public ResponseEntity<?> getNavNotice() throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<String> list = noticeService.getNavNotice();
+			if(list != null && !list.isEmpty()) {
+				map.put("data", list);
+				map.put("result", "success");
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
+		} catch (SQLException e) {
+			return exceptionHandling(e);
+		}
+	}
+	
 	@GetMapping("/view")
 	public ResponseEntity<?> view(@RequestParam("articleNo") int articleNo)
 			throws Exception {

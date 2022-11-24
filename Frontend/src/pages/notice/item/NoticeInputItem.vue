@@ -51,9 +51,15 @@
 
 <script>
 import { FormGroupInput } from "@/components";
-import { writeArticle, modifyArticle, getArticle } from "@/api/notice";
-import { mapState } from "vuex";
+import {
+  writeArticle,
+  modifyArticle,
+  getArticle,
+  getNavNotice,
+} from "@/api/notice";
+import { mapState, mapActions } from "vuex";
 const userStore = "userStore";
+const noticeStore = "noticeStore";
 export default {
   name: "NoticeInputItem",
   components: {
@@ -85,6 +91,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(noticeStore, ["setNavNotices"]),
     onSubmit(event) {
       event.preventDefault();
       let err = true;
@@ -122,6 +129,13 @@ export default {
         let msg = "등록 처리시 문제가 발생했습니다.";
         if (res.data.data === "success") {
           msg = "등록이 완료되었습니다.";
+          getNavNotice((res) => {
+            if (res.data.result == "success") {
+              this.setNavNotices(res.data.data);
+            } else {
+              alert("게시글 가져오기에 실패하였습니다.");
+            }
+          });
         }
         alert(msg);
         this.moveList();
@@ -137,6 +151,13 @@ export default {
         let msg = "수정 처리시 문제가 발생했습니다.";
         if (res.data.data === "success") {
           msg = "수정이 완료되었습니다.";
+          getNavNotice((res) => {
+            if (res.data.result == "success") {
+              this.setNavNotices(res.data.data);
+            } else {
+              alert("게시글 가져오기에 실패하였습니다.");
+            }
+          });
         }
         alert(msg);
         // 현재 route를 /list로 변경.

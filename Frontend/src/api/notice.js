@@ -59,6 +59,16 @@ function getArticleById(userId, success) {
     });
 }
 
+function getNavNotice(success) {
+  api
+    .get(`/notice/nav-notice`)
+    .then(success)
+    .catch((err) => {
+      alert("문제가 발생했습니다.");
+      console.log(err);
+    });
+}
+
 function getArticleBySubject(subject, success) {
   api
     .get(`/notice/searchTitle?subject=${subject}`)
@@ -77,4 +87,5 @@ export {
   deleteArticle,
   getArticleById,
   getArticleBySubject,
+  getNavNotice,
 };

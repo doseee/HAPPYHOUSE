@@ -11,8 +11,8 @@
 
     <template slot="navbar-notice">
       <textra
-        style="width: 530px; padding-top: 3px; padding-left: 25px"
-        :data="words"
+        style="width: 510px; padding-top: 3px; padding-left: 25px"
+        :data="navNotices"
         :infinite="true"
         :timer="2"
         filter="bottom-top" />
@@ -30,7 +30,7 @@
             <!--i class="now-ui-icons files_paper"></-i-->
             <!--img class="now-ui-icons" src="img/qna.png" width="16px" /-->
             <i class="now-ui-icons ui-2_chat-round"></i>
-            <p>Q&amp;A</p>
+            <p>COMMUNITY</p>
           </router-link>
         </li>
         <li class="nav-item">
@@ -81,21 +81,32 @@
 import { DropDown, Navbar, NavLink } from "@/components";
 import { Popover } from "element-ui";
 import { mapState, mapGetters, mapActions } from "vuex";
-
+import { getNavNotice } from "@/api/notice.js";
 const userStore = "userStore";
-
+const noticeStore = "noticeStore";
 export default {
   name: "main-navbar",
   props: {
     transparent: Boolean,
     colorOnScroll: Number,
   },
+  beforeCreate() {
+    getNavNotice((res) => {
+      if (res.data.result == "success") {
+        this.setNavNotices(res.data.data);
+      } else {
+        alert("게시글 가져오기에 실패하였습니다.");
+      }
+    });
+  },
   computed: {
     ...mapState(userStore, ["isLogin", "userInfo"]),
+    ...mapState(noticeStore, ["navNotices"]),
     ...mapGetters(["checkUserInfo"]),
   },
   methods: {
     ...mapActions(userStore, ["userLogout"]),
+    ...mapActions(noticeStore, ["setNavNotices"]),
     // ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
     onClickLogout() {
       // this.SET_IS_LOGIN(false);
@@ -113,15 +124,7 @@ export default {
     },
   },
   data() {
-    return {
-      words: [
-        "주기적으로 비밀번호를 변경해주세요",
-        "2022.1.1 부동산 법 개정",
-        "공지사항3",
-        "공지사항4",
-        "공지사항5",
-      ],
-    };
+    return {};
   },
   components: {
     DropDown,

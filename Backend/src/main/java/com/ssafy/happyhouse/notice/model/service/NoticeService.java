@@ -12,4 +12,5 @@ public interface NoticeService {
 	void modifyNotice(NoticeDto noticeDto) throws Exception;
 	void deleteNotice(int articleNo) throws Exception;
 	List<NoticeDto> searchByTitle(String subject) throws Exception;
+	List<String> getNavNotice() throws Exception;
 }

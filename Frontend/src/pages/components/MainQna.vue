@@ -7,22 +7,10 @@
       <div class="row justify-content-center">
         <div class="col-12">
           <el-carousel>
-            <el-carousel-item>
-              <img class="d-block" src="img/bg1.jpg" alt="First slide" />
+            <el-carousel-item v-for="(article, i) in bestArticles" :key="i">
+              <img class="d-block" src="img/navimg.png" alt="First slide" />
               <div class="carousel-caption d-none d-md-block">
-                <h5>Nature, United States</h5>
-              </div>
-            </el-carousel-item>
-            <el-carousel-item>
-              <img class="d-block" src="img/bg3.jpg" alt="Second slide" />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Somewhere Beyond, United States</h5>
-              </div>
-            </el-carousel-item>
-            <el-carousel-item>
-              <img class="d-block" src="img/bg4.jpg" alt="Third slide" />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Yellowstone National Park, United States</h5>
+                <h5>{{ article.content }}</h5>
               </div>
             </el-carousel-item>
           </el-carousel>
@@ -33,11 +21,25 @@
 </template>
 <script>
 import { Carousel, CarouselItem } from "element-ui";
-
+import { getBestArticle } from "@/api/board.js";
 export default {
+  data() {
+    return {
+      bestArticles: [],
+    };
+  },
   components: {
     [Carousel.name]: Carousel,
     [CarouselItem.name]: CarouselItem,
+  },
+  beforeCreate() {
+    getBestArticle((res) => {
+      if (res.data.result == "success") {
+        this.bestArticles = res.data.data;
+      } else {
+        alert("게시글 가져오기에 실패하였습니다.");
+      }
+    });
   },
 };
 </script>

@@ -56,4 +56,10 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<NoticeDto> searchByTitle(String subject) throws Exception {
 		return noticeMapper.searchByTitle(subject);
 	}
+
+	@Override
+	public List<String> getNavNotice() throws Exception {
+		// TODO Auto-generated method stub
+		return noticeMapper.getNavNotice();
+	}
 }

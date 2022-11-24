@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import { getArticle, deleteArticle } from "@/api/notice.js";
-import { mapState } from "vuex";
-
+import { getArticle, deleteArticle, getNavNotice } from "@/api/notice.js";
+import { mapState, mapActions } from "vuex";
 const userStore = "userStore";
+const noticeStore = "noticeStore";
 export default {
   name: "NoticeDetail",
   data() {
@@ -66,6 +66,7 @@ export default {
     });
   },
   methods: {
+    ...mapActions(noticeStore, ["setNavNotices"]),
     listArticle() {
       this.$router.push({ name: "noticeList" });
     },
@@ -93,6 +94,13 @@ export default {
             let msg = "문제가 발생했습니다.";
             if (res.data.data == "success") {
               msg = "글이 삭제되었습니다.";
+              getNavNotice((res) => {
+                if (res.data.result == "success") {
+                  this.setNavNotices(res.data.data);
+                } else {
+                  alert("게시글 삭제에 실패하였습니다.");
+                }
+              });
             }
             alert(msg);
             this.$router.push({ name: "noticeList" });

@@ -12,13 +12,6 @@
 		<result column="register_time" property="registerTime"/>
 	</resultMap>
 	
-	<select id="listNotice" resultMap="notice">
-		select article_no, subject, content, hit, register_time
-		from notice
-		order by article_no desc
-	</select>
-	
-	
 	<insert id="writeNotice" parameterType="noticeDto">
 		insert into notice (subject, content, hit, register_time)
 		values (#{subject}, #{content}, 0, now())
@@ -26,16 +19,38 @@
 			select last_insert_id()
 		</selectKey>
 	</insert>
+
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="key == 'subject'">
+				and subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key != 'subject'">
+				and ${key} = #{word}
+			</if>
+		</if>
+	</sql>
+
+	<select id="listNotice" parameterType="map" resultMap="notice">
+		select article_no, subject, content, hit, register_time
+		from notice
+		<include refid="search"></include>
+		order by article_no desc
+		limit #{start}, #{listsize}
+	</select>
+	
+	<select id="getTotalNoticeCount" parameterType="map" resultType="int">
+		select count(article_no)
+		from notice
+		<where>
+			<include refid="search"></include>
+		</where>
+	</select>
 	
 	<select id="getNotice" parameterType="int" resultMap="notice">
 		select article_no, subject, content, hit, register_time
 		from notice
 		where article_no = #{articleNo}
-	</select>
-	
-	<select id="getNavNotice" resultType="string">
-		select subject
-		from notice
 	</select>
 	
 	<update id="updateHit" parameterType="int">
@@ -54,10 +69,5 @@
 		delete from notice
 		where article_no = #{articleNo}
 	</delete>
-	
-	<select id="searchByTitle" parameterType="string" resultMap="notice">
-		select *
-		from notice
-		where subject like concat('%', #{subject}, '%')
-	</select>
+
 </mapper>
