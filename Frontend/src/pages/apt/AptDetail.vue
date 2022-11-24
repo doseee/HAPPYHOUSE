@@ -4,7 +4,11 @@
       <div>
         <h3>{{ this.house.apartmentName }}</h3>
       </div>
-      <b-button type="button" variant="warning" @click="linkMap" class="wd"
+      <b-button
+        type="button"
+        style="background: rgba(201, 138, 195, 0.6); color: white"
+        @click="linkMap"
+        class="wd"
         >자세히보기</b-button
       >
     </div>

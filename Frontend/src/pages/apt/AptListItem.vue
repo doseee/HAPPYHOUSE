@@ -12,7 +12,7 @@
       class="d-flex"
       style="color: black; font-size: 14px; font-weigth: bold">
       <p>{{ houseItem.apartmentName }} | &nbsp;</p>
-      <p style="color: blue">
+      <p style="color: #6a84b7">
         평균 {{ houseItem.avgPrice | price | toprice }}만원
       </p>
     </b-row>
