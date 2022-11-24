@@ -1,92 +1,115 @@
-# HappyHouse
+# 🏠 HAPPY HOUSE
 
-3조 나유현 최은녕
+부동산 커뮤니티 HAPPY HOUSE 입니다.
 
-## Getting started
+# 🔔 개요
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+SSAFY 8기 1학기기 FINAL PROJECT<br>
+부동산 검색과 뉴스, 커뮤니티 제공하는 서비스입니다.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
+# 🗓 프로젝트 일정
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+![image](https://user-images.githubusercontent.com/41516670/203812382-39a6f352-0379-4b67-a1b6-d31793bce1bc.png)
 
-```
-cd existing_repo
-git remote add origin https://lab.ssafy.com/s08/a18/project/finalproject/s3/happyhouse.git
-git branch -M master
-git push -uf origin master
-```
 
-## Integrate with your tools
+# 📑 화면 흐름도
 
-- [ ] [Set up project integrations](https://lab.ssafy.com/s08/a18/project/finalproject/s3/happyhouse/-/settings/integrations)
+![image](https://user-images.githubusercontent.com/41516670/203816809-439f229f-8612-4f42-809b-ee0b4c11fb8e.png)
 
-## Collaborate with your team
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-## Test and Deploy
+# 🖥 메인화면
 
-Use the built-in continuous integration in GitLab.
+![image](https://user-images.githubusercontent.com/41516670/203811514-850d91f2-06d1-4e83-83c8-3fd4482f1afd.PNG)
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+* 공지사항 배너가 실시간으로 반영됩니다.
+* 인기 게시물물 Top 3가가 실시간으로 반영됩니다. (조회수 기준)
+* 부동산 뉴스가 제공됩니다.
 
-***
 
-# Editing this README
+# 🖥 공지사항
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+![image](https://user-images.githubusercontent.com/41516670/203817216-28eaa378-261c-4a7f-83cc-598a7b6a069a.PNG)
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+* 관리자만 글작성이 가능합니다.
+* 글번호, 제목으로 검색이 가능합니다.
 
-## Name
-Choose a self-explaining name for your project.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+# 🖥 COMMUNITY
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+![image](https://user-images.githubusercontent.com/41516670/203818149-8f9a3905-6039-4610-aa1c-0874ee18540b.PNG)
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+* 글번호, 제목, 아이디로 검색이 가능합니다.
+* 페이지네이션이 적용되어 있습니다.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+![image](https://user-images.githubusercontent.com/41516670/203818799-a3cc86b5-3a0c-45f0-aab7-7ec2c1f3ab06.PNG)
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+* 글 작성이 가능합니다.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+![image](https://user-images.githubusercontent.com/41516670/203818807-651a55de-1929-4173-b780-3a2fe28c4ef3.PNG)
+![image](https://user-images.githubusercontent.com/41516670/203818816-6cee77a5-010a-4331-9a30-e347b0eee0af.PNG)
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+* 작성자는는 수정, 삭제가 가능하며며 댓글도 작성 가능합니다.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
 
-## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+# 🖥 거래조회
+
+![image](https://user-images.githubusercontent.com/41516670/203819485-5418c608-1ffc-4808-b7a5-9a9c828378b1.PNG)
+
+* 시, 구, 동을 입력해 주택 목록 조회가능합니다.
+* 관심지역 설정이 가능합니다.
+
+![image](https://user-images.githubusercontent.com/41516670/203819502-12209780-2f48-4944-8465-9a5d7e986bdf.PNG)
+
+* 인근 편의시설 조회가 가능합니다.
+
+![image](https://user-images.githubusercontent.com/41516670/203819511-e73ca4fd-ec19-4988-a27f-f501c16cbbd4.PNG)
+
+* 필터링을 통해 주택 목록 조회가 가능합니다.
+
+![image](https://user-images.githubusercontent.com/41516670/203819499-f9189077-5004-4ebd-9984-3cc098d4f635.PNG)
+
+* 주택 상세정보 조회가 가능합니다.
+
+
+# 🖥 뉴스
+
+![image](https://user-images.githubusercontent.com/41516670/203820908-22ba8c76-cd98-44ff-a7c7-41a30366c43e.PNG)
+
+* 부동산 관련 최신 뉴스를 제공합니다.
+
+
+# 🖥 마이페이지
+
+![image](https://user-images.githubusercontent.com/41516670/203821114-be8571f9-bd96-4317-bee0-e88a2764e8c5.PNG)
+![image](https://user-images.githubusercontent.com/41516670/203821117-3fadf38f-68e0-4887-ba89-bad049f039ee.PNG)
+![image](https://user-images.githubusercontent.com/41516670/203821120-db32032a-caa6-4b92-b89c-4bc52a4646ae.PNG)
+![image](https://user-images.githubusercontent.com/41516670/203821679-9ce59355-c566-490e-a6d9-d23f3842357c.PNG)
+
+
+* 회원정보 수정,삭제,조회가 가능합니다.
+
+
+![image](https://user-images.githubusercontent.com/41516670/203821108-22457d83-03a9-4f2d-bf04-afa7d147bd29.PNG)
+![image](https://user-images.githubusercontent.com/41516670/203821105-1bc33c87-edd7-4d96-a2c4-3842da518fca.PNG)
+
+* 내가 쓴 글, 댓글을 조회하고 삭제할 수 있습니다.
+
+
+![image](https://user-images.githubusercontent.com/41516670/203821099-8c743b04-cfd6-43e8-91e7-79b589872bf4.PNG)
+
+* 나의 관심지역을 확인할 수 있습니다.
+
+# 🤖 챗봇
+
+![image](https://user-images.githubusercontent.com/41516670/203821820-602f07d1-d328-4a18-835e-0af3c57fdf58.PNG)
+![image](https://user-images.githubusercontent.com/41516670/203821847-20411369-ee39-4056-8f84-cbd05ace29f5.PNG)
+
+* 챗봇을 통해 관리자와 문의사항을 주고받을 수 있습니다.
+
+
