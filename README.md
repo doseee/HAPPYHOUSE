@@ -13,6 +13,13 @@ SSAFY 8기 1학기기 FINAL PROJECT<br>
 ![image](https://user-images.githubusercontent.com/41516670/203812382-39a6f352-0379-4b67-a1b6-d31793bce1bc.png)
 
 
+# 📑 ERD
+
+![image](https://user-images.githubusercontent.com/41516670/203824343-c0f08e23-172d-4b2d-b54d-7eb60e727ec2.png)
+
+
+
+
 # 📑 화면 흐름도
 
 ![image](https://user-images.githubusercontent.com/41516670/203816809-439f229f-8612-4f42-809b-ee0b4c11fb8e.png)
