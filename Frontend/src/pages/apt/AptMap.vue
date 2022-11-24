@@ -3,7 +3,7 @@
   <div class="content">
     <b-row>
       <b-col>
-        <b-list-group horizontal id="category">
+        <b-list-group horizontal>
           <b-list-group-item
             class="category"
             :class="{ selected: martSelected }"
@@ -31,11 +31,12 @@
             지하철
           </b-list-group-item>
           <b-button
+            class="category1"
             id="popover-button-event"
             ref="button"
             variant="warning"
-            style="margin-left: 400px">
-            <b-icon icon="sliders" v-b-tooltip.hover.topright="'필터'"></b-icon>
+            style="margin-left: 365px">
+            <i class="input-group-text now-ui-icons design_bullet-list-67"></i>
           </b-button>
         </b-list-group>
         <b-popover
@@ -393,6 +394,14 @@ export default {
 </script>
 <style>
 .category {
+  margin-top: 20px;
+  height: 40px;
+  color: black !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.category1 {
+  margin-bottom: 0px;
   height: 40px;
   color: black !important;
   display: flex !important;

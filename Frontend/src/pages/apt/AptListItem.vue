@@ -76,6 +76,7 @@ export default {
         this.isSelected = true;
       }
       this.detailHouse(this.houseItem);
+      this.$emit("show-modal");
     },
     colorChange(flag) {
       this.isColor = flag;

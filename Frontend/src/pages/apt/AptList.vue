@@ -1,12 +1,16 @@
 <template>
   <b-container
     class="row align-items-end"
-    style="padding-top: 20px; padding-bottom: 0px; margin-left: 10px">
-    <div v-if="houses && houses.length != 0" class="bv-example-row wd">
+    style="padding-top: 30px; padding-bottom: 0px; margin-left: 10px">
+    <div
+      v-if="houses && houses.length != 0"
+      class="bv-example-row wd"
+      style="padding-top: 30px">
       <b-row></b-row>
-      <b-list-group class="con con1" style="padding-top: 10px">
+      <b-list-group class="con" style="padding-top: 10px; max-height: 400px">
         <apt-list-item
           v-for="(house, index) in housesfilter"
+          v-on:show-modal="showModal"
           :key="index"
           :houseItem="house" />
       </b-list-group>
@@ -63,6 +67,9 @@ export default {
       "clearHousesFilter",
       "setHousesFilter",
     ]),
+    showModal() {
+      this.$emit("show-modal");
+    },
     onClose() {
       this.popoverShow = false;
     },
@@ -91,10 +98,9 @@ export default {
 </script>
 
 <style>
-.con1 {
+.con2 {
   position: relative;
   overflow-y: auto;
-  max-height: 380px;
 }
 .con::-webkit-scrollbar {
   width: 10px;

@@ -32,7 +32,7 @@
       </b-list-group-item>
     </b-list-group>
     <h4 class="my-3">거래 목록</h4>
-    <b-table-simple sticky-header class="deal-list">
+    <b-table-simple sticky-header class="deallist" style="max-height: 300px">
       <b-thead head-variant="dark">
         <b-tr>
           <b-th v-for="(field, i) in fields" :key="i" sortable>
@@ -115,18 +115,19 @@ export default {
 .title {
   font-weight: bold;
 }
-.deal-list::-webkit-scrollbar {
+.deallist {
+  position: relative;
+  overflow-y: auto;
+}
+.deallist::-webkit-scrollbar {
   width: 15px;
 }
-.deal-list::-webkit-scrollbar-thumb {
+.deallist::-webkit-scrollbar-thumb {
   background-color: #181817;
   border-radius: 10px;
 }
-.deal-list::-webkit-scrollbar-track {
+.deallist::-webkit-scrollbar-track {
   border-radius: 10px;
-}
-.b-table-sticky-header {
-  max-height: 300px !important;
 }
 .center {
   text-align: center;

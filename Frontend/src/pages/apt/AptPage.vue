@@ -13,7 +13,7 @@
         <div class="row">
           <b-row class="mb-5">
             <b-col cols="4" class="p-0" style="margin-top: 20px">
-              <apt-list> </apt-list>
+              <apt-list v-on:show-modal="showModal"> </apt-list>
             </b-col>
             <b-col class="p-0">
               <apt-map v-on:show-modal="showModal"></apt-map>
