@@ -3,25 +3,28 @@
     <b-container class="bv-example-row md-3">
       <b-row class="mb-1">
         <b-col class="text-left">
-          <button class="btn btn-round btn-warning" @click="listArticle">
+          <b-button
+            style="background: rgba(201, 138, 195, 0.6)"
+            class="btn btn-round"
+            @click="listArticle">
             목록
-          </button>
+          </b-button>
         </b-col>
         <b-col v-if="userInfo && userInfo.userId == `admin`" class="text-right">
-          <button
+          <b-button
             type="button"
-            class="btn btn-round btn-warning float-right"
-            variant="success"
+            style="background: rgba(201, 138, 195, 0.6)"
+            class="btn btn-round float-right"
             @click="moveModifyArticle">
             글수정
-          </button>
-          <button
+          </b-button>
+          <b-button
             type="button"
-            class="btn btn-round btn-danger float-right"
-            variant="danger"
+            style="color: rgba(201, 138, 195, 0.6)"
+            class="btn btn-round btn-neutral"
             @click="deleteArticleCheck">
             글삭제
-          </button>
+          </b-button>
         </b-col>
       </b-row>
       <b-row class="mb-1">
