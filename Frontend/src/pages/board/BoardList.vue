@@ -4,11 +4,10 @@
       <div class="container">
         <div class="col-md-10 ml-auto mr-auto">
           <card type="list" plain>
-            <p>Q&A</p>
             <b-container>
               <b-row>
                 <b-col>
-                  <h3>List</h3>
+                  <h3>COMMUNITY</h3>
                 </b-col>
               </b-row>
               <b-row class="mb-1">
