@@ -1,25 +1,28 @@
 <template>
-  <b-row class="my-3">
-    <b-col sm="2">
-      <label for="textarea-no-auto-shrink"
-        ><strong>{{ userId }}</strong
-        ><br />
-        {{ registerTime | dateFormat }}
-      </label>
-    </b-col>
-    <b-col sm="10" class="d-flex bor">
-      <span id="textarea-no-auto-shrink" rows="3" max-rows="8">{{
-        content
-      }}</span>
-      <b-col class="text-right">
-        <button
-          v-if="userInfo && userInfo.userId == userId"
-          @click="checkDelete">
-          삭제
-        </button>
+  <div>
+    <b-row class="my-3">
+      <b-col sm="1">
+        <label for="textarea-no-auto-shrink"
+          ><strong>{{ userId }}</strong
+          ><br />
+          {{ registerTime | dateFormat }}
+        </label>
       </b-col>
-    </b-col>
-  </b-row>
+      <b-col sm="11" class="d-flex bor">
+        <span id="textarea-no-auto-shrink" rows="3" max-rows="8">{{
+          content
+        }}</span>
+        <b-col class="text-right">
+          <button
+            v-if="userInfo && userInfo.userId == userId"
+            @click="checkDelete">
+            삭제
+          </button>
+        </b-col>
+      </b-col>
+    </b-row>
+    <hr style="background-color: white" />
+  </div>
 </template>
 
 <script>
