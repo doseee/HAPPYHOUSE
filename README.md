@@ -4,7 +4,6 @@
 
 # 🔔 개요
 
-SSAFY 8기 1학기 FINAL PROJECT<br>
 부동산 검색과 뉴스, 커뮤니티 제공하는 서비스입니다.
 
 
@@ -29,7 +28,7 @@ SSAFY 8기 1학기 FINAL PROJECT<br>
 
 <a href="https://youtu.be/MadK70OLMYw">여기</a>에서 시청 가능합니다!
 
-# 👩🏻‍💻개발 환경
+# 👩🏻‍💻 개발 환경
 
 
 FRONT-END
@@ -53,3 +52,5 @@ BACK-END
 |SpringBoot|2.7.2|
 
 
+# 📺 UI
+자세한 화면은 <a href="https://github.com/doseee/HAPPYHOUSE/tree/master/Frontend#readme">여기</a>에서 볼 수 있습니다.
