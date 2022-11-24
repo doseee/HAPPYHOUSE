@@ -224,7 +224,7 @@ export default {
       const container = document.getElementById("map"); // 지도를 표시할 div let
       let Options = {
         center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 3, // 지도의 확대 레벨
+        level: 5, // 지도의 확대 레벨
       };
       this.map = new kakao.maps.Map(container, Options);
       this.infoWindow = new kakao.maps.InfoWindow({ zIndex: 1 });

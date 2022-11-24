@@ -30,13 +30,16 @@
         <b-col>
           <div
             v-html="
-              `<h3>${article.subject}</h3><div class='text-right'><h6>${article.hit}</h6></div><div class='text-right'><h6>${article.userId}</div><div class='text-right'>${article.registerTime}</h6></div>`
+              // eslint-disable-next-line prettier/prettier
+              `<h3>${article.subject}</h3><div class='text-right'><h6>조회수&nbsp;&nbsp;:&nbsp;&nbsp;${article.hit}</h6></div><div class='text-right'><h6>${article.userId} &nbsp;&nbsp;| &nbsp;&nbsp;${article.registerTime} </div>`
             " />
+          <hr style="background-color: white" />
           <b-card-body class="text-left">
             <div v-html="message"></div>
           </b-card-body>
         </b-col>
       </b-row>
+      <hr style="background-color: white" />
       <div v-if="userInfo">
         <b-form-textarea
           id="textarea"
