@@ -52,6 +52,18 @@ async function userFindPwd(user, success, fail) {
     .catch(fail);
 }
 
+async function selectComment(params, success, fail) {
+  await api
+    .get(`/user/user-comment?userId=${params.userId}`)
+    .then(success)
+    .catch(fail);
+}
+async function selectBoard(params, success, fail) {
+  await api
+    .get(`/user/user-board?userId=${params.userId}`)
+    .then(success)
+    .catch(fail);
+}
 async function join(user, success, fail) {
   await api.post(`/user/user`, JSON.stringify(user)).then(success).catch(fail);
 }
@@ -113,4 +125,6 @@ export {
   idCheck,
   pwdCheckModify,
   userFindPwd,
+  selectComment,
+  selectBoard,
 };
