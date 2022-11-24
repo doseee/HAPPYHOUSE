@@ -4,7 +4,7 @@
 
 # 🔔 개요
 
-SSAFY 8기 1학기기 FINAL PROJECT<br>
+SSAFY 8기 1학기 FINAL PROJECT<br>
 부동산 검색과 뉴스, 커뮤니티 제공하는 서비스입니다.
 
 
@@ -60,7 +60,7 @@ SSAFY 8기 1학기기 FINAL PROJECT<br>
 ![image](https://user-images.githubusercontent.com/41516670/203818807-651a55de-1929-4173-b780-3a2fe28c4ef3.PNG)
 ![image](https://user-images.githubusercontent.com/41516670/203818816-6cee77a5-010a-4331-9a30-e347b0eee0af.PNG)
 
-* 작성자는는 수정, 삭제가 가능하며며 댓글도 작성 가능합니다.
+* 작성자는 수정, 삭제가 가능하며 댓글도 작성 가능합니다.
 
 
 
