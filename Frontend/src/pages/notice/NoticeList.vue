@@ -1,81 +1,79 @@
 <template>
-  <div class="page-header clear-filter" filter-color="orange">
-    <div class="content">
-      <div class="container">
-        <div class="col-md-10 ml-auto mr-auto">
-          <card type="list" plain>
-            <p>Notice</p>
-            <b-container>
-              <b-row>
-                <b-col>
-                  <h3>List</h3>
-                </b-col>
-              </b-row>
-              <b-row class="mb-1">
-                <b-col class="text-right">
-                  <button
-                    type="button"
-                    class="btn btn-round btn-warning float-right"
-                    @click="moveWrite()">
-                    <!---->글쓰기<!---->
-                  </button>
-                </b-col>
-              </b-row>
-              <b-row class="mt-3 mb-5">
-                <b-col>
-                  <b-table
-                    class="mb-6 text-center"
-                    id="my-table"
-                    :fields="fields"
-                    :items="articles"
-                    :per-page="perPage"
-                    :current-page="currentPage">
-                    <template #cell(subject)="data">
-                      <router-link
-                        :to="{
-                          name: 'noticeDetail',
-                          params: { articleNo: data.item.articleNo },
-                        }"
-                        >{{ data.item.subject }}</router-link
+  <div class="" filter-color="orange" style="width 300px">
+    <div class="container">
+      <div class="col-md-10 ml-auto mr-auto">
+        <card type="list" plain>
+          <p>Notice</p>
+          <b-container>
+            <b-row>
+              <b-col>
+                <h3>List</h3>
+              </b-col>
+            </b-row>
+            <b-row class="mb-1">
+              <b-col class="text-right">
+                <button
+                  type="button"
+                  class="btn btn-round btn-warning float-right"
+                  @click="moveWrite()">
+                  <!---->글쓰기<!---->
+                </button>
+              </b-col>
+            </b-row>
+            <b-row class="mt-3 mb-5">
+              <b-col>
+                <b-table
+                  class="mb-6 text-center"
+                  id="my-table"
+                  :fields="fields"
+                  :items="articles"
+                  :per-page="perPage"
+                  :current-page="currentPage">
+                  <template #cell(subject)="data">
+                    <router-link
+                      :to="{
+                        name: 'noticeDetail',
+                        params: { articleNo: data.item.articleNo },
+                      }"
+                      >{{ data.item.subject }}</router-link
+                    >
+                  </template>
+                </b-table>
+                <b-row>
+                  <b-col class="d-flex justify-content-end">
+                    <b-form class="form-inline">
+                      <b-form-select
+                        class="form-control"
+                        v-model="searchNotice">
+                        <option value="articleNo">글번호</option>
+                        <option value="subject">제목</option>
+                      </b-form-select>
+                      <b-form-input
+                        type="text"
+                        class="ml-1"
+                        v-model="keyword"
+                        @keyup.enter="searchBoard" />
+                      <b-button
+                        type="button"
+                        class="ml-1 btn md-warning md-sm"
+                        @click="searchBoard"
+                        variant="warning"
+                        >search</b-button
                       >
-                    </template>
-                  </b-table>
-                  <b-row>
-                    <b-col class="d-flex justify-content-end">
-                      <b-form class="form-inline">
-                        <b-form-select
-                          class="form-control"
-                          v-model="searchNotice">
-                          <option value="articleNo">글번호</option>
-                          <option value="subject">제목</option>
-                        </b-form-select>
-                        <b-form-input
-                          type="text"
-                          class="ml-1"
-                          v-model="keyword"
-                          @keyup.enter="searchBoard" />
-                        <b-button
-                          type="button"
-                          class="ml-1 btn md-warning md-sm"
-                          @click="searchBoard"
-                          variant="warning"
-                          >search</b-button
-                        >
-                      </b-form>
-                    </b-col>
-                  </b-row>
-                  <div class="d-flex justify-content-center mt-5">
-                    <b-pagination
-                      v-model="currentPage"
-                      :total-rows="rows"
-                      :per-page="perPage"
-                      aria-controls="my-table"></b-pagination>
-                  </div>
-                </b-col>
-              </b-row>
-            </b-container>
-          </card>
-        </div>
+                    </b-form>
+                  </b-col>
+                </b-row>
+                <div class="d-flex justify-content-center mt-5">
+                  <b-pagination
+                    v-model="currentPage"
+                    :total-rows="rows"
+                    :per-page="perPage"
+                    aria-controls="my-table"></b-pagination>
+                </div>
+              </b-col>
+            </b-row>
+          </b-container>
+        </card>
       </div>
     </div>
   </div>
