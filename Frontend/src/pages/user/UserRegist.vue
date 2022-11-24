@@ -69,15 +69,15 @@
                   type="text"
                   id="userpwd"
                   class="form-control"
-                  placeholder="전화번호"
+                  placeholder="전화번호 010-0000-0000"
                   required="required"
                   ref="tel"
                   @focus="telCheck"
                   v-model="user.userTel" />
               </div>
-              <p v-show="checkTelFlag" class="input-error">
-                전화번호를 정확히 입력해주세요(010-0000-0000)
-              </p>
+              <label v-show="checkTelFlag" class="input-error">
+                전화번호 형식을 확인해주세요
+              </label>
             </div>
             <div>
               <div class="input-group no-border input-lg">
@@ -85,14 +85,14 @@
                   type="text"
                   id="userpwd"
                   class="form-control"
-                  placeholder="예) ssafy@ssafy.co.kr"
+                  placeholder="이메일 ssafy@ssafy.co.kr"
                   required="required"
                   ref="email"
                   @focus="emailCheck"
                   v-model="user.userEmail" />
               </div>
               <p v-show="checkEmailFlag" class="input-error">
-                이메일 주소를 정확히 입력해주세요
+                이메일 형식을 확인해주세요
               </p>
             </div>
             <div>
