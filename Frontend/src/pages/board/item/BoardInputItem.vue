@@ -35,16 +35,26 @@
             max-rows="15"></b-form-textarea>
         </b-form-group>
 
-        <button
+        <b-button
           type="submit"
-          class="btn btn-round btn-warning"
+          style="background: rgba(201, 138, 195, 0.6)"
+          class="btn btn-round"
           v-if="this.type === 'register'">
           등록
-        </button>
-        <button type="submit" class="btn btn-round btn-warning" v-else>
+        </b-button>
+        <b-button
+          type="submit"
+          style="background: rgba(201, 138, 195, 0.6)"
+          class="btn btn-round"
+          v-else>
           수정
+        </b-button>
+        <button
+          type="reset"
+          style="background: rgba(201, 138, 195, 0.6)"
+          class="btn btn-round">
+          초기화
         </button>
-        <button type="reset" class="btn btn-round btn-warning">초기화</button>
       </b-form>
     </b-col>
   </b-row>

@@ -14,12 +14,13 @@
             </b-row>
             <b-row class="mb-1">
               <b-col class="text-right">
-                <button
+                <b-button
                   type="button"
+                  style="background: rgba(201, 138, 195, 0.6)"
                   class="btn btn-round btn-warning float-right"
                   @click="moveWrite()">
                   <!---->글쓰기<!---->
-                </button>
+                </b-button>
               </b-col>
             </b-row>
             <b-row class="mt-3 mb-5">
@@ -59,8 +60,8 @@
                         type="button"
                         class="ml-1 btn md-warning md-sm"
                         @click="searchBoard"
-                        variant="warning"
-                        >search</b-button
+                        style="background: rgba(201, 138, 195, 0.6)"
+                        >검색</b-button
                       >
                     </b-form>
                   </b-col>

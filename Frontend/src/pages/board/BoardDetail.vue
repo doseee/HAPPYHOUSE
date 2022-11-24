@@ -3,7 +3,10 @@
     <b-container class="bv-example-row md-3">
       <b-row class="mb-1">
         <b-col class="text-left">
-          <button class="btn btn-round btn-warning" @click="listArticle">
+          <button
+            class="btn btn-round"
+            style="background: rgba(201, 138, 195, 0.6)"
+            @click="listArticle">
             목록
           </button>
         </b-col>
@@ -12,15 +15,15 @@
           class="text-right">
           <button
             type="button"
-            class="btn btn-round btn-warning float-right"
-            variant="success"
+            style="background: rgba(201, 138, 195, 0.6)"
+            class="btn btn-round float-right"
             @click="moveModifyArticle">
             글수정
           </button>
           <button
             type="button"
-            class="btn btn-round btn-danger float-right"
-            variant="danger"
+            style="color: rgba(201, 138, 195, 0.6)"
+            class="btn btn-round btn-neutral"
             @click="deleteArticleCheck">
             글삭제
           </button>
@@ -51,8 +54,8 @@
           <b-col class="text-right">
             <button
               type="button"
-              class="btn btn-round btn-warning float-right"
-              variant="success"
+              class="btn btn-round float-right"
+              style="background: rgba(201, 138, 195, 0.6)"
               @click="commentCheck">
               댓글 작성
             </button>
