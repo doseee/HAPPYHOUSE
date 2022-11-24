@@ -30,14 +30,13 @@
             @click="selectSubway">
             지하철
           </b-list-group-item>
-          <b-button
+          <button
             class="category1"
             id="popover-button-event"
             ref="button"
-            variant="warning"
-            style="margin-left: 365px">
+            style="margin-left: 408px">
             <i class="input-group-text now-ui-icons design_bullet-list-67"></i>
-          </b-button>
+          </button>
         </b-list-group>
         <b-popover
           ref="popover"
@@ -56,13 +55,13 @@
                 style="background-color: gray">
                 <span class="d-inline-block" aria-hidden="true">&times;</span>
               </b-button>
-              <h6>아파트 목록 필터링</h6>
+              <h6>아파트 필터</h6>
             </div>
           </template>
 
           <b-container class="flex-direction-col mx-2">
             <div class="my-4">
-              평균 가격 범위 (단위 : 만원)
+              거래 금액 (단위 : 만원)
               <vue-slider
                 v-model="pricevalue"
                 :data="pricedata"
@@ -72,7 +71,7 @@
                 @dragging="onSubmit"></vue-slider>
             </div>
             <div class="my-4">
-              건설연도 범위 (단위 : 년)
+              건설연도 (단위 : 년)
               <vue-slider
                 v-model="buildrange"
                 :tooltip="'always'"
@@ -83,9 +82,14 @@
                 @dragging="onSubmit"></vue-slider>
             </div>
             <b-row class="mt-4 d-flex justify-content-end">
-              <b-button @click="onReset" size="sm" variant="outline-danger"
-                >초기화</b-button
-              >
+              <button
+                @click="onReset"
+                size="sm"
+                variant="outline-danger"
+                class="btn wh btn-sm btn-secondary"
+                style="background: rgba(201, 138, 195, 0.6)">
+                초기화
+              </button>
             </b-row>
           </b-container>
         </b-popover>
@@ -401,9 +405,10 @@ export default {
   align-items: center !important;
 }
 .category1 {
-  margin-bottom: 0px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  margin-top: 20px;
   height: 40px;
-  color: black !important;
   display: flex !important;
   align-items: center !important;
 }
@@ -422,6 +427,7 @@ export default {
   color: whitesmoke;
 }
 .filtertitle {
+  color: black;
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-around;

@@ -16,13 +16,26 @@
       <b-form-select v-model="selectDong" :options="dongs"></b-form-select>
     </div>
     <div style="margin-right: 5px">
-      <b-button variant="outline-primary" @click="getHouseList">검색</b-button>
+      <b-button
+        class="wh btn-neutral"
+        style="color: rgba(201, 138, 195, 0.6)"
+        @click="getHouseList"
+        >검색</b-button
+      >
     </div>
     <div>
-      <b-button v-if="isLike" variant="outline-primary" @click="deleteLikeDong"
+      <b-button
+        v-if="isLike"
+        class="wh btn-neutral"
+        style="color: rgba(201, 138, 195, 0.6)"
+        @click="deleteLikeDong"
         >관심지역해제</b-button
       >
-      <b-button v-else variant="outline-primary" @click="addLikeDong"
+      <b-button
+        v-else
+        class="wh btn-neutral"
+        style="color: rgba(201, 138, 195, 0.6)"
+        @click="addLikeDong"
         >관심지역추가</b-button
       >
     </div>

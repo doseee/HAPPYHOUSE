@@ -18,11 +18,8 @@
     <div v-else class="bv-example-row mt-3 center" style="margin-right: 5px">
       <b-row>
         <b-col>
-          <div class="alert alert-info d-flex align-items-center">
-            <div class="alert-icon">
-              <b-icon icon="info-circle"></b-icon>
-            </div>
-            아파트 목록이 없습니다.
+          <div class="d-flex">
+            <h3>아파트 목록이 없습니다.</h3>
           </div>
         </b-col>
       </b-row>
