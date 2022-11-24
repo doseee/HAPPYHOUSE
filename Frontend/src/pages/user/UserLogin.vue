@@ -27,6 +27,7 @@
               id="userpwd"
               v-model="user.userPwd"
               class="form-control"
+              type="password"
               placeholder="비밀번호"
               @keyup.enter="confirm" />
           </div>

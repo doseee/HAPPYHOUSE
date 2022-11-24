@@ -51,14 +51,22 @@
         headerClasses="justify-content-center"
         type="mini">
         <div slot="header">
-          <img src="img/userdelete.jpg" style="width: 100px" />
+          <img src="img/pwd.png" style="width: 100px" />
         </div>
         <h3 style="text-align: center; color: black">
           {{ userName }}님의 임시 비밀번호는 <br />
           {{ tmpPwd }} 입니다.
         </h3>
         <template slot="footer">
+          <n-button
+            type="defalut"
+            link
+            @click.native="modals.mini = false"></n-button>
           <n-button type="defalut" link @click="goLogin">확인</n-button>
+          <n-button
+            type="defalut"
+            link
+            @click.native="modals.mini = false"></n-button>
         </template>
       </modal>
     </div>
@@ -85,6 +93,7 @@ export default {
   },
   methods: {
     async findPwd() {
+      this.userName = this.$refs.name.value;
       let user = {
         userId: this.$refs.id.value,
         userName: this.$refs.name.value,

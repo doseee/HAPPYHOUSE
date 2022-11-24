@@ -17,7 +17,11 @@
               "
               placeholder="현재 비밀번호:"
               readonly />
-            <input class="form-control" style="padding-left: 0px" ref="pass1" />
+            <input
+              class="form-control"
+              type="password"
+              style="padding-left: 0px"
+              ref="pass1" />
           </div>
           <div class="input-group no-border input-lg">
             <input
@@ -30,7 +34,11 @@
               "
               placeholder="새 비밀번호:"
               readonly />
-            <input class="form-control" style="padding-left: 0px" ref="pass2" />
+            <input
+              class="form-control"
+              type="password"
+              style="padding-left: 0px"
+              ref="pass2" />
           </div>
           <div class="input-group no-border input-lg">
             <input
@@ -43,7 +51,11 @@
               "
               placeholder="새 비밀번호 확인:"
               readonly />
-            <input class="form-control" style="padding-left: 0px" ref="pass3" />
+            <input
+              class="form-control"
+              type="password"
+              style="padding-left: 0px"
+              ref="pass3" />
           </div>
           <div align="right">
             <button
@@ -60,13 +72,21 @@
         headerClasses="justify-content-center"
         type="mini">
         <div slot="header">
-          <img src="img/userdelete.jpg" style="width: 100px" />
+          <img src="img/success.png" style="width: 100px" />
         </div>
-        <h3 style="text-align: center; color: black">
+        <h4 style="text-align: center; color: black">
           비밀번호가 정상적으로 변경 되었습니다.
-        </h3>
+        </h4>
         <template slot="footer">
+          <n-button
+            type="defalut"
+            link
+            @click.native="modals.mini = false"></n-button>
           <n-button type="defalut" link @click="goMypage">확인</n-button>
+          <n-button
+            type="defalut"
+            link
+            @click.native="modals.mini = false"></n-button>
         </template>
       </modal>
     </div>

@@ -93,9 +93,7 @@
       <div slot="header">
         <img src="img/userdelete.jpg" style="width: 100px" />
       </div>
-      <h3 style="text-align: center; color: black">
-        회원탈퇴를 <br />하시겠습니까?
-      </h3>
+      <h3 style="text-align: center; color: black">회원탈퇴를 하시겠습니까?</h3>
 
       <h5 style="text-align: center; color: black">
         더이상 해당 계정으로 활동을 하실 수 없습니다.
