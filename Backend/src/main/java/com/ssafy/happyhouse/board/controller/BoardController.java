@@ -64,6 +64,23 @@ public class BoardController {
 			return exceptionHandling(e);
 		}
 	}
+	
+	@GetMapping("/best-article")
+	public ResponseEntity<?> getBestArticle() throws Exception{
+		Map<String, Object> map = new HashMap<>();
+		try {
+			List<BoardDto> list = boardService.getBestArticle();
+			if(list != null && !list.isEmpty()) {
+				map.put("data", list);
+				map.put("result", "success");
+				return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			}
+		} catch (SQLException e) {
+			return exceptionHandling(e);
+		}
+	}
 
 	@GetMapping(value= {"/view", "/searchNo"})
 	public ResponseEntity<?> view(@RequestParam("articleNo") int articleNo)

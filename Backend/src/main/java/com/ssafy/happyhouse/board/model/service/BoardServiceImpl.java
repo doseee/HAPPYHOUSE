@@ -64,4 +64,10 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.searchByTitle(searchTitle);
 	}
 
+	@Override
+	public List<BoardDto> getBestArticle() throws Exception {
+		// TODO Auto-generated method stub
+		return boardMapper.getBestArticle();
+	}
+
 }

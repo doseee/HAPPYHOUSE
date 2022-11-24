@@ -19,4 +19,6 @@ public interface BoardMapper {
 	void deleteArticle(int articleNo) throws SQLException;
 	List<BoardDto> getListArticleByUser(String userId) throws SQLException;
 	List<BoardDto> searchByTitle(String searchTitle) throws SQLException;
+	List<BoardDto> getMyArticle(String userId) throws SQLException;
+	List<BoardDto> getBestArticle() throws SQLException;
 }

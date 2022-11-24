@@ -48,6 +48,16 @@ function getArticle(articleNo, success) {
     });
 }
 
+function getBestArticle(success) {
+  api
+    .get(`/board/best-article`)
+    .then(success)
+    .catch((err) => {
+      alert("문제가 발생했습니다.");
+      console.log(err);
+    });
+}
+
 function modifyArticle(article, success) {
   api
     .put(`/board/modify`, JSON.stringify(article))
@@ -99,6 +109,7 @@ export {
   listArticle,
   writeArticle,
   getArticle,
+  getBestArticle,
   modifyArticle,
   deleteArticle,
   getArticleById,

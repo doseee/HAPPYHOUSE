@@ -29,7 +29,11 @@
 		order by b.article_no desc
 	</select>
 	
-	<select id="getListArticleByUser" parameterType="string" resultMap="article">
+	<select id="getBestArticle" resultMap="article">
+		select * from board order by hit desc LIMIT 3
+	</select>
+	
+	<select id="getMyArticle" parameterType="string" resultMap="article">
 		select *
 		from board
 		where user_id = #{userId}
